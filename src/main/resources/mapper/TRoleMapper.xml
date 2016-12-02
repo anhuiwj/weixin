@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ah.weixin.mapper.TRoleMapper" >
+<mapper namespace="com.ah.manager.mapper.TRoleMapper" >
 
   <sql id="Base_Column_List" >
     id,rolename
   </sql>
 
-  <select id="findAll" resultType="com.ah.weixin.pojo.TRole" parameterType="java.util.Map" >
+  <select id="findAll" resultType="com.ah.manager.pojo.TRole" parameterType="java.util.Map" >
     select
     <include refid="Base_Column_List" />
     from t_role
     WHERE del_flag = '0'
   </select>
-  <delete id="deleteByExample" parameterType="com.ah.weixin.pojo.TRole" >
+  <delete id="deleteByExample" parameterType="com.ah.manager.pojo.TRole" >
     delete from t_role
   </delete>
-  <insert id="insert" parameterType="com.ah.weixin.pojo.TRole" >
+  <insert id="insert" parameterType="com.ah.manager.pojo.TRole" >
     insert into t_role (id, rolename)
     values (#{id,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ah.weixin.pojo.TRole" >
+  <insert id="insertSelective" parameterType="com.ah.manager.pojo.TRole" >
     insert into t_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -38,7 +38,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ah.weixin.pojo.TRole" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ah.manager.pojo.TRole" resultType="java.lang.Integer" >
     select count(*) from t_role
   </select>
   <update id="updateByExampleSelective" parameterType="map" >

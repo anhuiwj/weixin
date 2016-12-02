@@ -25,12 +25,17 @@
         <property name="configLocation" value="classpath:config/spring/mybatis-config.xml"></property>
         <property name="dataSource" ref="dataSource"/>
         <!-- 自动扫描mapping.xml文件 -->
-        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+        <property name="mapperLocations" >
+            <array>
+                <value>classpath*:mapper/*.xml</value>
+                <value>classpath*:mapper/weixin/*.xml</value>
+            </array>
+        </property>
     </bean>
 
     <!--自动扫描mapper接口，并注入sqlsession-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.ah.weixin.mapper"/>
+        <property name="basePackage" value="com.ah.manager.mapper,com.ah.weixin.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 

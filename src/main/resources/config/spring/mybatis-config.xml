@@ -44,12 +44,12 @@
 	
 	<!-- 类型别名 -->
 	<typeAliases>
-		<typeAlias alias="Page" type="com.ah.weixin.common.page.model.Pager" /><!--分页  -->
+		<typeAlias alias="Page" type="com.ah.manager.common.page.model.Pager" /><!--分页  -->
 	</typeAliases>
 	
 	<!-- 插件配置 -->
 	<plugins>
-		<plugin interceptor="com.ah.weixin.common.page.PaginationInterceptor" />
+		<plugin interceptor="com.ah.manager.common.page.PaginationInterceptor" />
     </plugins>
 	
 </configuration>

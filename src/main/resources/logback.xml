@@ -27,7 +27,7 @@
 
     <logger name="org.apache.ibatis" level="INFO" />
     <logger name="org.mybatis" level="INFO"/>
-    <logger name="com.ah.weixin.mapper" level="INFO"/>
+    <logger name="com.ah.manager.mapper" level="INFO"/>
 
     <logger name="SRTE" level="DEBUG" additivity="false">
         <appender-ref ref="SRTEINFO"/>

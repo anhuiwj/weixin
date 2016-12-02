@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ah.weixin.mapper.TPermissionMapper" >
-  <resultMap id="BaseResultMap" type="com.ah.weixin.pojo.TPermission" >
+<mapper namespace="com.ah.manager.mapper.TPermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.ah.manager.pojo.TPermission" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="permissionname" property="permissionname" jdbcType="VARCHAR" />
   </resultMap>
@@ -66,7 +66,7 @@
   <sql id="Base_Column_List" >
     id, permissionname
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ah.weixin.pojo.TPermission" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ah.manager.pojo.TPermission" >
     select
     <if test="distinct" >
       distinct
@@ -80,17 +80,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.ah.weixin.pojo.TPermission" >
+  <delete id="deleteByExample" parameterType="com.ah.manager.pojo.TPermission" >
     delete from t_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ah.weixin.pojo.TPermission" >
+  <insert id="insert" parameterType="com.ah.manager.pojo.TPermission" >
     insert into t_permission (id, permissionname)
     values (#{id,jdbcType=INTEGER}, #{permissionname,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ah.weixin.pojo.TPermission" >
+  <insert id="insertSelective" parameterType="com.ah.manager.pojo.TPermission" >
     insert into t_permission
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -109,7 +109,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ah.weixin.pojo.TPermission" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ah.manager.pojo.TPermission" resultType="java.lang.Integer" >
     select count(*) from t_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

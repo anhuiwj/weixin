@@ -25,6 +25,7 @@
             <value>
                 /publickey = anon
                 /static/** = anon
+                /wechatController = anon
                 /login = authc
                 /logout = logout
                 /** = user

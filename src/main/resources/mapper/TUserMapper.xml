@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ah.weixin.mapper.TUserMapper" >
+<mapper namespace="com.ah.manager.mapper.TUserMapper" >
 
   <sql id="Base_Column_List" >
     u.id, u.username, u.birthday, u.sex, u.address,u.password
@@ -8,7 +8,7 @@
 
 
 
-  <select id="selectByPrimaryKey" resultType="com.ah.weixin.pojo.TUser" parameterType="com.ah.weixin.pojo.TUser" >
+  <select id="selectByPrimaryKey" resultType="com.ah.manager.pojo.TUser" parameterType="com.ah.manager.pojo.TUser" >
     select 
     <include refid="Base_Column_List" />,r.*
     from t_user u LEFT JOIN t_user_role tr on tr.user_id = u.id  and tr.del_flag='0'
@@ -20,10 +20,10 @@
     delete from t_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ah.weixin.pojo.TUser" >
+  <delete id="deleteByExample" parameterType="com.ah.manager.pojo.TUser" >
     delete from t_user
   </delete>
-  <insert id="insert" parameterType="com.ah.weixin.pojo.TUser" >
+  <insert id="insert" parameterType="com.ah.manager.pojo.TUser" >
     insert into t_user (id, username, birthday, 
       sex, address, password
       )
@@ -31,7 +31,7 @@
       #{sex,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ah.weixin.pojo.TUser" >
+  <insert id="insertSelective" parameterType="com.ah.manager.pojo.TUser" >
     insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -74,7 +74,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ah.weixin.pojo.TUser" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ah.manager.pojo.TUser" resultType="java.lang.Integer" >
     select count(*) from t_user
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
@@ -109,7 +109,7 @@
       address = #{record.address,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ah.weixin.pojo.TUser" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ah.manager.pojo.TUser" >
     update t_user
     <set >
       <if test="username != null" >
@@ -130,7 +130,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ah.weixin.pojo.TUser" >
+  <update id="updateByPrimaryKey" parameterType="com.ah.manager.pojo.TUser" >
     update t_user
     set username = #{username,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=DATE},
