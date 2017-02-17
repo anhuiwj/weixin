@@ -2,11 +2,14 @@ package com.ah.manager.controller;
 
 import com.ah.manager.common.miniui.AjaxResult;
 import com.ah.manager.pojo.TUser;
+import com.ah.manager.service.SysMenuService;
 import com.ah.manager.util.RSAEncryptUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,9 @@ import java.util.Map;
  */
 @Controller
 public class LoginController {
+
+    @Autowired
+    private SysMenuService sysMenuService;
 
     @RequestMapping(value = "/login",method= RequestMethod.GET)
     public String loginForm(HttpServletRequest request, HttpServletResponse response){
@@ -92,7 +98,8 @@ public class LoginController {
 
 
     @RequestMapping(value = "/index")
-    public String index(){
+    public String index(Model model){
+        model.addAttribute(sysMenuService.findMenu());
         return "index";
     }
 

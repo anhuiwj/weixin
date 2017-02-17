@@ -10,7 +10,6 @@
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME STYLES -->
 <link href="${ctxStatic}/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
-<link href="${ctxStatic}/global/css/plugins.css" rel="stylesheet" type="text/css"/>
 <link href="${ctxStatic}/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
 <link href="${ctxStatic}/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 <link href="${ctxStatic}/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>

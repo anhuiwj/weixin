@@ -9,7 +9,7 @@
 <body>
 <nav class="w-breadcrumb">
     <i class="Hui-iconfont">&#xe67f;</i> 首页
-    <span class="c-gray en">&gt;</span>  用户管理
+    <span class="c-gray en">&gt;</span>  角色管理
     <span class="c-gray en">&gt;</span> 角色管理
     <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px"
        href="javascript:location.replace(location.href);" title="刷新">
@@ -24,12 +24,20 @@
             </p>
             <p>
                 <label>建档日期：</label>
-                <input type="text" style="width:109px;" class="input-text Wdate radius" id="datemin" name="datemin" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',startDate:'%y-%M-%d',maxDate:'#F{$dp.$D(\'datemax\')}'})" > －
+                <input type="text" style="width:109px;" class="input-text Wdate radius" id="datemin" name="datemin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',startDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'datemax\')}'})" > －
                 <input type="text" style="width:109px;" class="input-text Wdate radius" id="datemax" name="datemax" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',startDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'datemin\')}'})">
             </p>
-            <button name="query" id="query" class="btn btn-success radius r" type="submit"
-                    style="margin-left: 30px;">查询
-            </button>
+            <p>
+                <span>
+                     <button name="query" id="query" class="btn btn-success radius r" type="submit"
+                             style="margin-left: 30px;">查询
+                     </button>
+                </span>
+                <span >
+                      <button id="add_role" class="btn btn-success radius r">
+                        新增
+                      </button>
+                 </span>
             </p>
         </div>
     </div>
@@ -44,17 +52,30 @@
 </div>
 <script>
     $(function () {
+        var whether =${fns:getDictToJSON('00001')};
         var dtList = function () {
             var columns = [
-                {id: 'rolename', title: '姓名', type: 'string', columnClass: 'text-center',columnStyle: 'min-width:60px;max-width:60px'},
-                {id: 'rolename', title: '姓名', type: 'string', columnClass: 'text-center',columnStyle: 'min-width:60px;max-width:60px'}
+                {id: 'rolename', title: '角色名称', type: 'string', columnClass: 'text-center'},
+                {id: 'status', title: '启用状态', type: 'string',codeTable:whether, columnClass: 'text-center'},
+                {id: 'id', title: '操作', type: 'string',codeTable:whether, columnClass: 'text-center',
+                    resolution:function(value, record, column, grid, dataNo, columnNo){
+                    var content = '';
+                        <shiro:hasPermission name="role:add">
+                            content += '<input onclick="editRow(\''+record.id+'\');" value="修改" class="btn btn-primary size-MINI radius" type="button">';
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="name">
+                            content += '<input onclick="deleteRow(\''+record.id+'\');" value="删除" class="btn btn-primary size-MINI radius" type="button">';
+                        </shiro:hasPermission>
+                        return content;
+                    }
+                }
             ];
 
             var options = {
                 lang: 'zh-cn',
                 ajaxLoad : true,
                 tableStyle: 'font-size:14px;',
-                loadURL: "/role/getData",
+                loadURL: "${ctx}/role/getData",
                 check: false,
                 columns: columns,
                 gridContainer: 'table',
@@ -101,56 +122,28 @@
 //            param.datemax = $('#datemax').val();
             return param;
         }
-//        function getGetParams(){
-//            var parameters = dtList.grid.parameters;
-//            var param ='?';
-//            param += 'ID='+encodeURI(encodeURI(parameters.ID));
-//            param += '&country='+parameters.country;
-//            param += '&managerHospital='+parameters.managerHospital;
-//            param += '&currdocName='+encodeURI(encodeURI(parameters.currdocName));
-//            param += '&addressCounty='+parameters.addressCounty;
-//            param += '&addressTown='+parameters.addressTown;
-//            param += '&addressCommittee='+parameters.addressCommittee;
-//            param += '&managerLevel='+ parameters.managerLevel;
-//            param += '&gender='+ parameters.gender;
-//            param += '&datemin='+parameters.datemin;
-//            param += '&datemax='+parameters.datemax;
-//
-//            return param;
-//        }
-//        function exportData(obj){
-//            var data = $('#table>table>tbody>tr').size();
-//            if(data == 0){
-//                layer.msg('表格暂无数据，无法导出！');
-//                return;
-//            }
-//            var reqUrl = urls.exportURL+getGetParams();
-//            window.location =  reqUrl;
-//        }
-//
-//        function bindEvent() {
-//            $('#query').on('click', function () { //查询
-//                $.post(urls.getLoginStatus, function (data) {
-//                    if (data.code == '0') {
-//                        search();
-//                    } else {
-//                        window.location.reload();
-//                    }
-//                });
-//
-//            });
-//        }
-//
-//        function pageInit() {
-//            bindEvent();
-//            //暴露接口
-//            window.exports = {
-//                gridRefresh: gridRefresh,
-//            };
-//        }
-//
-//        pageInit();
+        function bindEvent() {
+            $('#query').on('click', function () { //查询
+                window.location.reload();
+            });
+            $('#add_role').on('click', function () { //查询
+               layer_show("角色新增","${ctx}/role/add")
+            });
+        }
+        function pageInit() {
+            bindEvent();
+            //暴露接口
+            window.exports = {
+                gridRefresh: gridRefresh,
+            };
+        }
+
+        pageInit();
     });
+    
+    function editRow(id) {
+        alert(id);
+    }
 </script>
 
 </body>

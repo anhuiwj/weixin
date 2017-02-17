@@ -3,7 +3,7 @@
 <mapper namespace="com.ah.manager.mapper.TRoleMapper" >
 
   <sql id="Base_Column_List" >
-    id,rolename
+    id,rolename,status
   </sql>
 
   <select id="findAll" resultType="com.ah.manager.pojo.TRole" parameterType="java.util.Map" >

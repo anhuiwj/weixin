@@ -1,34 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/common/top.jsp" %>
 <html lang="en" class="no-js">
-<!--<![endif]-->
-<!-- BEGIN HEAD -->
 <head>
-<meta charset="utf-8"/>
-<title>Metronic | Admin Dashboard Template</title>
+	<meta charset="utf-8"/>
+	<link rel="shortcut icon" href="${ctx}/favicon.ico"/>
+	<title>微信公众号管理系统</title>
 	<%@ include file="/WEB-INF/views/common/head.jsp" %>
 	<%@ include file="/WEB-INF/views/common/toplib.jsp" %>
-<!-- BEGIN GLOBAL MANDATORY STYLES -->
-
-<%--<link href="./assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>--%>
-<%--<!-- END GLOBAL MANDATORY STYLES -->--%>
-<%--<!-- BEGIN PAGE LEVEL PLUGIN STYLES -->--%>
-<%--<link href="./assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>--%>
-<%--<link href="./assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>--%>
-<%--<link href="./assets/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css"/>--%>
-<%--<!-- END PAGE LEVEL PLUGIN STYLES -->--%>
-<%--<!-- BEGIN PAGE STYLES -->--%>
-<%--<link href="./assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>--%>
-<%--<!-- END PAGE STYLES -->--%>
-<%--<!-- BEGIN THEME STYLES -->--%>
-<%--<!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->--%>
-<%--<link href="./assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>--%>
-<%--<link href="./assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>--%>
-<%--<link href="./assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>--%>
-<%--<link href="./assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>--%>
-<%--<link href="./assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>--%>
-<!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
+<%--<link rel="shortcut icon" href="favicon.ico"/>--%>
 </head>
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square">
 <div class="page-header navbar navbar-fixed-top">
@@ -212,7 +191,7 @@
 								<li>
 									<a href="inbox.html?a=view">
 									<span class="photo">
-									<img src=".${ctxStatic}/admin/layout3/img/avatar2.jpg" class="img-circle" alt="">
+									<img src="${ctxStatic}/admin/layout3/img/avatar2.jpg" class="img-circle" alt="">
 									</span>
 									<span class="subject">
 									<span class="from">
@@ -382,7 +361,7 @@
 				<!-- BEGIN QUICK SIDEBAR TOGGLER -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-quick-sidebar-toggler">
-					<a href="/logout" class="dropdown-toggle">
+					<a href="${ctx}/logout" class="dropdown-toggle">
 					<i class="icon-logout"></i>
 					</a>
 				</li>
@@ -425,34 +404,55 @@
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
 				<!--active open-->
-				<li class="start ">
-					<a href="javascript:;">
-					<i class="icon-home"></i>
-					<span class="title">角色管理</span>
-					<span class="selected"></span>
-					<span class="arrow open"></span>
-					</a>
-					<ul class="sub-menu">
-						<li class="active">
-							<a href="javascript:void(0)" onclick="iFrameJumpPage('/role/index')">
-							<i class="icon-bar-chart"></i>
-							角色管理</a>
+				<c:forEach items="${sysMenuList}" var="item" >
+					<c:if test="${item.pid=='12'}">
+						<li class="start">
+							<a href="javascript:;">
+								<i class="${item.icon}"></i>
+								<span class="title">${item.name}</span>
+								<span class="arrow"></span>
+							</a>
+							<ul class="sub-menu">
+							<c:forEach items="${item.children}" var="ch">
+									<li>
+									<a href="javascript:void(0)" onclick="iFrameJumpPage('${ctx}/${ch.href}')">
+									<i class="${ch.icon}"></i>
+									${ch.name}
+									</a>
+									</li>
+							</c:forEach>
+							</ul>
 						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;">
-					<i class="icon-rocket"></i>
-					<span class="title">系统设置</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li>
-							<a href="layout_horizontal_sidebar_menu.html">
-							Horizontal & Sidebar Menu</a>
-						</li>
-					</ul>
-				</li>
+					</c:if>
+				</c:forEach>
+				<%--<li class="start ">--%>
+					<%--<a href="javascript:;">--%>
+						<%--<i class="icon-home"></i>--%>
+						<%--<span class="title">角色管理</span>--%>
+						<%--<span class="selected"></span>--%>
+						<%--<span class="arrow open"></span>--%>
+					<%--</a>--%>
+					<%--<ul class="sub-menu">--%>
+						<%--<li class="active">--%>
+							<%--<a href="javascript:void(0)" onclick="iFrameJumpPage('${ctx}/role/index')">--%>
+							<%--<i class="icon-bar-chart"></i>--%>
+							<%--角色管理</a>--%>
+						<%--</li>--%>
+					<%--</ul>--%>
+				<%--</li>--%>
+				<%--<li>--%>
+					<%--<a href="javascript:;">--%>
+					<%--<i class="icon-rocket"></i>--%>
+					<%--<span class="title">系统设置12</span>--%>
+					<%--<span class="arrow "></span>--%>
+					<%--</a>--%>
+					<%--<ul class="sub-menu">--%>
+						<%--<li>--%>
+							<%--<a href="layout_horizontal_sidebar_menu.html">--%>
+							<%--Horizontal & Sidebar Menu</a>--%>
+						<%--</li>--%>
+					<%--</ul>--%>
+				<%--</li>--%>
 			<!-- END SIDEBAR MENU -->
 			</ul>
 		</div>

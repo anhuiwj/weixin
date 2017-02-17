@@ -4,6 +4,10 @@
 <script type="text/javascript" src="${ctxStatic}/lib/dtGrid/1.1.9/jquery.dtGrid.js"></script>
 <script type="text/javascript" src="${ctxStatic}/lib/dtGrid/1.1.9/i18n/en.js"></script>
 <script type="text/javascript" src="${ctxStatic}/lib/dtGrid/1.1.9/i18n/zh-cn.js"></script>
+<script type="text/javascript" src="${ctxStatic}/lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${ctxStatic}/layer/1.9.3/layer.js"></script>
+<script type="text/javascript" src="${ctxStatic}/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="${ctxStatic}/lib/layui/layui.js" ></script>
 <script type="text/javascript">
     jQuery(function($){
         // 备份jquery的ajax方法

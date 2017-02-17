@@ -2,10 +2,10 @@
 <%@ include file="/WEB-INF/views/common/top.jsp" %>
 <!DOCTYPE html>
 <head>
-<title>Metronic | Login Options - Login Form 3</title>
+	<link rel="shortcut icon" href="${ctx}/favicon.ico"/>
+	<title>微信公众号管理系统</title>
 	<%@ include file="/WEB-INF/views/common/head.jsp" %>
 	<%@ include file="/WEB-INF/views/common/toplib.jsp" %>
-<link rel="shortcut icon" href="favicon.ico"/>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -22,7 +22,7 @@
 <!-- BEGIN LOGIN -->
 <div class="content">
 	<!-- BEGIN LOGIN FORM -->
-	<form class="loginForm" action="/login" method="post">
+	<form class="loginForm" action="${ctx}/login" method="post">
 		<h3 class="form-title">登录</h3>
 		<c:if test="${not empty message}">
 			<div class="alert alert-danger ">

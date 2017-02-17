@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class TUser {
-    private Integer id;
+    private String id;
 
     private String username;
 
@@ -18,11 +18,11 @@ public class TUser {
 
     private List<TRole> roleList;//一个用户具有多个角色
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

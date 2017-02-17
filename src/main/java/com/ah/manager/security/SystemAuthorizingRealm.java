@@ -1,13 +1,21 @@
 package com.ah.manager.security;
 
+import com.ah.manager.controller.BaseController;
+import com.ah.manager.pojo.SysMenu;
 import com.ah.manager.pojo.TUser;
+import com.ah.manager.service.AuthService;
 import com.ah.manager.service.UserService;
+import com.ah.manager.util.SpringContextHolder;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by wangjie on 16/11/29.
@@ -25,7 +33,18 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
      * @return
      */
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) throws AuthenticationException{
-        return null;
+        TUser user  = BaseController.getSessionUser();
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        AuthService authService = SpringContextHolder.getBean(AuthService.class);
+        List<SysMenu> menus = authService.findByUserId(user.getId());
+        if (menus != null) {
+            for (SysMenu m : menus) {
+                if (m != null && StringUtils.isNotBlank(m.getPermission())) {
+                    info.addStringPermission(m.getPermission());
+                }
+            }
+        }
+        return info;
     }
 
     /**

@@ -9,6 +9,10 @@ public class TRole {
 
     private List<TUser> userList;//一个角色对应多个用户
 
+    private List<String> menus;
+
+    private String status;//启用状态
+
     public Integer getId() {
         return id;
     }
@@ -31,5 +35,21 @@ public class TRole {
 
     public void setUserList(List<TUser> userList) {
         this.userList = userList;
+    }
+
+    public List<String> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(List<String> menus) {
+        this.menus = menus;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
