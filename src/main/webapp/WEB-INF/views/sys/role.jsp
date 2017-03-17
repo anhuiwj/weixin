@@ -52,20 +52,19 @@
 </div>
 <script>
     $(function () {
-        var whether =${fns:getDictToJSON('00001')};
+        var whether =${fns:getDictToJSON('00004')};
         var dtList = function () {
             var columns = [
-                {id: 'rolename', title: '角色名称', type: 'string', columnClass: 'text-center'},
-                {id: 'status', title: '启用状态', type: 'string',codeTable:whether, columnClass: 'text-center'},
-                {id: 'id', title: '操作', type: 'string',codeTable:whether, columnClass: 'text-center',
+                {id: 'rolename', title: '角色名称', type: 'string', columnClass: 'text-center' ,columnStyle: 'width:50px'},
+                {id: 'status', title: '启用状态', type: 'string',codeTable:whether, columnClass: 'text-center', columnStyle: 'width:50px'},
+                {id: 'id', title: '操作', type: 'string',columnClass: 'text-center',columnStyle: 'width:50px',
                     resolution:function(value, record, column, grid, dataNo, columnNo){
                     var content = '';
-                        <shiro:hasPermission name="role:add">
+                        <%--<shiro:hasPermission name="role:add">--%>
+
+                        <%--</shiro:hasPermission>--%>
                             content += '<input onclick="editRow(\''+record.id+'\');" value="修改" class="btn btn-primary size-MINI radius" type="button">';
-                        </shiro:hasPermission>
-                        <shiro:hasPermission name="name">
                             content += '<input onclick="deleteRow(\''+record.id+'\');" value="删除" class="btn btn-primary size-MINI radius" type="button">';
-                        </shiro:hasPermission>
                         return content;
                     }
                 }

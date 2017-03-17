@@ -35,5 +35,11 @@
     <function-signature>java.lang.String getDictToJSON(java.lang.String)</function-signature>
   </function>
 
+  <function>
+    <name>getUser</name>
+    <function-class>com.ah.manager.util.UserUtils</function-class>
+    <function-signature>com.ah.manager.pojo.TUser getCurrentUser()</function-signature>
+  </function>
+
 
 </taglib>

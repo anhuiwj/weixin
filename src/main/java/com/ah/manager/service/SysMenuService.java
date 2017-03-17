@@ -1,6 +1,7 @@
 package com.ah.manager.service;
 
 import com.ah.manager.pojo.SysMenu;
+import com.ah.manager.response.JsonResponseEntity;
 
 import java.util.List;
 
@@ -13,5 +14,7 @@ public interface SysMenuService {
     List<SysMenu> findMenu();
     SysMenu findById(String id);
 
-    boolean save(SysMenu sysMenu);
+    JsonResponseEntity delete(String id);
+
+    void save(SysMenu sysMenu);
 }

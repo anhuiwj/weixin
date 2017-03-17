@@ -55,29 +55,27 @@
     <!--select -->
     <!--<include refid="Base_Column_List" />-->
     <!--from sys_menu-->
-    <!--where id = #{id,jdbcType=VARCHAR}-->
+    <!--where id = #{id}-->
   <!--</select>-->
   <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.String" >-->
     <!--delete from sys_menu-->
-    <!--where id = #{id,jdbcType=VARCHAR}-->
+    <!--where id = #{id}-->
   <!--</delete>-->
   <!--<delete id="deleteByExample" parameterType="com.ah.manager.pojo.SysMenu" >-->
     <!--delete from sys_menu-->
   <!--</delete>-->
-  <!--<insert id="insert" parameterType="com.ah.manager.pojo.SysMenu" >-->
-    <!--insert into sys_menu (id, pid, sys, -->
-      <!--name, href, target, -->
-      <!--icon, permission, display, -->
-      <!--sort, del_flag, create_date, -->
-      <!--create_by, update_date, update_by, -->
-      <!--remarks)-->
-    <!--values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{sys,jdbcType=VARCHAR}, -->
-      <!--#{name,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR}, -->
-      <!--#{icon,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, #{display,jdbcType=VARCHAR}, -->
-      <!--#{sort,jdbcType=INTEGER}, #{delFlag,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, -->
-      <!--#{createBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, -->
-      <!--#{remarks,jdbcType=VARCHAR})-->
-  <!--</insert>-->
+  <insert id="insert" parameterType="com.ah.manager.pojo.SysMenu" >
+    insert into sys_menu (id, pid, sys,
+      name, href, target,
+      icon, permission, display,
+      sort, del_flag, create_date,
+      create_by, update_date, update_by)
+    values (#{id}, #{pid}, #{sys},
+      #{name}, #{href}, #{target},
+      #{icon}, #{permission}, #{display},
+      #{sort}, #{delFlag}, #{createDate},
+      #{createBy}, #{updateDate}, #{updateBy})
+  </insert>
   <!--<insert id="insertSelective" parameterType="com.ah.manager.pojo.SysMenu" >-->
     <!--insert into sys_menu-->
     <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
@@ -132,52 +130,52 @@
     <!--</trim>-->
     <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
       <!--<if test="id != null" >-->
-        <!--#{id,jdbcType=VARCHAR},-->
+        <!--#{id},-->
       <!--</if>-->
       <!--<if test="pid != null" >-->
-        <!--#{pid,jdbcType=VARCHAR},-->
+        <!--#{pid},-->
       <!--</if>-->
       <!--<if test="sys != null" >-->
-        <!--#{sys,jdbcType=VARCHAR},-->
+        <!--#{sys},-->
       <!--</if>-->
       <!--<if test="name != null" >-->
-        <!--#{name,jdbcType=VARCHAR},-->
+        <!--#{name},-->
       <!--</if>-->
       <!--<if test="href != null" >-->
-        <!--#{href,jdbcType=VARCHAR},-->
+        <!--#{href},-->
       <!--</if>-->
       <!--<if test="target != null" >-->
-        <!--#{target,jdbcType=VARCHAR},-->
+        <!--#{target},-->
       <!--</if>-->
       <!--<if test="icon != null" >-->
-        <!--#{icon,jdbcType=VARCHAR},-->
+        <!--#{icon},-->
       <!--</if>-->
       <!--<if test="permission != null" >-->
-        <!--#{permission,jdbcType=VARCHAR},-->
+        <!--#{permission},-->
       <!--</if>-->
       <!--<if test="display != null" >-->
-        <!--#{display,jdbcType=VARCHAR},-->
+        <!--#{display},-->
       <!--</if>-->
       <!--<if test="sort != null" >-->
         <!--#{sort,jdbcType=INTEGER},-->
       <!--</if>-->
       <!--<if test="delFlag != null" >-->
-        <!--#{delFlag,jdbcType=VARCHAR},-->
+        <!--#{delFlag},-->
       <!--</if>-->
       <!--<if test="createDate != null" >-->
         <!--#{createDate,jdbcType=TIMESTAMP},-->
       <!--</if>-->
       <!--<if test="createBy != null" >-->
-        <!--#{createBy,jdbcType=VARCHAR},-->
+        <!--#{createBy},-->
       <!--</if>-->
       <!--<if test="updateDate != null" >-->
         <!--#{updateDate,jdbcType=TIMESTAMP},-->
       <!--</if>-->
       <!--<if test="updateBy != null" >-->
-        <!--#{updateBy,jdbcType=VARCHAR},-->
+        <!--#{updateBy},-->
       <!--</if>-->
       <!--<if test="remarks != null" >-->
-        <!--#{remarks,jdbcType=VARCHAR},-->
+        <!--#{remarks},-->
       <!--</if>-->
     <!--</trim>-->
   <!--</insert>-->
@@ -188,142 +186,156 @@
     <!--update sys_menu-->
     <!--<set >-->
       <!--<if test="record.id != null" >-->
-        <!--id = #{record.id,jdbcType=VARCHAR},-->
+        <!--id = #{record.id},-->
       <!--</if>-->
       <!--<if test="record.pid != null" >-->
-        <!--pid = #{record.pid,jdbcType=VARCHAR},-->
+        <!--pid = #{record.pid},-->
       <!--</if>-->
       <!--<if test="record.sys != null" >-->
-        <!--sys = #{record.sys,jdbcType=VARCHAR},-->
+        <!--sys = #{record.sys},-->
       <!--</if>-->
       <!--<if test="record.name != null" >-->
-        <!--name = #{record.name,jdbcType=VARCHAR},-->
+        <!--name = #{record.name},-->
       <!--</if>-->
       <!--<if test="record.href != null" >-->
-        <!--href = #{record.href,jdbcType=VARCHAR},-->
+        <!--href = #{record.href},-->
       <!--</if>-->
       <!--<if test="record.target != null" >-->
-        <!--target = #{record.target,jdbcType=VARCHAR},-->
+        <!--target = #{record.target},-->
       <!--</if>-->
       <!--<if test="record.icon != null" >-->
-        <!--icon = #{record.icon,jdbcType=VARCHAR},-->
+        <!--icon = #{record.icon},-->
       <!--</if>-->
       <!--<if test="record.permission != null" >-->
-        <!--permission = #{record.permission,jdbcType=VARCHAR},-->
+        <!--permission = #{record.permission},-->
       <!--</if>-->
       <!--<if test="record.display != null" >-->
-        <!--display = #{record.display,jdbcType=VARCHAR},-->
+        <!--display = #{record.display},-->
       <!--</if>-->
       <!--<if test="record.sort != null" >-->
         <!--sort = #{record.sort,jdbcType=INTEGER},-->
       <!--</if>-->
       <!--<if test="record.delFlag != null" >-->
-        <!--del_flag = #{record.delFlag,jdbcType=VARCHAR},-->
+        <!--del_flag = #{record.delFlag},-->
       <!--</if>-->
       <!--<if test="record.createDate != null" >-->
         <!--create_date = #{record.createDate,jdbcType=TIMESTAMP},-->
       <!--</if>-->
       <!--<if test="record.createBy != null" >-->
-        <!--create_by = #{record.createBy,jdbcType=VARCHAR},-->
+        <!--create_by = #{record.createBy},-->
       <!--</if>-->
       <!--<if test="record.updateDate != null" >-->
         <!--update_date = #{record.updateDate,jdbcType=TIMESTAMP},-->
       <!--</if>-->
       <!--<if test="record.updateBy != null" >-->
-        <!--update_by = #{record.updateBy,jdbcType=VARCHAR},-->
+        <!--update_by = #{record.updateBy},-->
       <!--</if>-->
       <!--<if test="record.remarks != null" >-->
-        <!--remarks = #{record.remarks,jdbcType=VARCHAR},-->
+        <!--remarks = #{record.remarks},-->
       <!--</if>-->
     <!--</set>-->
   <!--</update>-->
-  <!--<update id="updateByExample" parameterType="map" >-->
-    <!--update sys_menu-->
-    <!--set id = #{record.id,jdbcType=VARCHAR},-->
-      <!--pid = #{record.pid,jdbcType=VARCHAR},-->
-      <!--sys = #{record.sys,jdbcType=VARCHAR},-->
-      <!--name = #{record.name,jdbcType=VARCHAR},-->
-      <!--href = #{record.href,jdbcType=VARCHAR},-->
-      <!--target = #{record.target,jdbcType=VARCHAR},-->
-      <!--icon = #{record.icon,jdbcType=VARCHAR},-->
-      <!--permission = #{record.permission,jdbcType=VARCHAR},-->
-      <!--display = #{record.display,jdbcType=VARCHAR},-->
-      <!--sort = #{record.sort,jdbcType=INTEGER},-->
-      <!--del_flag = #{record.delFlag,jdbcType=VARCHAR},-->
-      <!--create_date = #{record.createDate,jdbcType=TIMESTAMP},-->
-      <!--create_by = #{record.createBy,jdbcType=VARCHAR},-->
-      <!--update_date = #{record.updateDate,jdbcType=TIMESTAMP},-->
-      <!--update_by = #{record.updateBy,jdbcType=VARCHAR},-->
-      <!--remarks = #{record.remarks,jdbcType=VARCHAR}-->
-  <!--</update>-->
+  <update id="update">
+    update sys_menu
+    set
+      pid = #{pid},
+      sys = #{sys},
+      name = #{name},
+      href = #{href},
+      target = #{target},
+      icon = #{icon},
+      permission = #{permission},
+      display = #{display},
+      sort = #{sort},
+      del_flag = #{delFlag},
+      create_date = #{createDate},
+      create_by = #{createBy},
+      update_date = #{updateDate},
+      update_by = #{updateBy}
+      where id = #{id} and del_flag = #{delFlag}
+  </update>
+
+  <update id="delete">
+    update sys_menu
+    set
+    del_flag = '1'
+    where id = #{id}
+  </update>
+
+  <select id="findChildren" resultType="com.ah.manager.pojo.SysMenu"  >
+    select
+    <include refid="Base_Column_List" />
+    from sys_menu m
+    where m.pid = #{pid} and m.del_flag = '0'
+  </select>
   <!--<update id="updateByPrimaryKeySelective" parameterType="com.ah.manager.pojo.SysMenu" >-->
     <!--update sys_menu-->
     <!--<set >-->
       <!--<if test="pid != null" >-->
-        <!--pid = #{pid,jdbcType=VARCHAR},-->
+        <!--pid = #{pid},-->
       <!--</if>-->
       <!--<if test="sys != null" >-->
-        <!--sys = #{sys,jdbcType=VARCHAR},-->
+        <!--sys = #{sys},-->
       <!--</if>-->
       <!--<if test="name != null" >-->
-        <!--name = #{name,jdbcType=VARCHAR},-->
+        <!--name = #{name},-->
       <!--</if>-->
       <!--<if test="href != null" >-->
-        <!--href = #{href,jdbcType=VARCHAR},-->
+        <!--href = #{href},-->
       <!--</if>-->
       <!--<if test="target != null" >-->
-        <!--target = #{target,jdbcType=VARCHAR},-->
+        <!--target = #{target},-->
       <!--</if>-->
       <!--<if test="icon != null" >-->
-        <!--icon = #{icon,jdbcType=VARCHAR},-->
+        <!--icon = #{icon},-->
       <!--</if>-->
       <!--<if test="permission != null" >-->
-        <!--permission = #{permission,jdbcType=VARCHAR},-->
+        <!--permission = #{permission},-->
       <!--</if>-->
       <!--<if test="display != null" >-->
-        <!--display = #{display,jdbcType=VARCHAR},-->
+        <!--display = #{display},-->
       <!--</if>-->
       <!--<if test="sort != null" >-->
         <!--sort = #{sort,jdbcType=INTEGER},-->
       <!--</if>-->
       <!--<if test="delFlag != null" >-->
-        <!--del_flag = #{delFlag,jdbcType=VARCHAR},-->
+        <!--del_flag = #{delFlag},-->
       <!--</if>-->
       <!--<if test="createDate != null" >-->
         <!--create_date = #{createDate,jdbcType=TIMESTAMP},-->
       <!--</if>-->
       <!--<if test="createBy != null" >-->
-        <!--create_by = #{createBy,jdbcType=VARCHAR},-->
+        <!--create_by = #{createBy},-->
       <!--</if>-->
       <!--<if test="updateDate != null" >-->
         <!--update_date = #{updateDate,jdbcType=TIMESTAMP},-->
       <!--</if>-->
       <!--<if test="updateBy != null" >-->
-        <!--update_by = #{updateBy,jdbcType=VARCHAR},-->
+        <!--update_by = #{updateBy},-->
       <!--</if>-->
       <!--<if test="remarks != null" >-->
-        <!--remarks = #{remarks,jdbcType=VARCHAR},-->
+        <!--remarks = #{remarks},-->
       <!--</if>-->
     <!--</set>-->
-    <!--where id = #{id,jdbcType=VARCHAR}-->
+    <!--where id = #{id}-->
   <!--</update>-->
   <!--<update id="updateByPrimaryKey" parameterType="com.ah.manager.pojo.SysMenu" >-->
     <!--update sys_menu-->
-    <!--set pid = #{pid,jdbcType=VARCHAR},-->
-      <!--sys = #{sys,jdbcType=VARCHAR},-->
-      <!--name = #{name,jdbcType=VARCHAR},-->
-      <!--href = #{href,jdbcType=VARCHAR},-->
-      <!--target = #{target,jdbcType=VARCHAR},-->
-      <!--icon = #{icon,jdbcType=VARCHAR},-->
-      <!--permission = #{permission,jdbcType=VARCHAR},-->
-      <!--display = #{display,jdbcType=VARCHAR},-->
+    <!--set pid = #{pid},-->
+      <!--sys = #{sys},-->
+      <!--name = #{name},-->
+      <!--href = #{href},-->
+      <!--target = #{target},-->
+      <!--icon = #{icon},-->
+      <!--permission = #{permission},-->
+      <!--display = #{display},-->
       <!--sort = #{sort,jdbcType=INTEGER},-->
-      <!--del_flag = #{delFlag,jdbcType=VARCHAR},-->
+      <!--del_flag = #{delFlag},-->
       <!--create_date = #{createDate,jdbcType=TIMESTAMP},-->
-      <!--create_by = #{createBy,jdbcType=VARCHAR},-->
+      <!--create_by = #{createBy},-->
       <!--update_date = #{updateDate,jdbcType=TIMESTAMP},-->
-      <!--update_by = #{updateBy,jdbcType=VARCHAR},-->
-      <!--remarks = #{remarks,jdbcType=VARCHAR}-->
-    <!--where id = #{id,jdbcType=VARCHAR}-->
+      <!--update_by = #{updateBy},-->
+      <!--remarks = #{remarks}-->
+    <!--where id = #{id}-->
   <!--</update>-->
 </mapper>

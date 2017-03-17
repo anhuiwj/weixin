@@ -14,4 +14,6 @@ public interface UserService {
     List<TUser> findUser();
 
     TUser findByName(String userName);
+
+    TUser findById(String userid);
 }

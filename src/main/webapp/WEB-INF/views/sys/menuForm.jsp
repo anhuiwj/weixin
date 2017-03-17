@@ -9,6 +9,7 @@
 	<%@include file="/WEB-INF/views/common/validation.jsp" %>
 	<link rel="stylesheet" href="${ctxStatic}/lib/zTree_v3-master/css/zTreeStyle/zTreeStyle.css" type="text/css">
 	<script type="text/javascript" src="${ctxStatic}/lib/zTree_v3-master/js/jquery.ztree.core.min.js"></script>
+	<script type="text/javascript" src="${ctxStatic}/lib/Validform/5.3.2/Validform.js"></script>
 	<title>菜单维护</title>
 	<script type="text/javascript">
 		var menuZTree = undefined;
@@ -152,12 +153,12 @@
 		</c:if>
 		<div class="f-l w-980 mb-20">
 			<label class="f-l mr-30 w-200">菜单名称：</label>
-			<input class="validate[required] input-text f-l" name="name" value="${sysMenu.name}" style="width:300px;" placeholder="菜单名称">
+			<input class="validate[required] input-text f-l" name="name" value="${sysMenu.name}" datatype="*" style="width:300px;" placeholder="菜单名称">
 		</div>
 
 		<div class="f-l w-980 mb-20">
 			<label class="f-l mr-30 w-200">菜单链接：</label>
-			<input class="validate[required] input-text f-l" name="href" value="${sysMenu.href}" style="width:300px;" placeholder="菜单链接">
+			<input class="validate[required] input-text f-l" name="href" value="${sysMenu.href}" datatype="*" style="width:300px;" placeholder="菜单链接">
 		</div>
 
 		<div class="f-l w-980 mb-20">
@@ -189,68 +190,26 @@
 
 		<div class="f-l w-980 mb-20">
 			<label class="f-l mr-30 w-200">菜单排序：</label>
-			<input class="input-text f-l" name="sort" value="${sysMenu.sort}" style="width:300px;" placeholder="菜单排序">
+			<input class="validate[required] input-text f-l" name="sort" value="${sysMenu.sort}" style="width:300px;"  datatype="n"  placeholder="菜单排序">
 		</div>
-
-
-		<%--<div class="row cl">--%>
-			<%--<label class="form-label col-xs-4 col-sm-3"></label>--%>
-			<%--<div class="formControls col-xs-8 col-sm-6">--%>
-				<%--<input name="name" value="${menu.name}" type="text" class="validate[required] input-text" placeholder="菜单名称">--%>
-			<%--</div>--%>
-		<%--</div>--%>
-		<%--<div class="row cl">--%>
-			<%--<label class="form-label col-xs-4 col-sm-3">菜单链接：</label>--%>
-			<%--<div class="formControls col-xs-8 col-sm-6">--%>
-				<%--<input name="href" value="${menu.href}" type="text" class="input-text" placeholder="菜单链接">--%>
-			<%--</div>--%>
-		<%--</div>--%>
-		<%--<div class="row cl">--%>
-			<%--<label class="form-label col-xs-4 col-sm-3">菜单目标：</label>--%>
-			<%--<div class="formControls col-xs-8 col-sm-6">--%>
-				<%--<input name="target" value="${menu.target}" type="text" class="input-text" placeholder="菜单目标">--%>
-			<%--</div>--%>
-		<%--</div>--%>
-		<%--<div class="row cl">--%>
-			<%--<label class="form-label col-xs-4 col-sm-3">菜单图标：</label>--%>
-			<%--<div class="formControls col-xs-8 col-sm-6">--%>
-				<%--<input name="icon" value="${menu.icon}" type="text" class="input-text" placeholder="菜单图标">--%>
-			<%--</div>--%>
-		<%--</div>--%>
-		<%--<div class="row cl">--%>
-			<%--<label class="form-label col-xs-4 col-sm-3">权限标识：</label>--%>
-			<%--<div class="formControls col-xs-8 col-sm-6">--%>
-				<%--<input name="permission" value="${menu.permission}" type="text" class="input-text" placeholder="权限标识">--%>
-			<%--</div>--%>
-		<%--</div>--%>
-		<%--<div class="row cl">--%>
-			<%--<label class="form-label col-xs-4 col-sm-3">是否显示：</label>--%>
-			<%--<div class="formControls col-xs-8 col-sm-6">--%>
-				<%--<div class="radio-box">--%>
-					<%--<input<c:if test="${menu.display eq '1'}"> checked="checked"</c:if> type="radio" id="isShow-1" name="display" value="1" class="validate[required]">--%>
-					<%--<label for="isShow-1">显示</label>--%>
-				<%--</div>--%>
-				<%--<div class="radio-box">--%>
-					<%--<input<c:if test="${menu.display eq '0'}"> checked="checked"</c:if> type="radio" id="isShow-0" name="display" value="0" class="validate[required]">--%>
-					<%--<label for="isShow-0">隐藏</label>--%>
-				<%--</div>--%>
-			<%--</div>--%>
-		<%--</div>--%>
-		<%--<div class="row cl">--%>
-			<%--<label class="form-label col-xs-4 col-sm-3">菜单排序：</label>--%>
-			<%--<div class="formControls col-xs-8 col-sm-6">--%>
-				<%--<input name="sort" value="${menu.sort}" type="text" class="validate[required,custom[integer],min[0]] input-text" placeholder="排序">--%>
-			<%--</div>--%>
-		<%--</div>--%>
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-				<input class="btn btn-primary radius"  value="提交">
+				<input class="btn btn-primary radius" type="submit" value="提交">
 			</div>
 		</div>
 	</form>
 </div>
 </body>
-<javascript>
-
-</javascript>
+<script>
+	$("#submitForm").Validform({ //表单验证
+		tiptype: 2,
+		ajaxPost: true,
+		callback: function (data) {
+			parent.layer.msg(data.msg, {icon: 1});
+			setTimeout(function(){
+				parent.location.href = parent.location.href;
+			},1e2);
+		},
+	});
+</script>
 </html>

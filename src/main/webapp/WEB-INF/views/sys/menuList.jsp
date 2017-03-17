@@ -104,14 +104,13 @@
 					title:"提示"
 				}, function(){
 					$.ajax({
-						url: "${ctx}/menu/del",
+						url: "${ctx}/menu/delete",
 						data:{"id":id} ,
-						dataType: "json",
-						success: function (res) {
-							if (res.ok) {
-								layer.msg('删除成功', {icon: 6,end:function(){location.reload();}});
+						success: function (data) {
+							if (data.code==200) {
+								layer.msg(data.msg, {icon: 6,end:function(){location.reload();}});
 							} else {
-								layer.msg('删除失败，请稍后再试！', {icon: 5});
+								layer.msg(data.msg, {icon: 5});
 							}
 						}
 					});

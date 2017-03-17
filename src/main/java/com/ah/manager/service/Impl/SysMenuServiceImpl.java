@@ -2,7 +2,10 @@ package com.ah.manager.service.Impl;
 
 import com.ah.manager.mapper.SysMenuMapper;
 import com.ah.manager.pojo.SysMenu;
+import com.ah.manager.response.JsonResponseEntity;
 import com.ah.manager.service.SysMenuService;
+import com.ah.manager.util.CommonUtil;
+import com.ah.manager.util.IdGen;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
@@ -56,9 +59,34 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    public boolean save(SysMenu sysMenu) {
+    public JsonResponseEntity delete(String id) {
+        JsonResponseEntity response = new JsonResponseEntity();
+        List<SysMenu> sysMenus = sysMenuMapper.findChildren(id);
+        try {
+            if(sysMenus.size()>0){
+                response.setCode(110);
+                response.setMsg(CommonUtil.ADD_MENU_ERROS);
+            }else {
+                sysMenuMapper.delete(id);
+                response.setCode(200);
+                response.setMsg(CommonUtil.DEL_SUCCESS);
+            }
+        }catch (Exception e){
+            response.setCode(-1);
+            response.setMsg(CommonUtil.DEL_ERROR);
+        }
 
-        return false;
+        return response;
+    }
+
+    @Override
+    public void save(SysMenu sysMenu) {
+        if(StringUtils.isEmpty(sysMenu.getId())){
+            sysMenu.setId(IdGen.uuid());
+            sysMenuMapper.insert(sysMenu);
+        }else {
+            sysMenuMapper.update(sysMenu);
+        }
     }
 
     //根据查询结果区分上下级关系

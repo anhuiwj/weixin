@@ -5,6 +5,7 @@ import com.ah.manager.pojo.TUser;
 import com.ah.manager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -25,5 +26,16 @@ public class UserServiceImpl implements UserService {
         TUser user = new TUser();
         user.setUsername(userName);
         return userMapper.selectByPrimaryKey(user);
+    }
+
+    @Override
+    public TUser findById(String userid) {
+        TUser user = new TUser();
+        if(!StringUtils.isEmpty(userid)){
+            user.setUsername(userid);
+            user = userMapper.selectByPrimaryKey(user);
+        }
+
+        return user;
     }
 }

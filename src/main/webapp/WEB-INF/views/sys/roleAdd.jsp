@@ -6,9 +6,11 @@
     <%@ include file="/WEB-INF/views/common/static-css.jsp" %>
     <%--<%@ include file="/WEB-INF/views/common/static-js.jsp" %>--%>
     <link rel="stylesheet" href="${ctxStatic}/lib/zTree_v3-master/css/zTreeStyle/zTreeStyle.css" type="text/css">
-    <script type="text/javascript" src="${ctxStatic}/lib/zTree_v3-master/js/jquery-1.4.4.min.js"></script>
+    <%--<script type="text/javascript" src="${ctxStatic}/lib/zTree_v3-master/js/jquery-1.4.4.min.js"></script>--%>
     <script type="text/javascript" src="${ctxStatic}/lib/zTree_v3-master/js/jquery.ztree.core.min.js"></script>
     <script type="text/javascript" src="${ctxStatic}/lib/zTree_v3-master/js/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="${ctxStatic}/lib/Validform/5.3.2/Validform.js"></script>
+    <script type="text/javascript" src="${ctxStatic}/lib/jquery/1.9.1/jquery.min.js"></script>
     <SCRIPT LANGUAGE="JavaScript">
         var zTreeObj;
         // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
@@ -60,11 +62,15 @@
     <form action="${ctx}/role/save" method="post" class="form form-horizontal va-m" id="form-role-edit">
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">角色名称</label>
-            <input class="input-text f-l" name="rolename" style="width:300px;">
+            <input class="input-text f-l" name="rolename" style="width:300px;" datatype="*" >
         </div>
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">启用状态</label>
-            <input class="input-text" style="width:300px;">
+            <select style="width:300px;" name="status">
+                <c:forEach var="SysXDict"  items="${fns:getDictById('00004')}">
+                    <option value="${SysXDict.code}">${SysXDict.name}</option>
+                </c:forEach>
+            </select>
         </div>
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">菜单</label>
@@ -93,6 +99,24 @@
     <%--</form>--%>
 </div>
 <script type="text/javascript">
+    $("#form-role-edit").Validform({ //表单验证
+        tiptype: 2,
+        ajaxPost: true,
+        callback: function (data) {
+            parent.layer.msg(data.msg, {icon: 1});
+            parent.exports.gridRefresh();
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        },beforeSubmit:function(){
+//            var name = $('#rolename').val();
+////            var enName = $('#enname').val();
+////            if(name === enName){
+////                $('#ennamet').html('<span class="Validform_checktip Validform_wrong">角色名称不能与英文名称重复</span>');
+////                return false;
+////            }
+            return true;
+        }
+    });
 //    layui.use(['layer', 'form'], function(){
 //
 //    });

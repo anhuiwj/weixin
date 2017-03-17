@@ -8,5 +8,5 @@ public interface TRoleMenuMapper {
 
     int updateByExample(TRoleMenu roleMenu);
 
-    int delete(TRoleMenu tRoleMenu);
+    int delete(String roleId);
 }

@@ -1,9 +1,8 @@
 package com.ah.manager.pojo;
 
-import java.util.Date;
 import java.util.List;
 
-public class SysMenu {
+public class SysMenu extends BaseEntity{
     private String id;
 
     private String pid;
@@ -24,17 +23,6 @@ public class SysMenu {
 
     private Integer sort;
 
-    private String delFlag;
-
-    private Date createDate;
-
-    private String createBy;
-
-    private Date updateDate;
-
-    private String updateBy;
-
-    private String remarks;
 
     //子记录
     private List<SysMenu> children;
@@ -117,54 +105,6 @@ public class SysMenu {
 
     public void setSort(Integer sort) {
         this.sort = sort;
-    }
-
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag == null ? null : delFlag.trim();
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy == null ? null : createBy.trim();
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy == null ? null : updateBy.trim();
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks == null ? null : remarks.trim();
     }
 
     public List<SysMenu> getChildren() {

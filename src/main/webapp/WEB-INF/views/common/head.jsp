@@ -46,6 +46,7 @@
 <script src="${ctxStatic}/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
 <script src="${ctxStatic}/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
 <script src="${ctxStatic}/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script>
+<script type="text/javascript" src="${ctxStatic}/lib/Validform/5.3.2/Validform.min.js"></script>
 <%--<script src="${ctxStatic}/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>--%>
 <%--<script src="${ctxStatic}/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>--%>
 <%--<script src="${ctxStatic}/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>--%>

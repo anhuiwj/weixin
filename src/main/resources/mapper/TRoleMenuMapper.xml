@@ -18,4 +18,9 @@
       menu_id = #{record.menuId,jdbcType=VARCHAR},
       del_flag = #{record.delFlag,jdbcType=VARCHAR}
   </update>
+  <update id="delete">
+    update t_role_menu
+    set del_flag = '1'
+    where role_id = #{roleId}
+  </update>
 </mapper>

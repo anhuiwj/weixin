@@ -44,6 +44,7 @@ public class RoleServiceImpl implements RoleService {
             tRoleMapper.insert(role);
         }
 
+        tRoleMenuMapper.delete(role.getId());
         for(String menuId:role.getMenus()){
             tRoleMenu = new TRoleMenu();
             tRoleMenu.setRoleId(role.getId());

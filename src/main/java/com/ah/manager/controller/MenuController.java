@@ -1,7 +1,7 @@
 package com.ah.manager.controller;
 
-import com.ah.manager.common.miniui.AjaxResult;
 import com.ah.manager.pojo.SysMenu;
+import com.ah.manager.response.JsonResponseEntity;
 import com.ah.manager.service.SysMenuService;
 import com.ah.manager.util.CommonUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -44,10 +45,21 @@ public class MenuController extends BaseController{
         return "sys/menuForm";
     }
     @RequestMapping("/save")
-    public AjaxResult save(SysMenu sysMenu){
-        if(sysMenuService.save(sysMenu)){
-            return new AjaxResult(true,CommonUtil.ADD_SUCCESS);
+    @ResponseBody
+    public JsonResponseEntity save(SysMenu sysMenu){
+        JsonResponseEntity response = new JsonResponseEntity();
+        try {
+            sysMenuService.save(sysMenu);
+            response.setMsg(CommonUtil.ADD_SUCCESS);
+        }catch (Exception e){
+            e.printStackTrace();
+            response.setMsg(CommonUtil.ADD_ERROR);
         }
-        return new AjaxResult(false,CommonUtil.ADD_ERROR);
+        return response;
+    }
+    @RequestMapping("/delete")
+    @ResponseBody
+    public JsonResponseEntity delete(String  id){
+        return sysMenuService.delete(id);
     }
 }
