@@ -12,4 +12,6 @@ public interface SysMenuService {
     List<SysMenu> findAll();
     List<SysMenu> findMenu();
     SysMenu findById(String id);
+
+    boolean save(SysMenu sysMenu);
 }

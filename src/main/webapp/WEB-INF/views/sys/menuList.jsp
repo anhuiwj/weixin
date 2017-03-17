@@ -26,9 +26,9 @@
 						<th>目标</th>
 						<th>菜单图标</th>
 						<th>权限标识</th>
-						<th>是否显示</th>
-						<th>排序</th>
-						<th style="width: 160px;text-align: center;">操作</th>
+						<th style="width: 100px;text-align: center;">是否显示</th>
+						<th style="width: 100px;text-align: center;">排序</th>
+						<th >操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,7 +39,7 @@
 						<td>${row.target}</td>
 						<td>${row.icon}</td>
 						<td>${row.permission}</td>
-						<td><c:choose>
+						<td style="text-align: center"><c:choose>
 								<c:when test="${row.display eq '2'}">
 									<span class="label label-default radius">隐藏</span>
 								</c:when>
@@ -48,7 +48,7 @@
 								</c:when>
 							</c:choose>
 						</td>
-						<td>${row.sort}</td>
+						<td style="text-align: center">${row.sort}</td>
 						<td style="text-align: center;">
 						<%--<shiro:hasPermission name="auth:menu:save">--%>
 							<input onclick="editRow('${row.id}');" value="修改" class="btn btn-primary size-MINI radius" type="button">

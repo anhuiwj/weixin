@@ -75,7 +75,7 @@
         <!-- 指定数据库表 -->
         <!--<table tableName="t_user"></table>-->
         <!--<table tableName="t_role"></table>-->
-        <!--<table tableName="t_permission"></table>-->
+        <table tableName="t_role_menu"></table>
 
         <!--<table tableName="weixin_account"></table>-->
 

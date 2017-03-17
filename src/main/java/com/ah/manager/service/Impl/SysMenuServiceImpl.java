@@ -55,6 +55,12 @@ public class SysMenuServiceImpl implements SysMenuService {
         return sysMenuMapper.findById(id);
     }
 
+    @Override
+    public boolean save(SysMenu sysMenu) {
+
+        return false;
+    }
+
     //根据查询结果区分上下级关系
     private List<SysMenu> convertTree(List<SysMenu> list) {
         Map<String, SysMenu> map = Maps.newHashMap();

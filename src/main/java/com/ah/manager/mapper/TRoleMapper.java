@@ -19,5 +19,5 @@ public interface TRoleMapper {
 
     int updateByExampleSelective(@Param("record") TRole record, @Param("example") TRole example);
 
-    int updateByExample(@Param("record") TRole record, @Param("example") TRole example);
+    int update(TRole role);
 }

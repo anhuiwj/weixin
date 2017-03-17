@@ -17,7 +17,7 @@
   </delete>
   <insert id="insert" parameterType="com.ah.manager.pojo.TRole" >
     insert into t_role (id, rolename)
-    values (#{id,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR})
+    values (#{id}, #{rolename})
   </insert>
   <insert id="insertSelective" parameterType="com.ah.manager.pojo.TRole" >
     insert into t_role
@@ -52,9 +52,9 @@
       </if>
     </set>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="update" parameterType="com.ah.manager.pojo.TRole" >
     update t_role
-    set id = #{record.id,jdbcType=INTEGER},
-      rolename = #{record.rolename,jdbcType=VARCHAR}
+    set id = #{id},
+      rolename = #{rolename}
   </update>
 </mapper>

@@ -2,8 +2,8 @@ package com.ah.manager.pojo;
 
 import java.util.List;
 
-public class TRole {
-    private Integer id;
+public class TRole extends BaseEntity{
+    private String id;
 
     private String rolename;
 
@@ -13,11 +13,11 @@ public class TRole {
 
     private String status;//启用状态
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

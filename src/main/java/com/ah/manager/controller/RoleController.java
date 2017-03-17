@@ -58,7 +58,7 @@ public class RoleController {
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     @ResponseBody
     public JsonResponseEntity save(TRole role){
-
+        roleService.save(role);
         return null;
     }
 
