@@ -1,5 +1,6 @@
 package com.ah.manager.service;
 
+import com.ah.manager.common.page.model.Pager;
 import com.ah.manager.pojo.TUser;
 
 import java.util.List;
@@ -11,9 +12,15 @@ public interface UserService {
     /**
      *查询所有用户
      */
-    List<TUser> findUser();
+    void findAll(Pager pager);
 
-    TUser findByName(String userName);
+    void save(TUser user);
 
-    TUser findById(String userid);
+    TUser findByUserCode(String userCode);
+
+    TUser findById(String id);
+
+    void delete(String id);
+
+    List<TUser> findUsers();
 }

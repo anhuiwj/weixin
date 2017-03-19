@@ -87,9 +87,10 @@
 			return true;
 		}
 		function ajaxValidationCallback(status, form, result, options){
+			debugger;
 			layer.close(layerLoadIndex);
 			if(status === true){
-				if (result.ok){
+				if (result.code == '200'){
 					var index = parent.layer.getFrameIndex(window.name);
 					if(index != undefined) {
 						parent.layer.msg(result.msg, {icon: 6});
@@ -137,19 +138,6 @@
 					<input id="menuSelectBtn" onclick="showMenu();" class="btn btn-primary size-S radius" type="button" value="选择">
 				</div>
 			</div>
-		<%--<div class="row cl">--%>
-			<%--<label class="form-label col-xs-4 col-sm-3">父节点：</label>--%>
-			<%--<div class="formControls col-xs-7 col-sm-5">--%>
-				<%--<input type="hidden" id="menuHidden" name="pid" value=""/>--%>
-				<%--<input id="menuPid" type="text" readonly class="input-text"/>--%>
-				<%--<div id="menuContent" class="zTreeContent" >--%>
-					<%--<ul id="menuTree" class="ztree" style="margin-top:0; width:168px;"></ul>--%>
-				<%--</div>--%>
-			<%--</div>--%>
-			<%--<div class="formControls col-xs-1 col-sm-1">--%>
-				<%--<input id="menuSelectBtn" onclick="showMenu();" class="btn btn-primary size-S radius" type="button" value="选择">--%>
-			<%--</div>--%>
-		<%--</div>--%>
 		</c:if>
 		<div class="f-l w-980 mb-20">
 			<label class="f-l mr-30 w-200">菜单名称：</label>
@@ -201,15 +189,5 @@
 </div>
 </body>
 <script>
-	$("#submitForm").Validform({ //表单验证
-		tiptype: 2,
-		ajaxPost: true,
-		callback: function (data) {
-			parent.layer.msg(data.msg, {icon: 1});
-			setTimeout(function(){
-				parent.location.href = parent.location.href;
-			},1e2);
-		},
-	});
 </script>
 </html>

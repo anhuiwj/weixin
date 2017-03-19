@@ -28,7 +28,7 @@ public class BaseController {
             Subject subject = SecurityUtils.getSubject();
             String username = (String) subject.getPrincipal();
             UserService userService = SpringContextHolder.getBean(UserService.class);
-            TUser user = userService.findByName(username);
+            TUser user = userService.findByUserCode(username);
             return user;
         } catch (Exception e) {
             return null;

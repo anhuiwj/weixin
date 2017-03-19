@@ -8,5 +8,7 @@ import com.ah.manager.pojo.TRole;
  */
 public interface RoleService {
     void findAll(Pager pager);
+    void findAll2(Pager pager);
     int save(TRole role);
+    TRole findOne(String id);
 }

@@ -3,6 +3,8 @@
  */
 package com.ah.manager.pojo;
 
+import com.ah.manager.util.UserUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,6 +23,7 @@ public abstract class BaseEntity implements Serializable {
     private Date createDate;
     private String updateBy;
     private Date updateDate;
+    private String createDateString;
 
     public BaseEntity() {
         this.delFlag = "0";
@@ -73,6 +76,14 @@ public abstract class BaseEntity implements Serializable {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public String getCreateDateString() {
+        return createDateString;
+    }
+
+    public void setCreateDateString(String createDateString) {
+        this.createDateString = createDateString;
     }
 
 }

@@ -3,10 +3,12 @@ package com.ah.manager.pojo;
 import java.util.Date;
 import java.util.List;
 
-public class TUser {
+public class TUser extends BaseEntity{
     private String id;
 
     private String username;
+
+    private String userCode;
 
     private Date birthday;
 
@@ -73,4 +75,14 @@ public class TUser {
     public void setRoleList(List<TRole> roleList) {
         this.roleList = roleList;
     }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+
 }

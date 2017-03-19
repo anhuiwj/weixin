@@ -40,7 +40,7 @@
 						<td>${row.icon}</td>
 						<td>${row.permission}</td>
 						<td style="text-align: center"><c:choose>
-								<c:when test="${row.display eq '2'}">
+								<c:when test="${row.display eq '0'}">
 									<span class="label label-default radius">隐藏</span>
 								</c:when>
 								<c:when test="${row.display eq '1'}">

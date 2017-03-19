@@ -23,4 +23,5 @@
     set del_flag = '1'
     where role_id = #{roleId}
   </update>
+
 </mapper>

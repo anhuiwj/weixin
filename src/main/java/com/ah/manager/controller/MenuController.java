@@ -50,6 +50,7 @@ public class MenuController extends BaseController{
         JsonResponseEntity response = new JsonResponseEntity();
         try {
             sysMenuService.save(sysMenu);
+            response.setCode(200);
             response.setMsg(CommonUtil.ADD_SUCCESS);
         }catch (Exception e){
             e.printStackTrace();

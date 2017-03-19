@@ -5,6 +5,7 @@ import com.ah.manager.pojo.TRole;
 import com.ah.manager.response.JsonResponseEntity;
 import com.ah.manager.service.RoleService;
 import com.ah.manager.service.SysMenuService;
+import com.ah.manager.util.CommonUtil;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,10 +50,31 @@ public class RoleController {
         return response;
     }
 
+    @RequestMapping("/getData2")
+    @ResponseBody
+    public JsonResponseEntity<Pager> getData2(@RequestParam(required = false) String dtGridPager){
+        JsonResponseEntity<Pager> response = new JsonResponseEntity<>();
+        Pager pager = new Gson().fromJson(dtGridPager, Pager.class);
+        if (pager != null) {
+            Map<String, Object> searchParam = pager.getParameters(); //查询参数
+//            searchParam.put("user",getCurrentUser().getId());
+            pager.setParameters(searchParam);
+            roleService.findAll2(pager);
+        }
+        response.setData(pager);
+        return response;
+    }
+
     @RequestMapping("/add")
-    public String add(Model model){
+    public String add(Model model,String id){
         model.addAttribute("list", sysMenuService.findMenusByTree());
+        model.addAttribute(roleService.findOne(id));
         return "sys/roleAdd";
+    }
+
+    @RequestMapping("/addUser")
+    public String addUser(Model model){
+        return "sys/roleAddUser";
     }
 
     @RequestMapping(value = "/save",method = RequestMethod.POST)
@@ -62,11 +84,27 @@ public class RoleController {
         try {
             roleService.save(role);
             response.setMsg("保存成功");
+            response.setCode(CommonUtil.SUCCESS_CODE);
         }catch (Exception e){
             e.printStackTrace();
             response.setMsg("保存失败");
         }
         return response;
     }
+
+//    @RequestMapping(value = "/delete")
+//    @ResponseBody
+//    public JsonResponseEntity delete(String id ){
+//        JsonResponseEntity response = new JsonResponseEntity();
+//        try {
+//            roleService.delete(id);
+//            response.setMsg(CommonUtil.DEL_SUCCESS);
+//            response.setCode(CommonUtil.SUCCESS_CODE);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            response.setMsg(CommonUtil.DEL_ERROR);
+//        }
+//        return response;
+//    }
 
 }

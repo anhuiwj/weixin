@@ -37,4 +37,6 @@ public interface SysMenuMapper {
      * 查询是否有下级菜单
      */
     List<SysMenu> findChildren(String pid);
+
+    List<SysMenu> selectRoleMenu(String roleId);
 }

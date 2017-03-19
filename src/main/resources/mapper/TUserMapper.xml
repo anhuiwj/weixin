@@ -3,140 +3,83 @@
 <mapper namespace="com.ah.manager.mapper.TUserMapper" >
 
   <sql id="Base_Column_List" >
-    u.id, u.username, u.birthday, u.sex, u.address,u.password
+    u.id as id,
+    u.username as username,
+    u.usercode as userCode,
+    u.birthday as birthday,
+    u.sex as sex,
+    u.address as address,
+    u.password as password,
+    del_flag,create_date,create_by,update_date,update_by
   </sql>
 
-
-
-  <select id="selectByPrimaryKey" resultType="com.ah.manager.pojo.TUser" parameterType="com.ah.manager.pojo.TUser" >
-    select 
-    <include refid="Base_Column_List" />,r.*
-    from t_user u LEFT JOIN t_user_role tr on tr.user_id = u.id  and tr.del_flag='0'
-    LEFT JOIN t_role r ON r.id = tr.role_id and tr.del_flag='0'
-    where u.username = #{username}
+  <select id="findAll" resultType="com.ah.manager.pojo.TUser" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from t_user u
+    WHERE u.del_flag = '0'
+    <if test="username !=null and username!='' ">
+      and u.username like concat('%',#{username},'%')
+    </if>
+    <if test="userCode !=null and userCode!='' ">
+      and u.usercode like concat('%',#{userCode},'%')
+    </if>
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_user
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ah.manager.pojo.TUser" >
-    delete from t_user
-  </delete>
-  <insert id="insert" parameterType="com.ah.manager.pojo.TUser" >
-    insert into t_user (id, username, birthday, 
-      sex, address, password
-      )
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
-      #{sex,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
-      )
+
+  <insert id="save" parameterType="com.ah.manager.pojo.TUser" >
+  insert into t_user (id, username,usercode, birthday,
+  sex, address, password,del_flag,create_date,create_by,update_date,update_by
+  )
+  values (#{id}, #{username},#{userCode} ,#{birthday},
+  #{sex}, #{address}, #{password},#{delFlag},#{createDate},#{createBy},#{updateDate},#{updateBy}
+  )
   </insert>
-  <insert id="insertSelective" parameterType="com.ah.manager.pojo.TUser" >
-    insert into t_user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="username != null" >
-        username,
-      </if>
-      <if test="birthday != null" >
-        birthday,
-      </if>
-      <if test="sex != null" >
-        sex,
-      </if>
-      <if test="address != null" >
-        address,
-      </if>
-      <if test="password != null" >
-        password,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null" >
-        #{birthday,jdbcType=DATE},
-      </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=CHAR},
-      </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.ah.manager.pojo.TUser" resultType="java.lang.Integer" >
-    select count(*) from t_user
+
+  <select id="findByUserCode" resultType="com.ah.manager.pojo.TUser">
+    select
+    <include refid="Base_Column_List" />
+    from t_user u
+    WHERE u.del_flag = '0'
+    and u.usercode =#{userCode}
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+
+
+  <select id="findById" resultType="com.ah.manager.pojo.TUser">
+    select
+    <include refid="Base_Column_List" />
+    from t_user u
+    WHERE u.del_flag = '0'
+    and u.id =#{id}
+  </select>
+
+  <update id="update" parameterType="com.ah.manager.pojo.TUser" >
     update t_user
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.birthday != null" >
-        birthday = #{record.birthday,jdbcType=DATE},
-      </if>
-      <if test="record.sex != null" >
-        sex = #{record.sex,jdbcType=CHAR},
-      </if>
-      <if test="record.address != null" >
-        address = #{record.address,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null" >
-        password = #{record.password,jdbcType=VARCHAR},
-      </if>
-    </set>
+    set username = #{username},
+        sex = #{sex}
+    where id = #{id}
   </update>
-  <update id="updateByExample" parameterType="map" >
+
+  <update id="delete" >
     update t_user
-    set id = #{record.id,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      birthday = #{record.birthday,jdbcType=DATE},
-      sex = #{record.sex,jdbcType=CHAR},
-      address = #{record.address,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR}
+    set del_flag = '1',
+    where id = #{id}
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ah.manager.pojo.TUser" >
-    update t_user
-    <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null" >
-        birthday = #{birthday,jdbcType=DATE},
-      </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=CHAR},
-      </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ah.manager.pojo.TUser" >
-    update t_user
-    set username = #{username,jdbcType=VARCHAR},
-      birthday = #{birthday,jdbcType=DATE},
-      sex = #{sex,jdbcType=CHAR},
-      address = #{address,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
+  <select id="findUsers" resultType="com.ah.manager.pojo.TUser">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    t_user u
+    WHERE
+    u.del_flag = '0'
+    AND u.id NOT IN (
+    SELECT
+    tr.user_id
+    FROM
+    t_user_role tr
+    WHERE
+    tr.del_flag = '0'
+    )
+  </select>
 </mapper>

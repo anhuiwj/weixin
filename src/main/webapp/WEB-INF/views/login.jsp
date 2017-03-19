@@ -35,7 +35,7 @@
 			<label class="control-label visible-ie8 visible-ie9">Username</label>
 			<div class="input-icon">
 				<i class="fa fa-user"></i>
-				<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="username"/>
+				<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="userCode"/>
 			</div>
 		</div>
 		<div class="form-group">
@@ -71,8 +71,8 @@ $(document).ready(function() {
 	});
 });
 function loginForm() {
-	var username = $("#username").val();
-	if (username == undefined || $.trim(username) == "") {
+	var userCode = $("#userCode").val();
+	if (userCode == undefined || $.trim(userCode) == "") {
 		return;
 	} else {
 		$("#message").text("");

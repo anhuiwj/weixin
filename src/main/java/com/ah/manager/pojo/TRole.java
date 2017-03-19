@@ -13,6 +13,8 @@ public class TRole extends BaseEntity{
 
     private String status;//启用状态
 
+    private List<SysMenu> sysMenus;
+
     public String getId() {
         return id;
     }
@@ -51,5 +53,13 @@ public class TRole extends BaseEntity{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<SysMenu> getSysMenus() {
+        return sysMenus;
+    }
+
+    public void setSysMenus(List<SysMenu> sysMenus) {
+        this.sysMenus = sysMenus;
     }
 }

@@ -268,74 +268,11 @@
     from sys_menu m
     where m.pid = #{pid} and m.del_flag = '0'
   </select>
-  <!--<update id="updateByPrimaryKeySelective" parameterType="com.ah.manager.pojo.SysMenu" >-->
-    <!--update sys_menu-->
-    <!--<set >-->
-      <!--<if test="pid != null" >-->
-        <!--pid = #{pid},-->
-      <!--</if>-->
-      <!--<if test="sys != null" >-->
-        <!--sys = #{sys},-->
-      <!--</if>-->
-      <!--<if test="name != null" >-->
-        <!--name = #{name},-->
-      <!--</if>-->
-      <!--<if test="href != null" >-->
-        <!--href = #{href},-->
-      <!--</if>-->
-      <!--<if test="target != null" >-->
-        <!--target = #{target},-->
-      <!--</if>-->
-      <!--<if test="icon != null" >-->
-        <!--icon = #{icon},-->
-      <!--</if>-->
-      <!--<if test="permission != null" >-->
-        <!--permission = #{permission},-->
-      <!--</if>-->
-      <!--<if test="display != null" >-->
-        <!--display = #{display},-->
-      <!--</if>-->
-      <!--<if test="sort != null" >-->
-        <!--sort = #{sort,jdbcType=INTEGER},-->
-      <!--</if>-->
-      <!--<if test="delFlag != null" >-->
-        <!--del_flag = #{delFlag},-->
-      <!--</if>-->
-      <!--<if test="createDate != null" >-->
-        <!--create_date = #{createDate,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-      <!--<if test="createBy != null" >-->
-        <!--create_by = #{createBy},-->
-      <!--</if>-->
-      <!--<if test="updateDate != null" >-->
-        <!--update_date = #{updateDate,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-      <!--<if test="updateBy != null" >-->
-        <!--update_by = #{updateBy},-->
-      <!--</if>-->
-      <!--<if test="remarks != null" >-->
-        <!--remarks = #{remarks},-->
-      <!--</if>-->
-    <!--</set>-->
-    <!--where id = #{id}-->
-  <!--</update>-->
-  <!--<update id="updateByPrimaryKey" parameterType="com.ah.manager.pojo.SysMenu" >-->
-    <!--update sys_menu-->
-    <!--set pid = #{pid},-->
-      <!--sys = #{sys},-->
-      <!--name = #{name},-->
-      <!--href = #{href},-->
-      <!--target = #{target},-->
-      <!--icon = #{icon},-->
-      <!--permission = #{permission},-->
-      <!--display = #{display},-->
-      <!--sort = #{sort,jdbcType=INTEGER},-->
-      <!--del_flag = #{delFlag},-->
-      <!--create_date = #{createDate,jdbcType=TIMESTAMP},-->
-      <!--create_by = #{createBy},-->
-      <!--update_date = #{updateDate,jdbcType=TIMESTAMP},-->
-      <!--update_by = #{updateBy},-->
-      <!--remarks = #{remarks}-->
-    <!--where id = #{id}-->
-  <!--</update>-->
+
+  <select id="selectRoleMenu" resultType="com.ah.manager.pojo.SysMenu" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_menu m INNER join t_role_menu tm on m.id = tm.menu_id and tm.del_flag='0'
+    where m.del_flag = '0' and tm.role_id = #{roleId}
+  </select>
 </mapper>

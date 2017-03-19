@@ -10,4 +10,6 @@ public class CommonUtil {
     public static final String DEL_ERROR = "删除失败";
     public static final String DEL_SUCCESS = "删除成功";
 
+    public static final int SUCCESS_CODE = 200;
+
 }

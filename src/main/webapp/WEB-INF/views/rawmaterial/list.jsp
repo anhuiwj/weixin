@@ -9,8 +9,8 @@
 <body>
 <nav class="w-breadcrumb">
     <i class="Hui-iconfont">&#xe67f;</i> 首页
-    <span class="c-gray en">&gt;</span>  企业信息管理
-    <span class="c-gray en">&gt;</span> 企业信息列表
+    <span class="c-gray en">&gt;</span>  产品信息管理
+    <span class="c-gray en">&gt;</span> 配比原材料
     <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px"
        href="javascript:location.replace(location.href);" title="刷新">
         <i class="Hui-iconfont">&#xe68f;</i>
@@ -19,17 +19,14 @@
 <div class="pd-20">
     <div class="cl pd-5 bg-1 bk-gray">
         <div class="j_hform">
-            <p style="padding-left:30px;">
-                <input id="ID" type="text" class="input-text" placeholder="企业名称" style="width:300px;"onkeyup=this.value=this.value.replace(/[$_%?*'"\s]/ig,'')>&nbsp;
-            </p>
+            <%--<p style="padding-left:30px;">--%>
+                <%--<input id="ID" type="text" class="input-text" placeholder="企业名称" style="width:300px;"onkeyup=this.value=this.value.replace(/[$_%?*'"\s]/ig,'')>&nbsp;--%>
+            <%--</p>--%>
             <p>
-                <label>建档日期：</label>
-                <input type="text" style="width:109px;" class="input-text Wdate radius" id="datemin" name="datemin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',startDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'datemax\')}'})" > －
-                <input type="text" style="width:109px;" class="input-text Wdate radius" id="datemax" name="datemax" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',startDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'datemin\')}'})">
-                <label>法人代表：</label>
-                <input type="text" style="width:109px;" class="input-text " id="datemin" name="datemin" >
-                <label>股权结构：</label>
-                <input type="text" style="width:109px;" class="input-text" id="datemin" name="datemin"  >
+                <label>俗称：</label>
+                <input type="text" style="width:109px;" class="input-text" id="commonlyCalled" name="commonlyCalled" >
+                <label>英文名称：</label>
+                <input type="text" style="width:109px;" class="input-text" id="englishName" name="englishName" >
             </p>
             <p>
 
@@ -49,7 +46,7 @@
         </div>
     </div>
     <div class="tbl_header mt-20">
-        <strong>企业信息列表</strong><p class="tbl_header_r">
+        <strong>配比原材料列表</strong><p class="tbl_header_r">
         <%--<input id="export" name="export" type="button" value="导出" class="btn btn-success size-S radius"></p>--%>
     </div>
     <div class="tbl_scroll">
@@ -62,21 +59,15 @@
         var whether =${fns:getDictToJSON('00001')};
         var dtList = function () {
             var columns = [
-                {id: 'rolename', title: '公司性质', type: 'string', columnClass: 'text-center'},
-                {id: 'status', title: '公司名称', type: 'string',codeTable:whether, columnClass: 'text-center'},
-                {id: 'status', title: '法人代表', type: 'string',codeTable:whether, columnClass: 'text-center'},
-                {id: 'status', title: '股权结构', type: 'string',codeTable:whether, columnClass: 'text-center'},
-                {id: 'status', title: '公司概况', type: 'string',codeTable:whether, columnClass: 'text-center'},
-                {id: 'status', title: '公司地址', type: 'string',codeTable:whether, columnClass: 'text-center'},
-                {id: 'id', title: '操作', type: 'string',codeTable:whether, columnClass: 'text-center',
+                {id: 'commonlyCalled', title: '原料俗称', type: 'string', columnClass: 'text-c td'},
+                {id: 'chinaName', title: '中文名称', type: 'string', columnClass: 'text-c'},
+                {id: 'englishName', title: '英文名称', type: 'string', columnClass: 'text-c'},
+                {id: 'chemicalFormula', title: '化学式',type: 'string',columnClass: 'text-c'},
+                {id: 'id', title: '操作', type: 'string',codeTable:whether, columnClass: 'text-c',
                     resolution:function(value, record, column, grid, dataNo, columnNo){
                     var content = '';
-                        <shiro:hasPermission name="role:add">
                             content += '<input onclick="editRow(\''+record.id+'\');" value="修改" class="btn btn-primary size-MINI radius" type="button">';
-                        </shiro:hasPermission>
-                        <shiro:hasPermission name="name">
-                            content += '<input onclick="deleteRow(\''+record.id+'\');" value="删除" class="btn btn-primary size-MINI radius" type="button">';
-                        </shiro:hasPermission>
+                            content += '&nbsp<input onclick="deleteRow(\''+record.id+'\');" value="删除" class="btn btn-primary size-MINI radius" type="button">';
                         return content;
                     }
                 }
@@ -86,7 +77,7 @@
                 lang: 'zh-cn',
                 ajaxLoad : true,
                 tableStyle: 'font-size:14px;',
-                loadURL: "${ctx}/role/getData",
+                loadURL: "${ctx}/rawmaterial/getData",
                 check: false,
                 columns: columns,
                 gridContainer: 'table',
@@ -120,25 +111,16 @@
         }
         function getParams() {
             var param = {};
-//            param.ID = $.trim($('#ID').val());
-//            param.country = $('#country option:selected').val();
-//            param.managerHospital = $('#hospital option:selected').val();
-//            param.currdocName = $('#doctor option:selected').text();
-//            param.addressCounty = $('#level3 option:selected').val();
-//            param.addressTown = $('#level4 option:selected').val();
-//            param.addressCommittee = $('#level5 option:selected').val();
-//            param.managerLevel = $('#managerLevel option:selected').val();
-//            param.gender = $('#gender option:selected').val();
-//            param.datemin = $('#datemin').val();
-//            param.datemax = $('#datemax').val();
+            param.commonlyCalled = $('#commonlyCalled').val();
+            param.englishName = $('#englishName').val();
             return param;
         }
         function bindEvent() {
             $('#query').on('click', function () { //查询
-                window.location.reload();
+                search();
             });
             $('#add_role').on('click', function () { //查询
-               layer_show("角色新增","${ctx}/company/add")
+               layer_show("原材料新增","${ctx}/rawmaterial/add")
             });
         }
         function pageInit() {
@@ -153,7 +135,30 @@
     });
     
     function editRow(id) {
-        alert(id);
+        var url = "${ctx}/rawmaterial/add?id="+id;
+        layer_show("原材料修改",url)
+    }
+    
+    function deleteRow(id) {
+        layer.confirm('确认删除吗？', {
+            btn: ['确认','取消'], //按钮
+            icon: 5,
+            title:"提示"
+        }, function(){
+            $.ajax({
+                url: "${ctx}/rawmaterial/delete",
+                data:{"id":id} ,
+                success: function (data) {
+                    if (data.code==200) {
+                        layer.msg(data.msg, {icon: 6,end:function(){
+                            gridRefresh.gridRefresh();
+                        }});
+                    } else {
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                }
+            });
+        });
     }
 </script>
 

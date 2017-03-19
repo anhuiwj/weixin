@@ -3,6 +3,7 @@ package com.ah.manager.controller;
 import com.ah.manager.common.miniui.AjaxResult;
 import com.ah.manager.pojo.TUser;
 import com.ah.manager.service.SysMenuService;
+import com.ah.manager.util.MD5Util;
 import com.ah.manager.util.RSAEncryptUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -56,7 +57,7 @@ public class LoginController {
             if(bindingResult.hasErrors()){
                 return "";
             }
-            SecurityUtils.getSubject().login(new UsernamePasswordToken(user.getUsername(),user.getPassword()));
+            SecurityUtils.getSubject().login(new UsernamePasswordToken(user.getUserCode(), MD5Util.MD5(user.getPassword())));
             return "redirect:/index";
         }catch (AuthenticationException e){
             redirectAttributes.addFlashAttribute("message","用户名或密码错误");

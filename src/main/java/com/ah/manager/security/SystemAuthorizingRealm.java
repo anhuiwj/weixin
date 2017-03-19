@@ -5,6 +5,7 @@ import com.ah.manager.pojo.SysMenu;
 import com.ah.manager.pojo.TUser;
 import com.ah.manager.service.AuthService;
 import com.ah.manager.service.UserService;
+import com.ah.manager.util.MD5Util;
 import com.ah.manager.util.SpringContextHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
@@ -56,10 +57,10 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token=(UsernamePasswordToken) authenticationToken;
         //查出是否有此用户
-        TUser user=userService.findByName(token.getUsername());
+        TUser user=userService.findByUserCode(token.getUsername());
         if(user!=null){
             //若存在，将此用户存放到登录认证info中
-            return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), getName());
+            return new SimpleAuthenticationInfo(user.getUserCode(), user.getPassword(), getName());
         }
         return null;
     }

@@ -1,30 +1,23 @@
 package com.ah.manager.mapper;
 
 import com.ah.manager.pojo.TUser;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TUserMapper {
-    int countByExample(TUser example);
 
-    int deleteByExample(TUser example);
+    List<TUser> findAll(Map<String,Object> map);
 
-    int deleteByPrimaryKey(Integer id);
+    int save(TUser user);
 
-    int insert(TUser record);
+    TUser findByUserCode(String userCode);
 
-    int insertSelective(TUser record);
+    TUser findById(String id);
 
-    List<TUser> selectByExample(TUser example);
+    int update(TUser user);
 
-    TUser selectByPrimaryKey(TUser user);
+    int delete(String id);
 
-    int updateByExampleSelective(@Param("record") TUser record, @Param("example") TUser example);
-
-    int updateByExample(@Param("record") TUser record, @Param("example") TUser example);
-
-    int updateByPrimaryKeySelective(TUser record);
-
-    int updateByPrimaryKey(TUser record);
+    List<TUser> findUsers();
 }
