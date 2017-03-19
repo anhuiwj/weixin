@@ -5,6 +5,7 @@ import com.ah.manager.pojo.TUser;
 import com.ah.manager.service.SysMenuService;
 import com.ah.manager.util.MD5Util;
 import com.ah.manager.util.RSAEncryptUtils;
+import com.ah.manager.util.UserUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -100,7 +101,7 @@ public class LoginController {
 
     @RequestMapping(value = "/index")
     public String index(Model model){
-        model.addAttribute(sysMenuService.findMenu());
+        model.addAttribute(sysMenuService.findUserId(UserUtils.getCurrentUser().getId()));
         return "index";
     }
 

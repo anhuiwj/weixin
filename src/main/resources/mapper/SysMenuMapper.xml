@@ -39,10 +39,15 @@
     SELECT
     <include refid="Base_Column_List" />
     FROM
-    t_user u INNER JOIN t_user_role r on u.id = r.role_id and r.del_flag='0'
-    INNER JOIN t_role_menu rm on r.role_id = rm.role_id and rm.del_flag='0'
-    INNER JOIN sys_menu m ON rm.menu_id=m.id and m.del_flag='0'
-    WHERE u.del_flag='0' AND u.id=#{id}
+    t_user u
+    INNER JOIN t_user_role r ON u.id = r.user_id
+    AND r.del_flag = '0'
+    INNER JOIN t_role_menu rm ON r.role_id = rm.role_id
+    AND rm.del_flag = '0'
+    INNER JOIN sys_menu m ON rm.menu_id = m.id
+    AND m.del_flag = '0'
+    WHERE
+    u.del_flag = '0' and u.id = #{id} and m.display = '1' and m.id !='12'
   </select>
 
   <select id="findById" resultType="com.ah.manager.pojo.SysMenu">

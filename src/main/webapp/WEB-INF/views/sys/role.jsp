@@ -20,12 +20,10 @@
     <div class="cl pd-5 bg-1 bk-gray">
         <div class="j_hform">
             <p style="padding-left:30px;">
-                <input id="ID" type="text" class="input-text" placeholder="姓名/证件号码/社保卡号" style="width:300px;"onkeyup=this.value=this.value.replace(/[$_%?*'"\s]/ig,'')>&nbsp;
             </p>
             <p>
-                <label>建档日期：</label>
-                <input type="text" style="width:109px;" class="input-text Wdate radius" id="datemin" name="datemin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',startDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'datemax\')}'})" > －
-                <input type="text" style="width:109px;" class="input-text Wdate radius" id="datemax" name="datemax" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',startDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'datemin\')}'})">
+                <label>角色名称：</label>
+                <input type="text" style="width:109px;" class="input-text" id="rolename" name="rolename">
             </p>
             <p>
                 <span>
@@ -55,6 +53,7 @@
     </div>
 </div>
 <script>
+    var lodingId = '';
     $(function () {
         var whether =${fns:getDictToJSON('00004')};
         var dtList = function () {
@@ -64,11 +63,7 @@
                 {id: 'id', title: '操作', type: 'string',columnClass: 'text-center',columnStyle: 'width:50px',
                     resolution:function(value, record, column, grid, dataNo, columnNo){
                     var content = '';
-                        <%--<shiro:hasPermission name="role:add">--%>
-
-                        <%--</shiro:hasPermission>--%>
                             content += '<input onclick="editRow(\''+record.id+'\');" value="修改" class="btn btn-primary size-MINI radius" type="button">';
-                            content += '&nbsp;<input onclick="deleteRow(\''+record.id+'\');" value="删除" class="btn btn-primary size-MINI radius" type="button">';
                         content += '&nbsp;<input onclick="addUser(\''+record.id+'\');" value="添加用户" class="btn btn-primary size-MINI radius" type="button">';
                         return content;
                     }
@@ -119,22 +114,12 @@
         }
         function getParams() {
             var param = {};
-//            param.ID = $.trim($('#ID').val());
-//            param.country = $('#country option:selected').val();
-//            param.managerHospital = $('#hospital option:selected').val();
-//            param.currdocName = $('#doctor option:selected').text();
-//            param.addressCounty = $('#level3 option:selected').val();
-//            param.addressTown = $('#level4 option:selected').val();
-//            param.addressCommittee = $('#level5 option:selected').val();
-//            param.managerLevel = $('#managerLevel option:selected').val();
-//            param.gender = $('#gender option:selected').val();
-//            param.datemin = $('#datemin').val();
-//            param.datemax = $('#datemax').val();
+            param.rolename = $('#rolename').val();
             return param;
         }
         function bindEvent() {
             $('#query').on('click', function () { //查询
-                window.location.reload();
+                search();
             });
             $('#add_role').on('click', function () { //查询
                layer_show("角色新增","${ctx}/role/add")
@@ -156,7 +141,7 @@
     }
 
     function addUser(id) {
-        layer_show("用户添加角色","${ctx}/role/addUser?id="+id)
+        layer_show("用户添加角色","${ctx}/role/addUser?roleId="+id)
     }
 
     function deleteRow(id) {
@@ -185,6 +170,7 @@
 
     function historyList(url, id) {
         if (!h_dtList) {
+            var whether =${fns:getDictToJSON('00002')};
             var columns = [
                 {
                     id: 'id', title: 'NO.', type: 'string', columnClass: 'text-c td', columnStyle: 'min-width:42px;max-width:42px',
@@ -193,7 +179,7 @@
                     }
                 },
                 {
-                    id: 'formulaMatarialId',
+                    id: 'userId',
                     title: '操作',
                     type: 'string',
                     columnClass: 'text-c td',
@@ -201,12 +187,12 @@
                     resolution: function (value, record) {
                         // var searchurl = urls.resultDetailUrl + "?file_id=" + record.file_id + "&personcard_no=" +record.personcard_no;
                         // var searchmethod = "parent.addTag('" + searchurl + "','查看详情')";onclick='+searchmethod+'
-                        var content = '<a class="btn btn-primary size-MINI radius" onclick="remove(\''+record.id+'\');" >删除</a>';
+                        var content = '<a class="btn btn-primary size-MINI radius" onclick="removeUser(\''+record.userId+'\');" >删除</a>';
                         return content;
                     }
                 },
                 {id: 'username', title: '用户名', type: 'string', columnClass: 'text-c td'},
-                {id: 'sex', title: '性别', type: 'string', columnClass: 'text-c td'}
+                {id: 'sex', title: '性别', type: 'string',codeTable:whether, columnClass: 'text-c td'}
             ];
             var options = {
                 lang: 'zh-cn',
@@ -230,16 +216,35 @@
             };
             var grid = $.fn.DtGrid.init(options);
             var param = {};
-            param.formulaId = id;
+            param.roleId = id;
             grid.parameters = param;
             grid.load();
             h_dtList = grid;
         } else {
             var param = {};
-            param.formulaId = id;
+            param.roleId = id;
             h_dtList.parameters = param;
             h_dtList.refresh(true);
         }
+    }
+    function removeUser(id) {
+        layer.confirm('确认删除吗？', {
+            btn: ['确认','取消'], //按钮
+            icon: 5,
+            title:"提示"
+        }, function(){
+            $.ajax({
+                url: "${ctx}/role/deleteUser",
+                data:{"id":id} ,
+                success: function (data) {
+                    if (data.code==200) {
+                        layer.msg(data.msg, {icon: 6,end:function(){location.reload();}});
+                    } else {
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                }
+            });
+        });
     }
 </script>
 

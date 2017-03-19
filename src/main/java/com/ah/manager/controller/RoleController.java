@@ -2,6 +2,8 @@ package com.ah.manager.controller;
 
 import com.ah.manager.common.page.model.Pager;
 import com.ah.manager.pojo.TRole;
+import com.ah.manager.pojo.TUser;
+import com.ah.manager.pojo.TUserRole;
 import com.ah.manager.response.JsonResponseEntity;
 import com.ah.manager.service.RoleService;
 import com.ah.manager.service.SysMenuService;
@@ -73,7 +75,8 @@ public class RoleController {
     }
 
     @RequestMapping("/addUser")
-    public String addUser(Model model){
+    public String addUser(Model model,String roleId){
+        model.addAttribute("roleId",roleId);
         return "sys/roleAddUser";
     }
 
@@ -92,19 +95,34 @@ public class RoleController {
         return response;
     }
 
-//    @RequestMapping(value = "/delete")
-//    @ResponseBody
-//    public JsonResponseEntity delete(String id ){
-//        JsonResponseEntity response = new JsonResponseEntity();
-//        try {
-//            roleService.delete(id);
-//            response.setMsg(CommonUtil.DEL_SUCCESS);
-//            response.setCode(CommonUtil.SUCCESS_CODE);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            response.setMsg(CommonUtil.DEL_ERROR);
-//        }
-//        return response;
-//    }
+    @RequestMapping(value = "/saveUserRole",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResponseEntity saveUserRole(TUserRole tUserRole){
+        JsonResponseEntity response = new JsonResponseEntity();
+        try {
+            roleService.saveUserRole(tUserRole);
+            response.setMsg("保存成功");
+            response.setCode(CommonUtil.SUCCESS_CODE);
+        }catch (Exception e){
+            e.printStackTrace();
+            response.setMsg("保存失败");
+        }
+        return response;
+    }
+
+    @RequestMapping(value = "/deleteUser")
+    @ResponseBody
+    public JsonResponseEntity deleteUser(String id ){
+        JsonResponseEntity response = new JsonResponseEntity();
+        try {
+            roleService.deleteUser(id);
+            response.setMsg(CommonUtil.DEL_SUCCESS);
+            response.setCode(CommonUtil.SUCCESS_CODE);
+        }catch (Exception e){
+            e.printStackTrace();
+            response.setMsg(CommonUtil.DEL_ERROR);
+        }
+        return response;
+    }
 
 }

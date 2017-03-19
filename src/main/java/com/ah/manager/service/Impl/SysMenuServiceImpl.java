@@ -89,6 +89,13 @@ public class SysMenuServiceImpl implements SysMenuService {
         }
     }
 
+    @Override
+    public List<SysMenu> findUserId(String userId) {
+        List<SysMenu> menus = sysMenuMapper.findByUserId(userId);
+        List<SysMenu> tree = convertTree(menus);
+        return tree;
+    }
+
     //根据查询结果区分上下级关系
     private List<SysMenu> convertTree(List<SysMenu> list) {
         Map<String, SysMenu> map = Maps.newHashMap();

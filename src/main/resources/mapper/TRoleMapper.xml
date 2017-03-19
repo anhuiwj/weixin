@@ -11,6 +11,9 @@
     <include refid="Base_Column_List" />
     from t_role
     WHERE del_flag = '0'
+    <if test="rolename !=null and rolename != '' ">
+      and rolename like concat('%',#{rolename},'%')
+    </if>
   </select>
   <delete id="deleteByExample" parameterType="com.ah.manager.pojo.TRole" >
     delete from t_role
@@ -79,6 +82,9 @@
     from t_role r INNER JOIN  t_user_role ur on r.id = ur.role_id and ur.del_flag = '0'
     INNER JOIN t_user u on u.id = ur.user_id and u.del_flag = '0'
     WHERE r.del_flag = '0'
+    <if test="roleId !=null and roleId!='' ">
+      and r.id = #{roleId}
+    </if>
   </select>
 
   <select id="findOne" resultType="com.ah.manager.pojo.TRole" >

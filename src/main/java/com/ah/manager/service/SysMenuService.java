@@ -17,4 +17,6 @@ public interface SysMenuService {
     JsonResponseEntity delete(String id);
 
     void save(SysMenu sysMenu);
+
+    List<SysMenu> findUserId(String userId);
 }

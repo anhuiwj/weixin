@@ -5,9 +5,8 @@ import com.ah.manager.common.page.model.Pager;
 import com.ah.manager.mapper.SysMenuMapper;
 import com.ah.manager.mapper.TRoleMapper;
 import com.ah.manager.mapper.TRoleMenuMapper;
-import com.ah.manager.pojo.SysMenu;
-import com.ah.manager.pojo.TRole;
-import com.ah.manager.pojo.TRoleMenu;
+import com.ah.manager.mapper.TUserRoleMapper;
+import com.ah.manager.pojo.*;
 import com.ah.manager.service.RoleService;
 import com.ah.manager.util.IdGen;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +30,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private SysMenuMapper sysMenuMapper;
+
+    @Autowired
+    private TUserRoleMapper tUserRoleMapper;
 
     public void findAll(Pager pager) {
         PageQueryMap param = new PageQueryMap(pager);
@@ -88,5 +90,16 @@ public class RoleServiceImpl implements RoleService {
 
         }
         return tRole;
+    }
+
+    @Override
+    public int saveUserRole(TUserRole user) {
+        user.setId(IdGen.uuid());
+        return tUserRoleMapper.save(user);
+    }
+
+    @Override
+    public int deleteUser(String id) {
+        return tUserRoleMapper.delete(id);
     }
 }

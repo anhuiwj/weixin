@@ -12,29 +12,11 @@
 </head>
 <body>
 <div class="pd-20">
-    <form action="${ctx}/user/save" method="post" class="form form-horizontal va-m" id="form-role-edit">
-        <input class="input-text hidden" name="id" value="${TUser.id}" style="width:300px;" display="none">
+    <form action="${ctx}/role/saveUserRole" method="post" class="form form-horizontal va-m" id="form-role-edit">
+        <input type='hidden' name='roleId' value='${roleId}'/>
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">姓名</label>
-            <input class="input-text" name="username" value="${TUser.username}" style="width:300px;">
-        </div>
-        <c:if test="${empty TUser.id}">
-            <div class="f-l w-980 mb-20">
-                <label class="f-l mr-30 w-200">登录用户名</label>
-                <input class="input-text" name="userCode"  value="${TUser.userCode}" datatype="english" style="width:300px;">
-            </div>
-            <div class="f-l w-980 mb-20">
-                <label class="f-l mr-30 w-200">密码</label>
-                <input class="input-text" name="password" id="password"  type="password" recheck="password1"   style="width:300px;">
-            </div>
-            <div class="f-l w-980 mb-20">
-                <label class="f-l mr-30 w-200">密码</label>
-                <input class="input-text" id="password1"  type="password" style="width:300px;">
-            </div>
-        </c:if>
-        <div class="f-l w-980 mb-20">
-            <label class="f-l mr-30 w-200">姓名</label>
-            <select name="sex">
+            <select name="userId">
                 <option value=""></option>
                 <c:forEach var="s" items="${fns:getUsers()}">
                     <option value="${s.id}" >${s.username}</option>
@@ -61,12 +43,6 @@
         beforeSubmit:function(curform){
             //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
             //这里明确return false的话表单将不会提交;
-            <c:if test="${empty TUser.id}">
-                if($.trim($('#password').val()) != $.trim($('#password1').val())){
-                    layer.alert("两次密码不一致");
-                    return false;
-            }
-            </c:if>
             return true;
         },
         callback: function (data) {
