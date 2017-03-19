@@ -58,7 +58,7 @@
                 var index = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(index);
             }else{
-                alert(data.msg);
+                layer.alert(data.msg);
             }
         }
     });
