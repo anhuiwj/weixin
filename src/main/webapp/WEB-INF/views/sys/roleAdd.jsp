@@ -32,6 +32,9 @@
                     return false;
                 },
                 onCheck:function(event, treeId, treeNode){
+                    $(".ids").each(function(){
+                        $(this).remove();
+                    });
                     var nodes = zTreeObj.getCheckedNodes(true);
                     var html1 = "";
                     for(var i=0; i<nodes.length; i++) {
@@ -60,7 +63,7 @@
 <div class="pd-20">
     <form action="${ctx}/role/save" method="post" class="form form-horizontal va-m" id="form-role-edit">
         <c:forEach var="m"  items="${TRole.menus}">
-            <input type='hidden' name='menus' value='${m}'/>
+            <input type='hidden' class="ids" name='menus' value='${m}'/>
         </c:forEach>
 
         <input type='hidden' name='id' value='${TRole.id}'/>

@@ -45,13 +45,14 @@
 				<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="password"/>
 			</div>
 		</div>
-		<%--<div class="form-actions">--%>
-			<%--<label class="checkbox">--%>
-			<%--<input type="checkbox" name="remember" value="1"/>记住密码</label>--%>
-			<%--<button id="btn" class="btn green-haze pull-right">--%>
-			<%--Login <i class="m-icon-swapright m-icon-white"></i>--%>
-			<%--</button>--%>
-		<%--</div>--%>
+		<div class="form-actions">
+			<label class="checkbox">
+			<%--<input type="checkbox" name="remember" value="1"/>记住密码--%>
+			</label>
+			<button id="btn" class="btn green-haze pull-right">
+			Login <i class="m-icon-swapright m-icon-white"></i>
+			</button>
+		</div>
 	</form>
 </div>
 <!-- END LOGIN -->
