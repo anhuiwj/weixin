@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ah.health.mapper.PhysicalFitnessTestMapper" >
+  <sql id="Base_Column_List" >
+    id, student_id, vital_capacity, run_fifty, run_eight_hundred, run_one_thousand, sitting_flexion, 
+    standing_long_jump, pull_ups, abdominal_curl, test_date, del_flag
+  </sql>
+  <select id="selectByExample" resultType="com.ah.health.pojo.PhysicalFitnessTest" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from physical_fitness_test
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultType="com.ah.health.pojo.PhysicalFitnessTest" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from physical_fitness_test
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from physical_fitness_test
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
+    delete from physical_fitness_test
+  </delete>
+  <insert id="insert" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
+    insert into physical_fitness_test (id, student_id, vital_capacity, 
+      run_fifty, run_eight_hundred, run_one_thousand, 
+      sitting_flexion, standing_long_jump, pull_ups, 
+      abdominal_curl, test_date, del_flag
+      )
+    values (#{id,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, #{vitalCapacity,jdbcType=VARCHAR}, 
+      #{runFifty,jdbcType=VARCHAR}, #{runEightHundred,jdbcType=VARCHAR}, #{runOneThousand,jdbcType=VARCHAR}, 
+      #{sittingFlexion,jdbcType=VARCHAR}, #{standingLongJump,jdbcType=VARCHAR}, #{pullUps,jdbcType=VARCHAR}, 
+      #{abdominalCurl,jdbcType=VARCHAR}, #{testDate,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
+    insert into physical_fitness_test
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="vitalCapacity != null" >
+        vital_capacity,
+      </if>
+      <if test="runFifty != null" >
+        run_fifty,
+      </if>
+      <if test="runEightHundred != null" >
+        run_eight_hundred,
+      </if>
+      <if test="runOneThousand != null" >
+        run_one_thousand,
+      </if>
+      <if test="sittingFlexion != null" >
+        sitting_flexion,
+      </if>
+      <if test="standingLongJump != null" >
+        standing_long_jump,
+      </if>
+      <if test="pullUps != null" >
+        pull_ups,
+      </if>
+      <if test="abdominalCurl != null" >
+        abdominal_curl,
+      </if>
+      <if test="testDate != null" >
+        test_date,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="vitalCapacity != null" >
+        #{vitalCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="runFifty != null" >
+        #{runFifty,jdbcType=VARCHAR},
+      </if>
+      <if test="runEightHundred != null" >
+        #{runEightHundred,jdbcType=VARCHAR},
+      </if>
+      <if test="runOneThousand != null" >
+        #{runOneThousand,jdbcType=VARCHAR},
+      </if>
+      <if test="sittingFlexion != null" >
+        #{sittingFlexion,jdbcType=VARCHAR},
+      </if>
+      <if test="standingLongJump != null" >
+        #{standingLongJump,jdbcType=VARCHAR},
+      </if>
+      <if test="pullUps != null" >
+        #{pullUps,jdbcType=VARCHAR},
+      </if>
+      <if test="abdominalCurl != null" >
+        #{abdominalCurl,jdbcType=VARCHAR},
+      </if>
+      <if test="testDate != null" >
+        #{testDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ah.health.pojo.PhysicalFitnessTest" resultType="java.lang.Integer" >
+    select count(*) from physical_fitness_test
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update physical_fitness_test
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentId != null" >
+        student_id = #{record.studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vitalCapacity != null" >
+        vital_capacity = #{record.vitalCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.runFifty != null" >
+        run_fifty = #{record.runFifty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.runEightHundred != null" >
+        run_eight_hundred = #{record.runEightHundred,jdbcType=VARCHAR},
+      </if>
+      <if test="record.runOneThousand != null" >
+        run_one_thousand = #{record.runOneThousand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sittingFlexion != null" >
+        sitting_flexion = #{record.sittingFlexion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.standingLongJump != null" >
+        standing_long_jump = #{record.standingLongJump,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pullUps != null" >
+        pull_ups = #{record.pullUps,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abdominalCurl != null" >
+        abdominal_curl = #{record.abdominalCurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testDate != null" >
+        test_date = #{record.testDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update physical_fitness_test
+    set id = #{record.id,jdbcType=VARCHAR},
+      student_id = #{record.studentId,jdbcType=VARCHAR},
+      vital_capacity = #{record.vitalCapacity,jdbcType=VARCHAR},
+      run_fifty = #{record.runFifty,jdbcType=VARCHAR},
+      run_eight_hundred = #{record.runEightHundred,jdbcType=VARCHAR},
+      run_one_thousand = #{record.runOneThousand,jdbcType=VARCHAR},
+      sitting_flexion = #{record.sittingFlexion,jdbcType=VARCHAR},
+      standing_long_jump = #{record.standingLongJump,jdbcType=VARCHAR},
+      pull_ups = #{record.pullUps,jdbcType=VARCHAR},
+      abdominal_curl = #{record.abdominalCurl,jdbcType=VARCHAR},
+      test_date = #{record.testDate,jdbcType=TIMESTAMP},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
+    update physical_fitness_test
+    <set >
+      <if test="studentId != null" >
+        student_id = #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="vitalCapacity != null" >
+        vital_capacity = #{vitalCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="runFifty != null" >
+        run_fifty = #{runFifty,jdbcType=VARCHAR},
+      </if>
+      <if test="runEightHundred != null" >
+        run_eight_hundred = #{runEightHundred,jdbcType=VARCHAR},
+      </if>
+      <if test="runOneThousand != null" >
+        run_one_thousand = #{runOneThousand,jdbcType=VARCHAR},
+      </if>
+      <if test="sittingFlexion != null" >
+        sitting_flexion = #{sittingFlexion,jdbcType=VARCHAR},
+      </if>
+      <if test="standingLongJump != null" >
+        standing_long_jump = #{standingLongJump,jdbcType=VARCHAR},
+      </if>
+      <if test="pullUps != null" >
+        pull_ups = #{pullUps,jdbcType=VARCHAR},
+      </if>
+      <if test="abdominalCurl != null" >
+        abdominal_curl = #{abdominalCurl,jdbcType=VARCHAR},
+      </if>
+      <if test="testDate != null" >
+        test_date = #{testDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
+    update physical_fitness_test
+    set student_id = #{studentId,jdbcType=VARCHAR},
+      vital_capacity = #{vitalCapacity,jdbcType=VARCHAR},
+      run_fifty = #{runFifty,jdbcType=VARCHAR},
+      run_eight_hundred = #{runEightHundred,jdbcType=VARCHAR},
+      run_one_thousand = #{runOneThousand,jdbcType=VARCHAR},
+      sitting_flexion = #{sittingFlexion,jdbcType=VARCHAR},
+      standing_long_jump = #{standingLongJump,jdbcType=VARCHAR},
+      pull_ups = #{pullUps,jdbcType=VARCHAR},
+      abdominal_curl = #{abdominalCurl,jdbcType=VARCHAR},
+      test_date = #{testDate,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

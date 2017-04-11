@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface AuthService {
     List<SysMenu> findByUserId(String id);
+
+    List<SysMenu> findAllMenuByUserId(String userId);
 }

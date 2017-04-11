@@ -137,8 +137,25 @@
 					<img alt="" class="img-circle" src="${ctxStatic}/admin/layout/img/avatar3_small.jpg"/>
 					<span class="username username-hide-on-mobile">
 					${fns:getUser().username} </span>
-					<i class="fa fa-angle-down"></i>
+					<i class="fa fa-angle-down">
+					</i>
 					</a>
+					<ul class="dropdown-menu dropdown-menu-default">
+						<li>
+							<a href="extra_profile.html">
+								<i class="icon-user"></i> My Profile </a>
+						</li>
+						<li class="divider">
+						</li>
+						<li>
+							<a href="extra_lock.html">
+								<i class="icon-lock"></i> Lock Screen </a>
+						</li>
+						<li>
+							<a href="login.html">
+								<i class="icon-key"></i> Log Out </a>
+						</li>
+					</ul>
 				</li>
 				<!--退出登录-->
 				<li class="dropdown dropdown-quick-sidebar-toggler">

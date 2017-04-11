@@ -21,4 +21,9 @@ public class AuthServiceImpl implements AuthService{
     public List<SysMenu> findByUserId(String id) {
         return sysMenuMapper.findByUserId(id);
     }
+
+    @Override
+    public List<SysMenu> findAllMenuByUserId(String userId) {
+        return sysMenuMapper.findAllMenuByUserId(userId);
+    }
 }

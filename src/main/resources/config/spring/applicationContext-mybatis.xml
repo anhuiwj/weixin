@@ -29,14 +29,14 @@
             <array>
                 <value>classpath*:mapper/*.xml</value>
                 <value>classpath*:mapper/weixin/*.xml</value>
-                <value>classpath*:mapper/company/*.xml</value>
+                <value>classpath*:mapper/health/*.xml</value>
             </array>
         </property>
     </bean>
 
     <!--自动扫描mapper接口，并注入sqlsession-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.ah.manager.mapper,com.ah.weixin.mapper,com.ah.company.mapper"/>
+        <property name="basePackage" value="com.ah.manager.mapper,com.ah.weixin.mapper,com.ah.health.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 

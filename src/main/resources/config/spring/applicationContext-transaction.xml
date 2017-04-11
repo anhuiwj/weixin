@@ -22,5 +22,6 @@
     <aop:config>
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.ah.manager.service.*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.ah.weixin.service.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.ah.health.service.*.*(..))"/>
     </aop:config>
 </beans>

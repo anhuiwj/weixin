@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ah.health.mapper.DoctorHistoryMapper" >
+  <sql id="Base_Column_List" >
+    id, student_id, doctor_time, ill, treatment_plan, del_flag
+  </sql>
+  <select id="selectByExample" resultType="com.ah.health.pojo.DoctorHistory" parameterType="com.ah.health.pojo.DoctorHistory" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from doctor_history
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultType="com.ah.health.pojo.DoctorHistory" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from doctor_history
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from doctor_history
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ah.health.pojo.DoctorHistory" >
+    delete from doctor_history
+  </delete>
+  <insert id="insert" parameterType="com.ah.health.pojo.DoctorHistory" >
+    insert into doctor_history (id, student_id, doctor_time, 
+      ill, treatment_plan, del_flag
+      )
+    values (#{id,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, #{doctorTime,jdbcType=TIMESTAMP}, 
+      #{ill,jdbcType=VARCHAR}, #{treatmentPlan,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ah.health.pojo.DoctorHistory" >
+    insert into doctor_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="doctorTime != null" >
+        doctor_time,
+      </if>
+      <if test="ill != null" >
+        ill,
+      </if>
+      <if test="treatmentPlan != null" >
+        treatment_plan,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorTime != null" >
+        #{doctorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ill != null" >
+        #{ill,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentPlan != null" >
+        #{treatmentPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ah.health.pojo.DoctorHistory" resultType="java.lang.Integer" >
+    select count(*) from doctor_history
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update doctor_history
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentId != null" >
+        student_id = #{record.studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorTime != null" >
+        doctor_time = #{record.doctorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ill != null" >
+        ill = #{record.ill,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treatmentPlan != null" >
+        treatment_plan = #{record.treatmentPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update doctor_history
+    set id = #{record.id,jdbcType=VARCHAR},
+      student_id = #{record.studentId,jdbcType=VARCHAR},
+      doctor_time = #{record.doctorTime,jdbcType=TIMESTAMP},
+      ill = #{record.ill,jdbcType=VARCHAR},
+      treatment_plan = #{record.treatmentPlan,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ah.health.pojo.DoctorHistory" >
+    update doctor_history
+    <set >
+      <if test="studentId != null" >
+        student_id = #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorTime != null" >
+        doctor_time = #{doctorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ill != null" >
+        ill = #{ill,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentPlan != null" >
+        treatment_plan = #{treatmentPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ah.health.pojo.DoctorHistory" >
+    update doctor_history
+    set student_id = #{studentId,jdbcType=VARCHAR},
+      doctor_time = #{doctorTime,jdbcType=TIMESTAMP},
+      ill = #{ill,jdbcType=VARCHAR},
+      treatment_plan = #{treatmentPlan,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,6 +1,9 @@
 package com.ah.manager.util;
 
+import com.ah.health.utils.CommonUtils;
+import com.ah.manager.pojo.TRole;
 import com.ah.manager.pojo.TUser;
+import com.ah.manager.service.RoleService;
 import com.ah.manager.service.UserService;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -20,6 +23,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class UserUtils {
     private  static  UserService userService = SpringContextHolder.getBean(UserService.class);
+
+    private static RoleService roleService = SpringContextHolder.getBean(RoleService.class);
+
     static LoadingCache<String, TUser> userCache = CacheBuilder.newBuilder()
             .refreshAfterWrite(1, TimeUnit.MINUTES)
             .build(new CacheLoader<String, TUser>() {
@@ -67,6 +73,8 @@ public class UserUtils {
             user = userService.findByUserCode(username);
             userCache.put(username,user);
         }
+
+        user.setRole(roleService.findUserRole(user.getId()));//设置用户角色
         return user;
     }
 
@@ -76,5 +84,23 @@ public class UserUtils {
      */
     public static List<TUser> getUsers(){
         return userService.findUsers();
+    }
+
+    /**
+     * 获取用户对应角色
+     * 1 学生 2校医 3心理辅导员 4管理员
+     */
+    public static int getRole(){
+        TRole role = getCurrentUser().getRole();
+        if(CommonUtils.STUDENT_ID.equals(role.getId())){
+            return CommonUtils.ROLE_STUDENT;
+        }else if(CommonUtils.DOCTOR_ID.equals(role.getId())){
+            return CommonUtils.ROLE_DOCTOR;
+        }else if(CommonUtils.XINLI_DOCTOR_ID.equals(role.getId())){
+            return CommonUtils.ROLE_XINLI_DOCTOR;
+        }else if(CommonUtils.ADMIN_ID.equals(role.getId())){
+            return CommonUtils.ROLE_ADMIN;
+        }
+        return CommonUtils.ROLE_STUDENT;
     }
 }

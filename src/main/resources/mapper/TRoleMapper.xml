@@ -3,16 +3,23 @@
 <mapper namespace="com.ah.manager.mapper.TRoleMapper" >
 
   <sql id="Base_Column_List" >
-    id,rolename,status,del_flag,create_date,create_by,update_date,update_by
+    r.id,
+    r.rolename,
+    r.status,
+    r.del_flag,
+    r.create_date,
+    r.create_by,
+    r.update_date,
+    r.update_by
   </sql>
 
   <select id="findAll" resultType="com.ah.manager.pojo.TRole" parameterType="java.util.Map" >
     select
     <include refid="Base_Column_List" />
-    from t_role
-    WHERE del_flag = '0'
+    from t_role r
+    WHERE r.del_flag = '0'
     <if test="rolename !=null and rolename != '' ">
-      and rolename like concat('%',#{rolename},'%')
+      and r.rolename like concat('%',#{rolename},'%')
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.ah.manager.pojo.TRole" >
@@ -90,7 +97,14 @@
   <select id="findOne" resultType="com.ah.manager.pojo.TRole" >
     select
     <include refid="Base_Column_List" />
-    from t_role
-    WHERE del_flag = '0' and id =#{id}
+    from t_role r
+    WHERE r.del_flag = '0' and id =#{id}
+  </select>
+
+  <select id="findUserRole" resultType="com.ah.manager.pojo.TRole" >
+    select
+    <include refid="Base_Column_List" />
+    from t_role r INNER JOIN  t_user_role ur on r.id = ur.role_id and ur.del_flag = '0'
+    WHERE r.del_flag = '0' and ur.user_id =#{userId}
   </select>
 </mapper>

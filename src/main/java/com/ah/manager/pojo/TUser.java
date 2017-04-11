@@ -10,15 +10,49 @@ public class TUser extends BaseEntity{
 
     private String userCode;
 
+    private String password;
+
+    private String familyName;//名族
+
     private Date birthday;
 
     private String sex;
 
     private String address;
 
-    private String password;
+    private String delFlag;
 
-    private List<TRole> roleList;//一个用户具有多个角色
+    private Date createDate;
+
+    private String createBy;
+
+    private Date updateDate;
+
+    private String updateBy;
+
+    private String remarks;
+
+    private String school;
+
+    private String college;//学院
+
+    private String major;//专业
+
+    private String phone;
+
+    private String qqNumber;
+
+    private String email;
+
+    private String job;
+
+    private String workTime;
+
+    private String personcardNo;
+
+    private String grade;
+
+    private TRole role;//用户角色
 
     public String getId() {
         return id;
@@ -68,12 +102,12 @@ public class TUser extends BaseEntity{
         this.password = password == null ? null : password.trim();
     }
 
-    public List<TRole> getRoleList() {
-        return roleList;
+    public TRole getRole() {
+        return role;
     }
 
-    public void setRoleList(List<TRole> roleList) {
-        this.roleList = roleList;
+    public void setRole(TRole role) {
+        this.role = role;
     }
 
     public String getUserCode() {
@@ -84,5 +118,149 @@ public class TUser extends BaseEntity{
         this.userCode = userCode;
     }
 
+    public String getFamilyName() {
+        return familyName;
+    }
 
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+    @Override
+    public String getDelFlag() {
+        return delFlag;
+    }
+
+    @Override
+    public void setDelFlag(String delFlag) {
+        this.delFlag = delFlag;
+    }
+
+    @Override
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    @Override
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    @Override
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    @Override
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    @Override
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    @Override
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    @Override
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    @Override
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getCollege() {
+        return college;
+    }
+
+    public void setCollege(String college) {
+        this.college = college;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getQqNumber() {
+        return qqNumber;
+    }
+
+    public void setQqNumber(String qqNumber) {
+        this.qqNumber = qqNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public String getWorkTime() {
+        return workTime;
+    }
+
+    public void setWorkTime(String workTime) {
+        this.workTime = workTime;
+    }
+
+    public String getPersoncardNo() {
+        return personcardNo;
+    }
+
+    public void setPersoncardNo(String personcardNo) {
+        this.personcardNo = personcardNo;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
 }

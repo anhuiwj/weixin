@@ -37,7 +37,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
         TUser user  = BaseController.getSessionUser();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         AuthService authService = SpringContextHolder.getBean(AuthService.class);
-        List<SysMenu> menus = authService.findByUserId(user.getId());
+        List<SysMenu> menus = authService.findAllMenuByUserId(user.getId());
         if (menus != null) {
             for (SysMenu m : menus) {
                 if (m != null && StringUtils.isNotBlank(m.getPermission())) {

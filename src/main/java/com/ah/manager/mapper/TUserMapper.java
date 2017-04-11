@@ -20,4 +20,13 @@ public interface TUserMapper {
     int delete(String id);
 
     List<TUser> findUsers();
+
+    int updateUser(TUser user);
+
+    /**
+     * 查询不同角色用户
+     * @param map
+     * @return
+     */
+    List<TUser> findByRole(Map<String,Object> map);
 }

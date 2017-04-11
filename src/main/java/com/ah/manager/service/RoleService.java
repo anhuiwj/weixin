@@ -17,4 +17,6 @@ public interface RoleService {
     int saveUserRole(TUserRole user);
 
     int deleteUser(String id);
+
+    TRole findUserRole(String userId);
 }

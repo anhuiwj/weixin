@@ -8,9 +8,24 @@
     u.usercode as userCode,
     u.birthday as birthday,
     u.sex as sex,
+    u.grade as grade,
+    u.family_name as familyName,
+    u.school as school,
+    u.college as college,
+    u.major as major,
+    u.phone as phone,
+    u.qq_number as qqNumber,
+    u.email as email,
+    u.job as job,
+    u.work_time as workTime,
+    u.personcard_no as personcardNo,
     u.address as address,
     u.password as password,
-    del_flag,create_date,create_by,update_date,update_by
+    u.del_flag,
+    u.create_date,
+    u.create_by,
+    u.update_date,
+    u.update_by
   </sql>
 
   <select id="findAll" resultType="com.ah.manager.pojo.TUser" parameterType="java.util.Map" >
@@ -24,16 +39,49 @@
     <if test="userCode !=null and userCode!='' ">
       and u.usercode like concat('%',#{userCode},'%')
     </if>
+    <if test="id !=null and id!='' ">
+      and u.id = #{id}
+    </if>
+  </select>
+
+
+  <select id="findByRole" resultType="com.ah.manager.pojo.TUser" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from t_user u left join t_user_role r on u.id = r.user_id and r.del_flag = '0'
+    WHERE u.del_flag = '0'
+    <if test="username !=null and username!='' ">
+      and u.username like concat('%',#{username},'%')
+    </if>
+    <if test="userCode !=null and userCode!='' ">
+      and u.usercode like concat('%',#{userCode},'%')
+    </if>
+    <if test="roleId !=null and roleId!='' ">
+      and r.role_id = #{roleId}
+    </if>
+    <if test="id !=null and id !='' ">
+      and u.id = #{id}
+    </if>
   </select>
 
 
   <insert id="save" parameterType="com.ah.manager.pojo.TUser" >
-  insert into t_user (id, username,usercode, birthday,
-  sex, address, password,del_flag,create_date,create_by,update_date,update_by
-  )
-  values (#{id}, #{username},#{userCode} ,#{birthday},
-  #{sex}, #{address}, #{password},#{delFlag},#{createDate},#{createBy},#{updateDate},#{updateBy}
-  )
+   insert into t_user (id, usercode, password,
+      family_name, username, birthday,
+      sex, address, del_flag,
+      create_date, create_by, update_date,
+      update_by, remarks, school,
+      college, major, phone,
+      qq_number, email, job,
+      work_time, personcard_no,grade)
+    values (#{id}, #{usercode}, #{password},
+      #{familyName}, #{username}, #{birthday},
+      #{sex}, #{address}, #{delFlag},
+      #{createDate}, #{createBy}, #{updateDate},
+      #{updateBy}, #{remarks}, #{school},
+      #{college}, #{major}, #{phone},
+      #{qqNumber}, #{email}, #{job},
+      #{workTime}, #{personcardNo},#{grade})
   </insert>
 
   <select id="findByUserCode" resultType="com.ah.manager.pojo.TUser">
@@ -82,4 +130,65 @@
     tr.del_flag = '0'
     )
   </select>
+
+  <update id="updateUser" parameterType="com.ah.manager.pojo.TUser" >
+    update t_user
+    <set >
+      <if test="userCode != null" >
+        usercode = #{userCode},
+      </if>
+      <if test="password != null" >
+        password = #{password},
+      </if>
+      <if test="familyName != null" >
+        family_name = #{familyName},
+      </if>
+      <if test="username != null" >
+        username = #{username},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks},
+      </if>
+      <if test="school != null" >
+        school = #{school},
+      </if>
+      <if test="college != null" >
+        college = #{college},
+      </if>
+      <if test="major != null" >
+        major = #{major},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone},
+      </if>
+      <if test="qqNumber != null" >
+        qq_number = #{qqNumber},
+      </if>
+      <if test="email != null" >
+        email = #{email},
+      </if>
+      <if test="job != null" >
+        job = #{job},
+      </if>
+      <if test="workTime != null" >
+        work_time = #{workTime},
+      </if>
+      <if test="personcardNo != null" >
+        personcard_no = #{personcardNo},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade}
+      </if>
+    </set>
+    where id = #{id}
+  </update>
 </mapper>

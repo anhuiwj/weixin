@@ -102,4 +102,13 @@ public class RoleServiceImpl implements RoleService {
     public int deleteUser(String id) {
         return tUserRoleMapper.delete(id);
     }
+
+    @Override
+    public TRole findUserRole(String userId) {
+        TRole tRole = new TRole();
+        if(!StringUtils.isEmpty(userId)){
+            tRole = tRoleMapper.findUserRole(userId);
+        }
+        return tRole;
+    }
 }

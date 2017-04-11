@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ah.health.mapper.PhysicalExaminationMapper" >
+  <sql id="Base_Column_List" >
+    id, check_date, uncorrected_visual_left, uncorrected_visual_right, color_vision_left, 
+    color_vision_right, hearing_left, hearing_right, ears_left, ears_right, smell, facial_region, 
+    oral_cavity, the_throat, height, wright, skin, lymph, spine, limb, other, systolic_pressure, 
+    diastolic_pressure, heart_rate, heart, lung, liver, spleen, blood, urine, liver_function, 
+    renal_function, chest_x_ray_examination, user_id, del_flag
+  </sql>
+  <select id="selectByExample" resultType="com.ah.health.pojo.PhysicalExamination" parameterType="com.ah.health.pojo.PhysicalExamination" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from physical_examination
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultType="com.ah.health.pojo.PhysicalExamination" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from physical_examination
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from physical_examination
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ah.health.pojo.PhysicalExamination" >
+    delete from physical_examination
+  </delete>
+  <insert id="insert" parameterType="com.ah.health.pojo.PhysicalExamination" >
+    insert into physical_examination (id, check_date, uncorrected_visual_left, 
+      uncorrected_visual_right, color_vision_left, 
+      color_vision_right, hearing_left, hearing_right, 
+      ears_left, ears_right, smell, 
+      facial_region, oral_cavity, the_throat, 
+      height, wright, skin, 
+      lymph, spine, limb, 
+      other, systolic_pressure, diastolic_pressure, 
+      heart_rate, heart, lung, 
+      liver, spleen, blood, 
+      urine, liver_function, renal_function, 
+      chest_x_ray_examination, user_id, del_flag
+      )
+    values (#{id,jdbcType=VARCHAR}, #{checkDate,jdbcType=TIMESTAMP}, #{uncorrectedVisualLeft,jdbcType=VARCHAR}, 
+      #{uncorrectedVisualRight,jdbcType=VARCHAR}, #{colorVisionLeft,jdbcType=VARCHAR}, 
+      #{colorVisionRight,jdbcType=VARCHAR}, #{hearingLeft,jdbcType=VARCHAR}, #{hearingRight,jdbcType=VARCHAR}, 
+      #{earsLeft,jdbcType=VARCHAR}, #{earsRight,jdbcType=VARCHAR}, #{smell,jdbcType=VARCHAR}, 
+      #{facialRegion,jdbcType=VARCHAR}, #{oralCavity,jdbcType=VARCHAR}, #{theThroat,jdbcType=VARCHAR}, 
+      #{height,jdbcType=DOUBLE}, #{wright,jdbcType=VARCHAR}, #{skin,jdbcType=VARCHAR}, 
+      #{lymph,jdbcType=VARCHAR}, #{spine,jdbcType=VARCHAR}, #{limb,jdbcType=VARCHAR}, 
+      #{other,jdbcType=VARCHAR}, #{systolicPressure,jdbcType=VARCHAR}, #{diastolicPressure,jdbcType=VARCHAR}, 
+      #{heartRate,jdbcType=VARCHAR}, #{heart,jdbcType=VARCHAR}, #{lung,jdbcType=VARCHAR}, 
+      #{liver,jdbcType=VARCHAR}, #{spleen,jdbcType=VARCHAR}, #{blood,jdbcType=VARCHAR}, 
+      #{urine,jdbcType=VARCHAR}, #{liverFunction,jdbcType=VARCHAR}, #{renalFunction,jdbcType=VARCHAR}, 
+      #{chestXRayExamination,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ah.health.pojo.PhysicalExamination" >
+    insert into physical_examination
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="checkDate != null" >
+        check_date,
+      </if>
+      <if test="uncorrectedVisualLeft != null" >
+        uncorrected_visual_left,
+      </if>
+      <if test="uncorrectedVisualRight != null" >
+        uncorrected_visual_right,
+      </if>
+      <if test="colorVisionLeft != null" >
+        color_vision_left,
+      </if>
+      <if test="colorVisionRight != null" >
+        color_vision_right,
+      </if>
+      <if test="hearingLeft != null" >
+        hearing_left,
+      </if>
+      <if test="hearingRight != null" >
+        hearing_right,
+      </if>
+      <if test="earsLeft != null" >
+        ears_left,
+      </if>
+      <if test="earsRight != null" >
+        ears_right,
+      </if>
+      <if test="smell != null" >
+        smell,
+      </if>
+      <if test="facialRegion != null" >
+        facial_region,
+      </if>
+      <if test="oralCavity != null" >
+        oral_cavity,
+      </if>
+      <if test="theThroat != null" >
+        the_throat,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="wright != null" >
+        wright,
+      </if>
+      <if test="skin != null" >
+        skin,
+      </if>
+      <if test="lymph != null" >
+        lymph,
+      </if>
+      <if test="spine != null" >
+        spine,
+      </if>
+      <if test="limb != null" >
+        limb,
+      </if>
+      <if test="other != null" >
+        other,
+      </if>
+      <if test="systolicPressure != null" >
+        systolic_pressure,
+      </if>
+      <if test="diastolicPressure != null" >
+        diastolic_pressure,
+      </if>
+      <if test="heartRate != null" >
+        heart_rate,
+      </if>
+      <if test="heart != null" >
+        heart,
+      </if>
+      <if test="lung != null" >
+        lung,
+      </if>
+      <if test="liver != null" >
+        liver,
+      </if>
+      <if test="spleen != null" >
+        spleen,
+      </if>
+      <if test="blood != null" >
+        blood,
+      </if>
+      <if test="urine != null" >
+        urine,
+      </if>
+      <if test="liverFunction != null" >
+        liver_function,
+      </if>
+      <if test="renalFunction != null" >
+        renal_function,
+      </if>
+      <if test="chestXRayExamination != null" >
+        chest_x_ray_examination,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDate != null" >
+        #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uncorrectedVisualLeft != null" >
+        #{uncorrectedVisualLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="uncorrectedVisualRight != null" >
+        #{uncorrectedVisualRight,jdbcType=VARCHAR},
+      </if>
+      <if test="colorVisionLeft != null" >
+        #{colorVisionLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="colorVisionRight != null" >
+        #{colorVisionRight,jdbcType=VARCHAR},
+      </if>
+      <if test="hearingLeft != null" >
+        #{hearingLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="hearingRight != null" >
+        #{hearingRight,jdbcType=VARCHAR},
+      </if>
+      <if test="earsLeft != null" >
+        #{earsLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="earsRight != null" >
+        #{earsRight,jdbcType=VARCHAR},
+      </if>
+      <if test="smell != null" >
+        #{smell,jdbcType=VARCHAR},
+      </if>
+      <if test="facialRegion != null" >
+        #{facialRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="oralCavity != null" >
+        #{oralCavity,jdbcType=VARCHAR},
+      </if>
+      <if test="theThroat != null" >
+        #{theThroat,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="wright != null" >
+        #{wright,jdbcType=VARCHAR},
+      </if>
+      <if test="skin != null" >
+        #{skin,jdbcType=VARCHAR},
+      </if>
+      <if test="lymph != null" >
+        #{lymph,jdbcType=VARCHAR},
+      </if>
+      <if test="spine != null" >
+        #{spine,jdbcType=VARCHAR},
+      </if>
+      <if test="limb != null" >
+        #{limb,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="systolicPressure != null" >
+        #{systolicPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="diastolicPressure != null" >
+        #{diastolicPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="heartRate != null" >
+        #{heartRate,jdbcType=VARCHAR},
+      </if>
+      <if test="heart != null" >
+        #{heart,jdbcType=VARCHAR},
+      </if>
+      <if test="lung != null" >
+        #{lung,jdbcType=VARCHAR},
+      </if>
+      <if test="liver != null" >
+        #{liver,jdbcType=VARCHAR},
+      </if>
+      <if test="spleen != null" >
+        #{spleen,jdbcType=VARCHAR},
+      </if>
+      <if test="blood != null" >
+        #{blood,jdbcType=VARCHAR},
+      </if>
+      <if test="urine != null" >
+        #{urine,jdbcType=VARCHAR},
+      </if>
+      <if test="liverFunction != null" >
+        #{liverFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="renalFunction != null" >
+        #{renalFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="chestXRayExamination != null" >
+        #{chestXRayExamination,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ah.health.pojo.PhysicalExamination" resultType="java.lang.Integer" >
+    select count(*) from physical_examination
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update physical_examination
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkDate != null" >
+        check_date = #{record.checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uncorrectedVisualLeft != null" >
+        uncorrected_visual_left = #{record.uncorrectedVisualLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uncorrectedVisualRight != null" >
+        uncorrected_visual_right = #{record.uncorrectedVisualRight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colorVisionLeft != null" >
+        color_vision_left = #{record.colorVisionLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colorVisionRight != null" >
+        color_vision_right = #{record.colorVisionRight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hearingLeft != null" >
+        hearing_left = #{record.hearingLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hearingRight != null" >
+        hearing_right = #{record.hearingRight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.earsLeft != null" >
+        ears_left = #{record.earsLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="record.earsRight != null" >
+        ears_right = #{record.earsRight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smell != null" >
+        smell = #{record.smell,jdbcType=VARCHAR},
+      </if>
+      <if test="record.facialRegion != null" >
+        facial_region = #{record.facialRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oralCavity != null" >
+        oral_cavity = #{record.oralCavity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.theThroat != null" >
+        the_throat = #{record.theThroat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null" >
+        height = #{record.height,jdbcType=DOUBLE},
+      </if>
+      <if test="record.wright != null" >
+        wright = #{record.wright,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skin != null" >
+        skin = #{record.skin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lymph != null" >
+        lymph = #{record.lymph,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spine != null" >
+        spine = #{record.spine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.limb != null" >
+        limb = #{record.limb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.other != null" >
+        other = #{record.other,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systolicPressure != null" >
+        systolic_pressure = #{record.systolicPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diastolicPressure != null" >
+        diastolic_pressure = #{record.diastolicPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.heartRate != null" >
+        heart_rate = #{record.heartRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.heart != null" >
+        heart = #{record.heart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lung != null" >
+        lung = #{record.lung,jdbcType=VARCHAR},
+      </if>
+      <if test="record.liver != null" >
+        liver = #{record.liver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spleen != null" >
+        spleen = #{record.spleen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blood != null" >
+        blood = #{record.blood,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urine != null" >
+        urine = #{record.urine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.liverFunction != null" >
+        liver_function = #{record.liverFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.renalFunction != null" >
+        renal_function = #{record.renalFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chestXRayExamination != null" >
+        chest_x_ray_examination = #{record.chestXRayExamination,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update physical_examination
+    set id = #{record.id,jdbcType=VARCHAR},
+      check_date = #{record.checkDate,jdbcType=TIMESTAMP},
+      uncorrected_visual_left = #{record.uncorrectedVisualLeft,jdbcType=VARCHAR},
+      uncorrected_visual_right = #{record.uncorrectedVisualRight,jdbcType=VARCHAR},
+      color_vision_left = #{record.colorVisionLeft,jdbcType=VARCHAR},
+      color_vision_right = #{record.colorVisionRight,jdbcType=VARCHAR},
+      hearing_left = #{record.hearingLeft,jdbcType=VARCHAR},
+      hearing_right = #{record.hearingRight,jdbcType=VARCHAR},
+      ears_left = #{record.earsLeft,jdbcType=VARCHAR},
+      ears_right = #{record.earsRight,jdbcType=VARCHAR},
+      smell = #{record.smell,jdbcType=VARCHAR},
+      facial_region = #{record.facialRegion,jdbcType=VARCHAR},
+      oral_cavity = #{record.oralCavity,jdbcType=VARCHAR},
+      the_throat = #{record.theThroat,jdbcType=VARCHAR},
+      height = #{record.height,jdbcType=DOUBLE},
+      wright = #{record.wright,jdbcType=VARCHAR},
+      skin = #{record.skin,jdbcType=VARCHAR},
+      lymph = #{record.lymph,jdbcType=VARCHAR},
+      spine = #{record.spine,jdbcType=VARCHAR},
+      limb = #{record.limb,jdbcType=VARCHAR},
+      other = #{record.other,jdbcType=VARCHAR},
+      systolic_pressure = #{record.systolicPressure,jdbcType=VARCHAR},
+      diastolic_pressure = #{record.diastolicPressure,jdbcType=VARCHAR},
+      heart_rate = #{record.heartRate,jdbcType=VARCHAR},
+      heart = #{record.heart,jdbcType=VARCHAR},
+      lung = #{record.lung,jdbcType=VARCHAR},
+      liver = #{record.liver,jdbcType=VARCHAR},
+      spleen = #{record.spleen,jdbcType=VARCHAR},
+      blood = #{record.blood,jdbcType=VARCHAR},
+      urine = #{record.urine,jdbcType=VARCHAR},
+      liver_function = #{record.liverFunction,jdbcType=VARCHAR},
+      renal_function = #{record.renalFunction,jdbcType=VARCHAR},
+      chest_x_ray_examination = #{record.chestXRayExamination,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ah.health.pojo.PhysicalExamination" >
+    update physical_examination
+    <set >
+      <if test="checkDate != null" >
+        check_date = #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uncorrectedVisualLeft != null" >
+        uncorrected_visual_left = #{uncorrectedVisualLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="uncorrectedVisualRight != null" >
+        uncorrected_visual_right = #{uncorrectedVisualRight,jdbcType=VARCHAR},
+      </if>
+      <if test="colorVisionLeft != null" >
+        color_vision_left = #{colorVisionLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="colorVisionRight != null" >
+        color_vision_right = #{colorVisionRight,jdbcType=VARCHAR},
+      </if>
+      <if test="hearingLeft != null" >
+        hearing_left = #{hearingLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="hearingRight != null" >
+        hearing_right = #{hearingRight,jdbcType=VARCHAR},
+      </if>
+      <if test="earsLeft != null" >
+        ears_left = #{earsLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="earsRight != null" >
+        ears_right = #{earsRight,jdbcType=VARCHAR},
+      </if>
+      <if test="smell != null" >
+        smell = #{smell,jdbcType=VARCHAR},
+      </if>
+      <if test="facialRegion != null" >
+        facial_region = #{facialRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="oralCavity != null" >
+        oral_cavity = #{oralCavity,jdbcType=VARCHAR},
+      </if>
+      <if test="theThroat != null" >
+        the_throat = #{theThroat,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="wright != null" >
+        wright = #{wright,jdbcType=VARCHAR},
+      </if>
+      <if test="skin != null" >
+        skin = #{skin,jdbcType=VARCHAR},
+      </if>
+      <if test="lymph != null" >
+        lymph = #{lymph,jdbcType=VARCHAR},
+      </if>
+      <if test="spine != null" >
+        spine = #{spine,jdbcType=VARCHAR},
+      </if>
+      <if test="limb != null" >
+        limb = #{limb,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="systolicPressure != null" >
+        systolic_pressure = #{systolicPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="diastolicPressure != null" >
+        diastolic_pressure = #{diastolicPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="heartRate != null" >
+        heart_rate = #{heartRate,jdbcType=VARCHAR},
+      </if>
+      <if test="heart != null" >
+        heart = #{heart,jdbcType=VARCHAR},
+      </if>
+      <if test="lung != null" >
+        lung = #{lung,jdbcType=VARCHAR},
+      </if>
+      <if test="liver != null" >
+        liver = #{liver,jdbcType=VARCHAR},
+      </if>
+      <if test="spleen != null" >
+        spleen = #{spleen,jdbcType=VARCHAR},
+      </if>
+      <if test="blood != null" >
+        blood = #{blood,jdbcType=VARCHAR},
+      </if>
+      <if test="urine != null" >
+        urine = #{urine,jdbcType=VARCHAR},
+      </if>
+      <if test="liverFunction != null" >
+        liver_function = #{liverFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="renalFunction != null" >
+        renal_function = #{renalFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="chestXRayExamination != null" >
+        chest_x_ray_examination = #{chestXRayExamination,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ah.health.pojo.PhysicalExamination" >
+    update physical_examination
+    set check_date = #{checkDate,jdbcType=TIMESTAMP},
+      uncorrected_visual_left = #{uncorrectedVisualLeft,jdbcType=VARCHAR},
+      uncorrected_visual_right = #{uncorrectedVisualRight,jdbcType=VARCHAR},
+      color_vision_left = #{colorVisionLeft,jdbcType=VARCHAR},
+      color_vision_right = #{colorVisionRight,jdbcType=VARCHAR},
+      hearing_left = #{hearingLeft,jdbcType=VARCHAR},
+      hearing_right = #{hearingRight,jdbcType=VARCHAR},
+      ears_left = #{earsLeft,jdbcType=VARCHAR},
+      ears_right = #{earsRight,jdbcType=VARCHAR},
+      smell = #{smell,jdbcType=VARCHAR},
+      facial_region = #{facialRegion,jdbcType=VARCHAR},
+      oral_cavity = #{oralCavity,jdbcType=VARCHAR},
+      the_throat = #{theThroat,jdbcType=VARCHAR},
+      height = #{height,jdbcType=DOUBLE},
+      wright = #{wright,jdbcType=VARCHAR},
+      skin = #{skin,jdbcType=VARCHAR},
+      lymph = #{lymph,jdbcType=VARCHAR},
+      spine = #{spine,jdbcType=VARCHAR},
+      limb = #{limb,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR},
+      systolic_pressure = #{systolicPressure,jdbcType=VARCHAR},
+      diastolic_pressure = #{diastolicPressure,jdbcType=VARCHAR},
+      heart_rate = #{heartRate,jdbcType=VARCHAR},
+      heart = #{heart,jdbcType=VARCHAR},
+      lung = #{lung,jdbcType=VARCHAR},
+      liver = #{liver,jdbcType=VARCHAR},
+      spleen = #{spleen,jdbcType=VARCHAR},
+      blood = #{blood,jdbcType=VARCHAR},
+      urine = #{urine,jdbcType=VARCHAR},
+      liver_function = #{liverFunction,jdbcType=VARCHAR},
+      renal_function = #{renalFunction,jdbcType=VARCHAR},
+      chest_x_ray_examination = #{chestXRayExamination,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

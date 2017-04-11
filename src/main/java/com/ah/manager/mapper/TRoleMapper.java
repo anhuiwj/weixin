@@ -25,4 +25,6 @@ public interface TRoleMapper {
     int update(TRole role);
 
     TRole findOne(String id);
+
+    TRole findUserRole(String userId);
 }

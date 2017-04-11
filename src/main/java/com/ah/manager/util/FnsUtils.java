@@ -1,13 +1,8 @@
 package com.ah.manager.util;
 
-import com.ah.company.pojo.RawMaterial;
-import com.ah.company.service.ProductFormulaService;
-import com.ah.company.service.RawmaterialService;
-import com.ah.company.vo.FormulaVo;
 import com.ah.manager.pojo.SysXDict;
 import com.ah.manager.service.SysXDictService;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -57,23 +52,5 @@ public class FnsUtils {
             map.put(sysXDict.getCode(),sysXDict.getName());
         }
         return new Gson().toJson(map).toString();
-    }
-
-    /**
-     * 获取原材料字典
-     * @return
-     */
-    public static List<RawMaterial> getRawMaterial(){
-        RawmaterialService rawmaterialService = SpringContextHolder.getBean(RawmaterialService.class);
-        List<RawMaterial> list = rawmaterialService.findAll();
-        return list;
-    }
-
-    /**
-     *获取所有配比公式
-     */
-    public static  List<FormulaVo> findFormulas(){
-        ProductFormulaService productFormulaService = SpringContextHolder.getBean(ProductFormulaService.class);
-        return productFormulaService.findAll();
     }
 }

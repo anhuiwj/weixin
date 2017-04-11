@@ -39,4 +39,6 @@ public interface SysMenuMapper {
     List<SysMenu> findChildren(String pid);
 
     List<SysMenu> selectRoleMenu(String roleId);
+
+    List<SysMenu> findAllMenuByUserId(String userId);
 }
