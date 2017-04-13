@@ -142,18 +142,12 @@
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
 						<li>
-							<a href="extra_profile.html">
-								<i class="icon-user"></i> My Profile </a>
-						</li>
-						<li class="divider">
+							<a href="javascript:void(0)" onclick="iFrameJumpPage('${ctx}/personal/read?id='+${fns:getUser().id})">
+								<i class="icon-user"></i>个人信息</a>
 						</li>
 						<li>
-							<a href="extra_lock.html">
-								<i class="icon-lock"></i> Lock Screen </a>
-						</li>
-						<li>
-							<a href="login.html">
-								<i class="icon-key"></i> Log Out </a>
+							<a href="javascript:void(0)" onclick="iFrameJumpPage('${ctx}/personal/editPass?id='+${fns:getUser().id})">
+								<i class="icon-eyeglass"></i>密码修改</a>
 						</li>
 					</ul>
 				</li>

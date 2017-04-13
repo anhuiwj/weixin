@@ -150,7 +150,7 @@
                 success: function (data) {
                     if (data.code==200) {
                         layer.msg(data.msg, {icon: 6,end:function(){
-                            gridRefresh.gridRefresh();
+                            location.reload();
                         }});
                     } else {
                         layer.msg(data.msg, {icon: 5});

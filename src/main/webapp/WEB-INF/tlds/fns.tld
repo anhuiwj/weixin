@@ -42,21 +42,21 @@
   </function>
 
   <function>
-    <name>getRawMaterial</name>
-    <function-class>com.ah.manager.util.FnsUtils</function-class>
-    <function-signature>java.util.List getRawMaterial()</function-signature>
-  </function>
-  
-  <function>
-    <name>findFormulas</name>
-    <function-class>com.ah.manager.util.FnsUtils</function-class>
-    <function-signature>java.util.List findFormulas()</function-signature>
-  </function>
-
-  <function>
     <name>getUsers</name>
     <function-class>com.ah.manager.util.UserUtils</function-class>
     <function-signature>java.util.List getUsers()</function-signature>
+  </function>
+  
+  <function>
+    <name>formatDate</name>
+    <function-class>com.ah.manager.util.DateUtils</function-class>
+    <function-signature>java.lang.String formatDate(java.lang.String))</function-signature>
+  </function>
+  
+  <function>
+    <name>formatDateTime</name>
+    <function-class>com.ah.manager.util.DateUtils</function-class>
+    <function-signature>java.lang.String formatDateTime(java.util.Date))</function-signature>
   </function>
 
 

@@ -7,25 +7,39 @@ public class PhysicalFitnessTest {
 
     private String studentId;
 
-    private String vitalCapacity;
+    private String vitalCapacity;//肺活量
 
-    private String runFifty;
+    private String runFifty;//50m
 
-    private String runEightHundred;
+    private String runEightHundred;//800m
 
-    private String runOneThousand;
+    private String runOneThousand;//1000m
 
-    private String sittingFlexion;
+    private String sittingFlexion;//坐位体前屈
 
-    private String standingLongJump;
+    private String standingLongJump;//立地跳远
 
-    private String pullUps;
+    private String pullUps;//引体向上（男）
 
-    private String abdominalCurl;
+    private String abdominalCurl;//仰卧起坐
 
-    private Date testDate;
+    private Date testDate;//测试时间
 
     private String delFlag;
+
+    private String username;
+
+    private String userCode;
+
+    private String grade;
+
+    private String sex;
+
+    private String major;//专业
+
+    private String birthday;
+
+    private String testDateString;
 
     public String getId() {
         return id;
@@ -121,5 +135,61 @@ public class PhysicalFitnessTest {
 
     public void setDelFlag(String delFlag) {
         this.delFlag = delFlag == null ? null : delFlag.trim();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getTestDateString() {
+        return testDateString;
+    }
+
+    public void setTestDateString(String testDateString) {
+        this.testDateString = testDateString;
     }
 }

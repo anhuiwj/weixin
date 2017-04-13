@@ -9,11 +9,25 @@ public class DoctorHistory {
 
     private Date doctorTime;
 
-    private String ill;
+    private String ill;//疾病
 
-    private String treatmentPlan;
+    private String treatmentPlan;//治疗方案
 
     private String delFlag;
+
+    private String username;
+
+    private String userCode;
+
+    private String grade;
+
+    private String sex;
+
+    private String major;//专业
+
+    private String birthday;
+
+    private String doctorTimeString;
 
     public String getId() {
         return id;
@@ -61,5 +75,61 @@ public class DoctorHistory {
 
     public void setDelFlag(String delFlag) {
         this.delFlag = delFlag == null ? null : delFlag.trim();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getDoctorTimeString() {
+        return doctorTimeString;
+    }
+
+    public void setDoctorTimeString(String doctorTimeString) {
+        this.doctorTimeString = doctorTimeString;
     }
 }

@@ -54,6 +54,8 @@ public class TUser extends BaseEntity{
 
     private TRole role;//用户角色
 
+    private String birthdayString;
+
     public String getId() {
         return id;
     }
@@ -262,5 +264,13 @@ public class TUser extends BaseEntity{
 
     public void setGrade(String grade) {
         this.grade = grade;
+    }
+
+    public String getBirthdayString() {
+        return birthdayString;
+    }
+
+    public void setBirthdayString(String birthdayString) {
+        this.birthdayString = birthdayString;
     }
 }

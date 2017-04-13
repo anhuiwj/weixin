@@ -1,73 +1,88 @@
-package com.ah.health.pojo;
+package com.ah.health.vo;
 
 import java.util.Date;
 
-public class PhysicalExamination {
+public class PhysicalExaminationVo {
     private String id;
 
     private Date checkDate;
 
-    private String uncorrectedVisualLeft;//裸眼视力 左
+    private String checkDateString;
+
+    private String uncorrectedVisualLeft;
 
     private String uncorrectedVisualRight;
 
-    private String colorVision;//色觉
+    private String colorVision;
 
-    private String hearingLeft;//听力
+    private String hearingLeft;
 
     private String hearingRight;
 
-    private String earsLeft;//耳疾
+    private String earsLeft;
 
     private String earsRight;
 
-    private String smell;//嗅觉
+    private String smell;
 
-    private String facialRegion;//颜面部
+    private String facialRegion;
 
-    private String oralCavity;//口腔
+    private String oralCavity;
 
-    private String theThroat;//咽喉
+    private String theThroat;
 
-    private Double height;//身高
+    private Double height;
 
-    private String wright;//体重
+    private String wright;
 
-    private String skin;//皮肤
+    private String skin;
 
-    private String lymph;//淋巴
+    private String lymph;
 
-    private String spine;//脊柱
+    private String spine;
 
-    private String limb;//四肢
+    private String limb;
 
     private String other;
 
     private String bloodPressure;//血压
 
-    private String heartRate;//心率
+    private String heartRate;
 
-    private String heart;//心脏
+    private String heart;
 
-    private String lung;//肺部
+    private String lung;
 
-    private String liver;//肝
+    private String liver;
 
-    private String spleen;//脾
+    private String spleen;
 
-    private String blood;//血
+    private String blood;
 
-    private String urine;//尿
+    private String urine;
 
-    private String liverFunction;//肝功能
+    private String liverFunction;
 
-    private String renalFunction;//肾功能
+    private String renalFunction;
 
-    private String chestXRayExamination;//胸透检查
+    private String chestXRayExamination;
 
     private String userId;
 
     private String delFlag;
+
+    private String username;
+
+    private String userCode;
+
+    private String grade;
+
+    private String sex;
+
+    private String major;//专业
+
+    private String birthday;
+
 
     public String getId() {
         return id;
@@ -100,6 +115,7 @@ public class PhysicalExamination {
     public void setUncorrectedVisualRight(String uncorrectedVisualRight) {
         this.uncorrectedVisualRight = uncorrectedVisualRight == null ? null : uncorrectedVisualRight.trim();
     }
+
 
     public String getColorVision() {
         return colorVision;
@@ -323,6 +339,62 @@ public class PhysicalExamination {
 
     public void setDelFlag(String delFlag) {
         this.delFlag = delFlag == null ? null : delFlag.trim();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getCheckDateString() {
+        return checkDateString;
+    }
+
+    public void setCheckDateString(String checkDateString) {
+        this.checkDateString = checkDateString;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public String getBloodPressure() {

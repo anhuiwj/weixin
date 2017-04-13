@@ -1,12 +1,11 @@
 package com.ah.health.controller;
 
-import com.ah.health.service.PersonalService;
+import com.ah.health.base.BaseController;
+import com.ah.health.pojo.DoctorHistory;
+import com.ah.health.service.DoctorHistoryService;
 import com.ah.manager.common.page.model.Pager;
-import com.ah.manager.pojo.TUser;
 import com.ah.manager.response.JsonResponseEntity;
 import com.ah.manager.util.CommonUtil;
-import com.ah.manager.util.MD5Util;
-import com.ah.manager.util.UserUtils;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,20 +18,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Map;
 
 /**
- * Created by wangjie on 2017/4/11.
+ * Created by wangjie on 2017/4/13.
  */
 @Controller
-@RequestMapping("/personal")
-public class PersonalController {
+@RequestMapping("/doctorHistory")
+public class DoctorHistoryController extends BaseController{
 
     @Autowired
-    private PersonalService personalService;
+    private DoctorHistoryService doctorHistoryService;
 
     @RequestMapping("/index")
-    public String index(Model model){
-        return "health/user/userlist";
+    public String index(){
+        return "health/doctorHistory/list";
     }
-
 
     /**
      * 列表数据
@@ -46,32 +44,36 @@ public class PersonalController {
         Pager pager = new Gson().fromJson(dtGridPager, Pager.class);
         if (pager != null) {
             Map<String, Object> searchParam = pager.getParameters(); //查询参数
-//            searchParam.put("user",getCurrentUser().getId());
             pager.setParameters(searchParam);
-            personalService.findAll(pager);
+            doctorHistoryService.findAll(pager);
         }
         response.setData(pager);
         return response;
     }
 
     @RequestMapping("/add")
-    public String add(Model model,String id){
-        model.addAttribute(personalService.findById(id));
-        return "health/user/addUser";
+    public String add(Model model, String id){
+        model.addAttribute("doctorHistory",doctorHistoryService.get(id));
+        return "health/doctorHistory/add";
     }
 
+    @RequestMapping("/read")
+    public String read(Model model, String id){
+        model.addAttribute("doctorHistory",doctorHistoryService.get(id));
+        return "health/doctorHistory/read";
+    }
 
     /**
      * 新增保存
-     * @param tUser
+     * @param
      * @return
      */
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     @ResponseBody
-    public JsonResponseEntity save(TUser tUser){
+    public JsonResponseEntity save(DoctorHistory doctorHistory){
         JsonResponseEntity response = new JsonResponseEntity();
         try {
-            personalService.save(tUser);
+            doctorHistoryService.save(doctorHistory);
             response.setMsg(CommonUtil.ADD_SUCCESS);
             response.setCode(CommonUtil.SUCCESS_CODE);
         }catch (Exception e){
@@ -81,35 +83,19 @@ public class PersonalController {
         return response;
     }
 
-    /**
-     * 查看个人信息
-     * @param model
-     * @param id
-     * @return
-     */
-    @RequestMapping("/read")
-    public String read(Model model,String id){
-        model.addAttribute(personalService.findById(id));
-        return "health/user/userDetail";
-    }
-
-    @RequestMapping("/editPass")
-    public String editPass(Model model,String id){
-        model.addAttribute(personalService.findById(id));
-        return "health/user/editPassword";
-    }
-
-
-    /**
-     * 验证密码
-     */
-    @RequestMapping("/vaildatePass")
+    @RequestMapping(value = "/delete")
     @ResponseBody
-    public boolean vaildatePass(String passW){
-        passW = MD5Util.MD5(passW);
-        if(passW.equals(UserUtils.getCurrentUser().getPassword())){
-            return true;
+    public JsonResponseEntity delete(String id ){
+        JsonResponseEntity response = new JsonResponseEntity();
+        try {
+            doctorHistoryService.delete(id);
+            response.setMsg(CommonUtil.DEL_SUCCESS);
+            response.setCode(CommonUtil.SUCCESS_CODE);
+        }catch (Exception e){
+            e.printStackTrace();
+            response.setMsg(CommonUtil.DEL_ERROR);
         }
-        return false;
+        return response;
     }
+
 }

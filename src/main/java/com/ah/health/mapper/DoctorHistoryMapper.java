@@ -4,8 +4,25 @@ import com.ah.health.pojo.DoctorHistory;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DoctorHistoryMapper {
+    /**
+     * 查询检查数据
+     * @param
+     * @return
+     */
+    List<DoctorHistory> findAll(Map search);
+
+    void save(DoctorHistory doctorHistory);
+
+    DoctorHistory get(String id);
+
+    void delete(String id);
+
+    void update(DoctorHistory doctorHistory);
+
+
     int countByExample(DoctorHistory DoctorHistory);
 
     int deleteByExample(DoctorHistory DoctorHistory);

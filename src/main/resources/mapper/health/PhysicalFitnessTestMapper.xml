@@ -2,9 +2,112 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ah.health.mapper.PhysicalFitnessTestMapper" >
   <sql id="Base_Column_List" >
-    id, student_id, vital_capacity, run_fifty, run_eight_hundred, run_one_thousand, sitting_flexion, 
-    standing_long_jump, pull_ups, abdominal_curl, test_date, del_flag
+    pft.id,
+    pft.student_id,
+    pft.vital_capacity,
+    pft.run_fifty,
+    pft.run_eight_hundred,
+    pft.run_one_thousand,
+    pft.sitting_flexion,
+    pft.standing_long_jump,
+    pft.pull_ups,
+    pft.abdominal_curl,
+    pft.test_date,
+    pft.del_flag
   </sql>
+
+  <select id="findAll" parameterType="map" resultType="com.ah.health.pojo.PhysicalFitnessTest">
+    select
+    <include refid="Base_Column_List" />,
+    DATE_FORMAT(pft.test_date,'%m-%d-%Y') as testDateString,
+    u.username as username,
+    u.usercode as userCode,
+    u.grade as grade,
+    u.sex as sex
+    from physical_fitness_test pft left JOIN t_user u on pft.student_id = u.id and u.del_flag='0'
+    WHERE pft.del_flag = '0'
+    <if test="username !=null and username!='' ">
+      and u.username like concat('%',#{username},'%')
+    </if>
+    <if test="userCode !=null and userCode!='' ">
+      and u.usercode like concat('%',#{userCode},'%')
+    </if>
+    <if test="grade !=null and grade!='' ">
+      and u.grade like concat('%',#{grade},'%')
+    </if>
+    <if test="userId !=null and userId!='' ">
+      and u.id = #{userId}
+    </if>
+  </select>
+
+
+  <select id="get" resultType="com.ah.health.pojo.PhysicalFitnessTest">
+    select
+    <include refid="Base_Column_List" />,
+    DATE_FORMAT(pft.test_date,'%m-%d-%Y') as testDateString,
+    u.username as username,
+    u.usercode as userCode,
+    u.grade as grade,
+    u.sex as sex,
+    DATE_FORMAT(u.birthday,'%m-%d-%Y') as birthday
+    from physical_fitness_test pft left JOIN t_user u on pft.student_id = u.id and u.del_flag='0'
+    WHERE pft.del_flag = '0' and pft.id = #{id}
+  </select>
+
+  <insert id="save" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
+    insert into physical_fitness_test (id, student_id, vital_capacity,
+    run_fifty, run_eight_hundred, run_one_thousand,
+    sitting_flexion, standing_long_jump, pull_ups,
+    abdominal_curl, test_date, del_flag
+    )
+    values (#{id}, #{studentId}, #{vitalCapacity},
+    #{runFifty}, #{runEightHundred}, #{runOneThousand},
+    #{sittingFlexion}, #{standingLongJump}, #{pullUps},
+    #{abdominalCurl}, #{testDate}, #{delFlag}
+    )
+  </insert>
+
+
+  <update id="delete">
+    update physical_fitness_test set del_flag = '1' where id = #{id}
+  </update>
+
+  <update id="update" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
+    update physical_fitness_test
+    <set >
+      <if test="vitalCapacity != null" >
+        vital_capacity = #{vitalCapacity},
+      </if>
+      <if test="runFifty != null" >
+        run_fifty = #{runFifty},
+      </if>
+      <if test="runEightHundred != null" >
+        run_eight_hundred = #{runEightHundred},
+      </if>
+      <if test="runOneThousand != null" >
+        run_one_thousand = #{runOneThousand},
+      </if>
+      <if test="sittingFlexion != null" >
+        sitting_flexion = #{sittingFlexion},
+      </if>
+      <if test="standingLongJump != null" >
+        standing_long_jump = #{standingLongJump},
+      </if>
+      <if test="pullUps != null" >
+        pull_ups = #{pullUps},
+      </if>
+      <if test="abdominalCurl != null" >
+        abdominal_curl = #{abdominalCurl},
+      </if>
+      <if test="testDate != null" >
+        test_date = #{testDate}
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+
+
+
   <select id="selectByExample" resultType="com.ah.health.pojo.PhysicalFitnessTest" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
     select
     <if test="distinct" >
@@ -20,27 +123,15 @@
     select 
     <include refid="Base_Column_List" />
     from physical_fitness_test
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from physical_fitness_test
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id}
   </delete>
   <delete id="deleteByExample" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
     delete from physical_fitness_test
   </delete>
-  <insert id="insert" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
-    insert into physical_fitness_test (id, student_id, vital_capacity, 
-      run_fifty, run_eight_hundred, run_one_thousand, 
-      sitting_flexion, standing_long_jump, pull_ups, 
-      abdominal_curl, test_date, del_flag
-      )
-    values (#{id,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, #{vitalCapacity,jdbcType=VARCHAR}, 
-      #{runFifty,jdbcType=VARCHAR}, #{runEightHundred,jdbcType=VARCHAR}, #{runOneThousand,jdbcType=VARCHAR}, 
-      #{sittingFlexion,jdbcType=VARCHAR}, #{standingLongJump,jdbcType=VARCHAR}, #{pullUps,jdbcType=VARCHAR}, 
-      #{abdominalCurl,jdbcType=VARCHAR}, #{testDate,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=VARCHAR}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
     insert into physical_fitness_test
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -83,154 +174,114 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
+        #{id},
       </if>
       <if test="studentId != null" >
-        #{studentId,jdbcType=VARCHAR},
+        #{studentId},
       </if>
       <if test="vitalCapacity != null" >
-        #{vitalCapacity,jdbcType=VARCHAR},
+        #{vitalCapacity},
       </if>
       <if test="runFifty != null" >
-        #{runFifty,jdbcType=VARCHAR},
+        #{runFifty},
       </if>
       <if test="runEightHundred != null" >
-        #{runEightHundred,jdbcType=VARCHAR},
+        #{runEightHundred},
       </if>
       <if test="runOneThousand != null" >
-        #{runOneThousand,jdbcType=VARCHAR},
+        #{runOneThousand},
       </if>
       <if test="sittingFlexion != null" >
-        #{sittingFlexion,jdbcType=VARCHAR},
+        #{sittingFlexion},
       </if>
       <if test="standingLongJump != null" >
-        #{standingLongJump,jdbcType=VARCHAR},
+        #{standingLongJump},
       </if>
       <if test="pullUps != null" >
-        #{pullUps,jdbcType=VARCHAR},
+        #{pullUps},
       </if>
       <if test="abdominalCurl != null" >
-        #{abdominalCurl,jdbcType=VARCHAR},
+        #{abdominalCurl},
       </if>
       <if test="testDate != null" >
-        #{testDate,jdbcType=TIMESTAMP},
+        #{testDate},
       </if>
       <if test="delFlag != null" >
-        #{delFlag,jdbcType=VARCHAR},
+        #{delFlag},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ah.health.pojo.PhysicalFitnessTest" resultType="java.lang.Integer" >
     select count(*) from physical_fitness_test
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update physical_fitness_test
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.studentId != null" >
-        student_id = #{record.studentId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.vitalCapacity != null" >
-        vital_capacity = #{record.vitalCapacity,jdbcType=VARCHAR},
-      </if>
-      <if test="record.runFifty != null" >
-        run_fifty = #{record.runFifty,jdbcType=VARCHAR},
-      </if>
-      <if test="record.runEightHundred != null" >
-        run_eight_hundred = #{record.runEightHundred,jdbcType=VARCHAR},
-      </if>
-      <if test="record.runOneThousand != null" >
-        run_one_thousand = #{record.runOneThousand,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sittingFlexion != null" >
-        sitting_flexion = #{record.sittingFlexion,jdbcType=VARCHAR},
-      </if>
-      <if test="record.standingLongJump != null" >
-        standing_long_jump = #{record.standingLongJump,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pullUps != null" >
-        pull_ups = #{record.pullUps,jdbcType=VARCHAR},
-      </if>
-      <if test="record.abdominalCurl != null" >
-        abdominal_curl = #{record.abdominalCurl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.testDate != null" >
-        test_date = #{record.testDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.delFlag != null" >
-        del_flag = #{record.delFlag,jdbcType=VARCHAR},
-      </if>
-    </set>
-  </update>
+
   <update id="updateByExample" parameterType="map" >
     update physical_fitness_test
-    set id = #{record.id,jdbcType=VARCHAR},
-      student_id = #{record.studentId,jdbcType=VARCHAR},
-      vital_capacity = #{record.vitalCapacity,jdbcType=VARCHAR},
-      run_fifty = #{record.runFifty,jdbcType=VARCHAR},
-      run_eight_hundred = #{record.runEightHundred,jdbcType=VARCHAR},
-      run_one_thousand = #{record.runOneThousand,jdbcType=VARCHAR},
-      sitting_flexion = #{record.sittingFlexion,jdbcType=VARCHAR},
-      standing_long_jump = #{record.standingLongJump,jdbcType=VARCHAR},
-      pull_ups = #{record.pullUps,jdbcType=VARCHAR},
-      abdominal_curl = #{record.abdominalCurl,jdbcType=VARCHAR},
-      test_date = #{record.testDate,jdbcType=TIMESTAMP},
-      del_flag = #{record.delFlag,jdbcType=VARCHAR}
+    set id = #{record.id},
+      student_id = #{record.studentId},
+      vital_capacity = #{record.vitalCapacity},
+      run_fifty = #{record.runFifty},
+      run_eight_hundred = #{record.runEightHundred},
+      run_one_thousand = #{record.runOneThousand},
+      sitting_flexion = #{record.sittingFlexion},
+      standing_long_jump = #{record.standingLongJump},
+      pull_ups = #{record.pullUps},
+      abdominal_curl = #{record.abdominalCurl},
+      test_date = #{record.testDate},
+      del_flag = #{record.delFlag}
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
     update physical_fitness_test
     <set >
       <if test="studentId != null" >
-        student_id = #{studentId,jdbcType=VARCHAR},
+        student_id = #{studentId},
       </if>
       <if test="vitalCapacity != null" >
-        vital_capacity = #{vitalCapacity,jdbcType=VARCHAR},
+        vital_capacity = #{vitalCapacity},
       </if>
       <if test="runFifty != null" >
-        run_fifty = #{runFifty,jdbcType=VARCHAR},
+        run_fifty = #{runFifty},
       </if>
       <if test="runEightHundred != null" >
-        run_eight_hundred = #{runEightHundred,jdbcType=VARCHAR},
+        run_eight_hundred = #{runEightHundred},
       </if>
       <if test="runOneThousand != null" >
-        run_one_thousand = #{runOneThousand,jdbcType=VARCHAR},
+        run_one_thousand = #{runOneThousand},
       </if>
       <if test="sittingFlexion != null" >
-        sitting_flexion = #{sittingFlexion,jdbcType=VARCHAR},
+        sitting_flexion = #{sittingFlexion},
       </if>
       <if test="standingLongJump != null" >
-        standing_long_jump = #{standingLongJump,jdbcType=VARCHAR},
+        standing_long_jump = #{standingLongJump},
       </if>
       <if test="pullUps != null" >
-        pull_ups = #{pullUps,jdbcType=VARCHAR},
+        pull_ups = #{pullUps},
       </if>
       <if test="abdominalCurl != null" >
-        abdominal_curl = #{abdominalCurl,jdbcType=VARCHAR},
+        abdominal_curl = #{abdominalCurl},
       </if>
       <if test="testDate != null" >
-        test_date = #{testDate,jdbcType=TIMESTAMP},
+        test_date = #{testDate},
       </if>
       <if test="delFlag != null" >
-        del_flag = #{delFlag,jdbcType=VARCHAR},
+        del_flag = #{delFlag},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ah.health.pojo.PhysicalFitnessTest" >
     update physical_fitness_test
-    set student_id = #{studentId,jdbcType=VARCHAR},
-      vital_capacity = #{vitalCapacity,jdbcType=VARCHAR},
-      run_fifty = #{runFifty,jdbcType=VARCHAR},
-      run_eight_hundred = #{runEightHundred,jdbcType=VARCHAR},
-      run_one_thousand = #{runOneThousand,jdbcType=VARCHAR},
-      sitting_flexion = #{sittingFlexion,jdbcType=VARCHAR},
-      standing_long_jump = #{standingLongJump,jdbcType=VARCHAR},
-      pull_ups = #{pullUps,jdbcType=VARCHAR},
-      abdominal_curl = #{abdominalCurl,jdbcType=VARCHAR},
-      test_date = #{testDate,jdbcType=TIMESTAMP},
-      del_flag = #{delFlag,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+    set student_id = #{studentId},
+      vital_capacity = #{vitalCapacity},
+      run_fifty = #{runFifty},
+      run_eight_hundred = #{runEightHundred},
+      run_one_thousand = #{runOneThousand},
+      sitting_flexion = #{sittingFlexion},
+      standing_long_jump = #{standingLongJump},
+      pull_ups = #{pullUps},
+      abdominal_curl = #{abdominalCurl},
+      test_date = #{testDate},
+      del_flag = #{delFlag}
+    where id = #{id}
   </update>
 </mapper>

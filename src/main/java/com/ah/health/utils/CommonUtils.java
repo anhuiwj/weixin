@@ -19,4 +19,13 @@ public class CommonUtils {
     public static final int ROLE_XINLI_DOCTOR = 3;//心理辅导员
 
     public static final int ROLE_ADMIN = 4;//管理员
+
+    public static final String DEL_FLAG = "1";//删除
+
+    public static final String NO_DEL_FLAG = "0";//未删除
+
+    public static final String  NORMAL  = "正常";//正常
+
+    public static final String  nothing  = "无";//无
+
 }

@@ -25,6 +25,7 @@
     u.create_date,
     u.create_by,
     u.update_date,
+    DATE_FORMAT(u.birthday,'%m-%d-%Y') as  birthdayString,
     u.update_by
   </sql>
 
@@ -74,7 +75,7 @@
       college, major, phone,
       qq_number, email, job,
       work_time, personcard_no,grade)
-    values (#{id}, #{usercode}, #{password},
+    values (#{id}, #{userCode}, #{password},
       #{familyName}, #{username}, #{birthday},
       #{sex}, #{address}, #{delFlag},
       #{createDate}, #{createBy}, #{updateDate},
@@ -110,7 +111,7 @@
 
   <update id="delete" >
     update t_user
-    set del_flag = '1',
+    set del_flag = '1'
     where id = #{id}
   </update>
 
@@ -134,58 +135,58 @@
   <update id="updateUser" parameterType="com.ah.manager.pojo.TUser" >
     update t_user
     <set >
-      <if test="userCode != null" >
+      <if test="userCode != null and userCode!='' " >
         usercode = #{userCode},
       </if>
-      <if test="password != null" >
+      <if test="password != null and password !='' " >
         password = #{password},
       </if>
-      <if test="familyName != null" >
+      <if test="familyName != null and familyName !='' " >
         family_name = #{familyName},
       </if>
-      <if test="username != null" >
+      <if test="username != null and username!='' " >
         username = #{username},
       </if>
       <if test="birthday != null" >
         birthday = #{birthday},
       </if>
-      <if test="sex != null" >
+      <if test="sex != null and sex !='' " >
         sex = #{sex},
       </if>
-      <if test="address != null" >
+      <if test="address != null and address !='' " >
         address = #{address},
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null and remarks !='' " >
         remarks = #{remarks},
       </if>
-      <if test="school != null" >
+      <if test="school != null and school !='' " >
         school = #{school},
       </if>
-      <if test="college != null" >
+      <if test="college != null and college!='' " >
         college = #{college},
       </if>
-      <if test="major != null" >
+      <if test="major != null and major !='' " >
         major = #{major},
       </if>
-      <if test="phone != null" >
+      <if test="phone != null and phone !='' " >
         phone = #{phone},
       </if>
-      <if test="qqNumber != null" >
+      <if test="qqNumber != null and qqNumber !='' " >
         qq_number = #{qqNumber},
       </if>
-      <if test="email != null" >
+      <if test="email != null and email !='' " >
         email = #{email},
       </if>
-      <if test="job != null" >
+      <if test="job != null and job !='' " >
         job = #{job},
       </if>
-      <if test="workTime != null" >
+      <if test="workTime != null and workTime !='' " >
         work_time = #{workTime},
       </if>
-      <if test="personcardNo != null" >
+      <if test="personcardNo != null and personcardNo !='' " >
         personcard_no = #{personcardNo},
       </if>
-      <if test="grade != null" >
+      <if test="grade != null and grade !='' " >
         grade = #{grade}
       </if>
     </set>

@@ -1,12 +1,11 @@
 package com.ah.health.controller;
 
-import com.ah.health.service.PersonalService;
+import com.ah.health.pojo.PhysicalExamination;
+import com.ah.health.service.PhysicalExaminationService;
 import com.ah.manager.common.page.model.Pager;
 import com.ah.manager.pojo.TUser;
 import com.ah.manager.response.JsonResponseEntity;
 import com.ah.manager.util.CommonUtil;
-import com.ah.manager.util.MD5Util;
-import com.ah.manager.util.UserUtils;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,20 +18,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Map;
 
 /**
- * Created by wangjie on 2017/4/11.
+ * Created by wangjie on 2017/4/12.
+ *  体检管理
  */
 @Controller
-@RequestMapping("/personal")
-public class PersonalController {
+@RequestMapping("/physicalExam")
+public class PhysicalExaminationController {
 
     @Autowired
-    private PersonalService personalService;
+    private PhysicalExaminationService physicalExaminationService;
+
 
     @RequestMapping("/index")
-    public String index(Model model){
-        return "health/user/userlist";
+    public String index(){
+        return "health/physicalexam/list";
     }
-
 
     /**
      * 列表数据
@@ -46,32 +46,42 @@ public class PersonalController {
         Pager pager = new Gson().fromJson(dtGridPager, Pager.class);
         if (pager != null) {
             Map<String, Object> searchParam = pager.getParameters(); //查询参数
-//            searchParam.put("user",getCurrentUser().getId());
             pager.setParameters(searchParam);
-            personalService.findAll(pager);
+            physicalExaminationService.findAll(pager);
         }
         response.setData(pager);
         return response;
     }
 
     @RequestMapping("/add")
-    public String add(Model model,String id){
-        model.addAttribute(personalService.findById(id));
-        return "health/user/addUser";
+    public String add(Model model, String id){
+        model.addAttribute("physicalExam",physicalExaminationService.get(id));
+        return "health/physicalexam/add";
     }
 
+    @RequestMapping("/read")
+    public String read(Model model, String id){
+        model.addAttribute("physicalExam",physicalExaminationService.get(id));
+        return "health/physicalexam/read";
+    }
+
+    @RequestMapping("/getUserInfo")
+    @ResponseBody
+    public TUser getUserInfo(String userCode){
+        return physicalExaminationService.getUserInfo(userCode);
+    }
 
     /**
      * 新增保存
-     * @param tUser
+     * @param
      * @return
      */
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     @ResponseBody
-    public JsonResponseEntity save(TUser tUser){
+    public JsonResponseEntity save(PhysicalExamination physicalExamination){
         JsonResponseEntity response = new JsonResponseEntity();
         try {
-            personalService.save(tUser);
+            physicalExaminationService.save(physicalExamination);
             response.setMsg(CommonUtil.ADD_SUCCESS);
             response.setCode(CommonUtil.SUCCESS_CODE);
         }catch (Exception e){
@@ -81,35 +91,18 @@ public class PersonalController {
         return response;
     }
 
-    /**
-     * 查看个人信息
-     * @param model
-     * @param id
-     * @return
-     */
-    @RequestMapping("/read")
-    public String read(Model model,String id){
-        model.addAttribute(personalService.findById(id));
-        return "health/user/userDetail";
-    }
-
-    @RequestMapping("/editPass")
-    public String editPass(Model model,String id){
-        model.addAttribute(personalService.findById(id));
-        return "health/user/editPassword";
-    }
-
-
-    /**
-     * 验证密码
-     */
-    @RequestMapping("/vaildatePass")
+    @RequestMapping(value = "/delete")
     @ResponseBody
-    public boolean vaildatePass(String passW){
-        passW = MD5Util.MD5(passW);
-        if(passW.equals(UserUtils.getCurrentUser().getPassword())){
-            return true;
+    public JsonResponseEntity delete(String id ){
+        JsonResponseEntity response = new JsonResponseEntity();
+        try {
+            physicalExaminationService.delete(id);
+            response.setMsg(CommonUtil.DEL_SUCCESS);
+            response.setCode(CommonUtil.SUCCESS_CODE);
+        }catch (Exception e){
+            e.printStackTrace();
+            response.setMsg(CommonUtil.DEL_ERROR);
         }
-        return false;
+        return response;
     }
 }
