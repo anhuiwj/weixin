@@ -35,10 +35,15 @@
                     $(".ids").each(function(){
                         $(this).remove();
                     });
+
+                    $("input[name='menus']").each(function(){
+                        $(this).remove();
+                    });
+
                     var nodes = zTreeObj.getCheckedNodes(true);
                     var html1 = "";
                     for(var i=0; i<nodes.length; i++) {
-                        html1 += "<input type='hidden' name='menus' value='"+nodes[i].id+"'/>";
+                        html1 += "<input type='hidden'  name='menus' value='"+nodes[i].id+"'/>";
                     }
                     $("#treeDemo").after(html1);
                 }
