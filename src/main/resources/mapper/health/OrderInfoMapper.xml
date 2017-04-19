@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ah.health.mapper.OrderInfoMapper" >
+  <sql id="Base_Column_List" >
+    oi.id,
+    oi.order_time,
+    oi.order_statu,
+    oi.student_id,
+    oi.guidance_id,
+    oi.create_date,
+    oi.del_flag
+  </sql>
+
+  <select id="findAll" parameterType="map" resultType="com.ah.health.pojo.OrderInfo">
+    select
+    <include refid="Base_Column_List" />,
+    DATE_FORMAT(oi.order_time,'%m-%d-%Y') as orderTimeString,
+    u.username as username,
+    u.usercode as userCode,
+    u.grade as grade,
+    u.sex as sex
+    from order_info oi left JOIN t_user u on oi.student_id = u.id and u.del_flag='0'
+    WHERE oi.del_flag = '0'
+    <if test="username !=null and username!='' ">
+      and u.username like concat('%',#{username},'%')
+    </if>
+    <if test="userCode !=null and userCode!='' ">
+      and u.usercode like concat('%',#{userCode},'%')
+    </if>
+    <if test="grade !=null and grade!='' ">
+      and u.grade like concat('%',#{grade},'%')
+    </if>
+    <if test="userId !=null and userId!='' ">
+      and u.id = #{userId}
+    </if>
+    <if test="guidanceId !=null and guidanceId !='' ">
+      and oi.guidance_id =#{guidanceId}
+    </if>
+  </select>
+
+  <insert id="save" parameterType="com.ah.health.pojo.OrderInfo" >
+    insert into order_info (id, order_time, order_statu,
+    student_id, guidance_id, create_date,
+    del_flag)
+    values (#{id}, #{orderTime}, #{orderStatu},
+    #{studentId}, #{guidanceId}, #{createDate},
+    #{delFlag})
+  </insert>
+
+  <update id="update" parameterType="com.ah.health.pojo.OrderInfo" >
+    update order_info
+    <set >
+      <if test="record.id != null" >
+        id = #{id},
+      </if>
+      <if test="orderTime != null" >
+        order_time = #{orderTime},
+      </if>
+      <if test="orderStatu != null" >
+        order_statu = #{orderStatu},
+      </if>
+      <if test="studentId != null" >
+        student_id = #{studentId},
+      </if>
+      <if test="guidanceId != null" >
+        guidance_id = #{guidanceId},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+    </set>
+  </update>
+
+  <select id="get" resultType="com.ah.health.pojo.OrderInfo">
+    select
+    <include refid="Base_Column_List" />,
+    DATE_FORMAT(oi.order_time,'%Y-%m-%d %H:%i:%S') as orderTimeString,
+    DATE_FORMAT(oi.create_date,'%Y-%m-%d %H:%i:%S') as createdateString,
+    u.username as username,
+    u.usercode as userCode,
+    u.grade as grade,
+    u.sex as sex
+    from order_info oi left JOIN t_user u on oi.student_id = u.id and u.del_flag='0'
+    WHERE oi.del_flag = '0' and oi.id = #{id}
+  </select>
+
+  <update id="delete">
+    update order_info set del_flag = '1' where id = #{id}
+  </update>
+
+  <update id="refusevisit" parameterType="com.ah.health.pojo.OrderInfo">
+    update order_info set order_statu = #{orderStatu} where id = #{id}
+  </update>
+</mapper>

@@ -36,8 +36,10 @@ public class PersonalServiceImpl implements PersonalService {
         if(UserUtils.getRole() == CommonUtils.ROLE_STUDENT){
             param.put("roleId",UserUtils.getCurrentUser().getRole().getId());
             param.put("id",UserUtils.getCurrentUser().getId());
+        }else {
+            param.put("id",UserUtils.getCurrentUser().getId());
         }
-        pager.setExhibitDatas(userMapper.findByRole(param));
+        pager.setExhibitDatas(userMapper.findAll(param));
         pager.setIsSuccess(true);           //成功
         pager.setPageCount((pager.getRecordCount() + pager.getPageSize() - 1) / pager.getPageSize());//页数
     }
@@ -75,5 +77,20 @@ public class PersonalServiceImpl implements PersonalService {
     @Override
     public List<TUser> findUsers() {
         return userMapper.findUsers();
+    }
+
+    @Override
+    public void findByRole(Pager pager) {
+        PageQueryMap param = new PageQueryMap(pager);
+        if (pager.getParameters() != null) {
+            param.putAll(pager.getParameters());
+        }
+
+        if(UserUtils.getRole() == CommonUtils.ROLE_XINLI_DOCTOR){
+            param.put("roleId","8190e019798f43e782470fd1e986b85d");
+        }
+        pager.setExhibitDatas(userMapper.findByRole(param));
+        pager.setIsSuccess(true);           //成功
+        pager.setPageCount((pager.getRecordCount() + pager.getPageSize() - 1) / pager.getPageSize());//页数
     }
 }

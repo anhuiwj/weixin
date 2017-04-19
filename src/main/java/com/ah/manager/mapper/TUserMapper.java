@@ -9,6 +9,9 @@ public interface TUserMapper {
 
     List<TUser> findAll(Map<String,Object> map);
 
+
+    List<TUser> findStudent(Map<String,Object> map);
+
     int save(TUser user);
 
     TUser findByUserCode(String userCode);

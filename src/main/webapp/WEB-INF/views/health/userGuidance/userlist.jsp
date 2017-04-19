@@ -9,8 +9,8 @@
 <body>
 <nav class="w-breadcrumb">
     <i class="Hui-iconfont">&#xe67f;</i> 首页
-    <span class="c-gray en">&gt;</span>   个人信息管理管理
-    <span class="c-gray en">&gt;</span> 个人信息
+    <span class="c-gray en">&gt;</span>   心理健康管理
+    <span class="c-gray en">&gt;</span> 心理辅导员信息
     <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px"
        href="javascript:location.replace(location.href);" title="刷新">
         <i class="Hui-iconfont">&#xe68f;</i>
@@ -19,9 +19,6 @@
 <div class="pd-20">
     <div class="cl pd-5 bg-1 bk-gray">
         <div class="j_hform">
-            <%--<p style="padding-left:30px;">--%>
-                <%--<input id="ID" type="text" class="input-text" placeholder="企业名称" style="width:300px;"onkeyup=this.value=this.value.replace(/[$_%?*'"\s]/ig,'')>&nbsp;--%>
-            <%--</p>--%>
             <p>
                 <label>用户姓名：</label>
                 <input type="text" style="width:109px;" class="input-text" id="username" name="username" >
@@ -37,18 +34,11 @@
                              style="margin-left: 30px;">查询
                      </button>
                 </span>
-                <shiro:hasAnyPermissions name="personal:add">
-                <span>
-                      <button id="add_role" class="btn btn-success radius r">
-                        新增
-                      </button>
-                 </span>
-                </shiro:hasAnyPermissions>
             </p>
         </div>
     </div>
     <div class="tbl_header mt-20">
-        <strong>用户列表</strong><p class="tbl_header_r">
+        <strong>心理辅导员</strong><p class="tbl_header_r">
         <%--<input id="export" name="export" type="button" value="导出" class="btn btn-success size-S radius"></p>--%>
     </div>
     <div class="tbl_scroll">
@@ -62,23 +52,25 @@
         var nation =${fns:getDictToJSON('10001')};
         var dtList = function () {
             var columns = [
-                {id: 'userCode', title: '学号', type: 'string', columnClass: 'text-c td'},
                 {id: 'username', title: '姓名', type: 'string', columnClass: 'text-c'},
                 {id: 'sex', title: '性别', type: 'string',codeTable:whether, columnClass: 'text-c'},
-                {id: 'familyName', title: '民族', type: 'string',codeTable:nation, columnClass: 'text-c'},
-                {id: 'school', title: '学校', type: 'string', columnClass: 'text-c'},
-                {id: 'college', title: '学院', type: 'string', columnClass: 'text-c'},
+                {id: 'workTime', title: '工作时间', type: 'string',codeTable:nation, columnClass: 'text-c'},
+                {id: 'qqNumber', title: 'QQ号', type: 'string', columnClass: 'text-c'},
+                {id: 'email', title: '邮箱', type: 'string', columnClass: 'text-c'},
                 {id: 'id', title: '操作', type: 'string', columnClass: 'text-c',
                     resolution:function(value, record, column, grid, dataNo, columnNo){
                     var content = '';
-                        <shiro:hasAnyPermissions name="personal:read">
+                        <shiro:hasAnyPermissions name="userGuidance:read">
                             content += '<input onclick="read(\''+record.id+'\');" value="查看" class="btn btn-primary size-MINI radius" type="button">&nbsp;&nbsp;';
                         </shiro:hasAnyPermissions>
-                        <shiro:hasAnyPermissions name="personal:edit">
+                        <shiro:hasAnyPermissions name="userGuidance:edit">
                             content += '<input onclick="editRow(\''+record.id+'\');" value="修改" class="btn btn-primary size-MINI radius" type="button">&nbsp;&nbsp;';
                         </shiro:hasAnyPermissions>
-                        <shiro:hasAnyPermissions name="personal:delete">
+                        <shiro:hasAnyPermissions name="userGuidance:delete">
                             content += '&nbsp<input onclick="deleteRow(\''+record.id+'\');" value="删除" class="btn btn-primary size-MINI radius" type="button">';
+                        </shiro:hasAnyPermissions>
+                        <shiro:hasAnyPermissions name="orderInfo:add">
+                            content += '&nbsp<input onclick="order(\''+record.id+'\');" value="预约" class="btn btn-primary size-MINI radius" type="button">';
                         </shiro:hasAnyPermissions>
                         return content;
                     }
@@ -89,7 +81,7 @@
                 lang: 'zh-cn',
                 ajaxLoad : true,
                 tableStyle: 'font-size:14px;',
-                loadURL: "${ctx}/personal/getData",
+                loadURL: "${ctx}/userGuidance/getData",
                 check: false,
                 columns: columns,
                 gridContainer: 'table',
@@ -131,9 +123,6 @@
             $('#query').on('click', function () { //查询
                 search();
             });
-            $('#add_role').on('click', function () { //查询
-               layer_show("用户添加","${ctx}/personal/add")
-            });
         }
         function pageInit() {
             bindEvent();
@@ -147,13 +136,18 @@
     });
     
     function read(id) {
-        var url = "${ctx}/personal/read?id="+id;
-        layer_show("用户查看",url)
+        var url = "${ctx}/userGuidance/read?id="+id;
+        layer_show("心理辅导员查看",url)
+    }
+
+    function order(id) {
+        var url = "${ctx}/userGuidance/add?guidanceId="+id;
+        layer_show("预约",url)
     }
     
     function editRow(id) {
-        var url = "${ctx}/personal/add?id="+id;
-        layer_show("用户修改",url)
+        var url = "${ctx}/user/add?id="+id;
+        layer_show("心理辅导员信息修改",url)
     }
     
     function deleteRow(id) {

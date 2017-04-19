@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ah.health.mapper.QuestionMapper" >
+  <sql id="Base_Column_List" >
+    q.id,
+    q.student_id,
+    q.q1,
+    q.q2,
+    q.q3,
+    q.q4,
+    q.q5,
+    q.q6,
+    q.q7,
+    q.q8,
+    q.q9,
+    q.q10,
+    q.q11,
+    q.q12,
+    q.q13,
+    q.q14,
+    q.q15,
+    q.suggestion,
+    q.create_date
+  </sql>
+
+  <select id="findAll" parameterType="map" resultType="com.ah.health.pojo.Question">
+    select
+    <include refid="Base_Column_List" />,
+    DATE_FORMAT(q .create_date,'%m-%d-%Y') as createDateString,
+    u.username as username,
+    u.usercode as userCode,
+    u.grade as grade,
+    u.sex as sex
+    from question q left JOIN t_user u on q.student_id = u.id and u.del_flag='0'
+    WHERE q.del_flag = '0'
+    <if test="username !=null and username!='' ">
+      and u.username like concat('%',#{username},'%')
+    </if>
+    <if test="userCode !=null and userCode!='' ">
+      and u.usercode like concat('%',#{userCode},'%')
+    </if>
+    <if test="grade !=null and grade!='' ">
+      and u.grade like concat('%',#{grade},'%')
+    </if>
+    <if test="userId !=null and userId!='' ">
+      and u.id = #{userId}
+    </if>
+  </select>
+
+
+
+  <insert id="save" parameterType="com.ah.health.pojo.Question" >
+    insert into question (id, student_id, q1,
+    q2, q3, q4, q5,
+    q6, q7, q8, q9,
+    q10, q11, q12, q13,
+    q14, q15, suggestion,del_flag,create_date
+    )
+    values (#{id}, #{studentId}, #{q1},
+    #{q2}, #{q3}, #{q4}, #{q5},
+    #{q6}, #{q7}, #{q8}, #{q9},
+    #{q10}, #{q11}, #{q12}, #{q13},
+    #{q14}, #{q15}, #{suggestion},#{delFlag},#{createDate}
+    )
+  </insert>
+
+
+  <select id="get"  resultType="com.ah.health.pojo.Question">
+    select
+    <include refid="Base_Column_List" />,
+    DATE_FORMAT(q .create_date,'%m-%d-%Y') as createDateString,
+    DATE_FORMAT(u.birthday,'%m-%d-%Y') as birthday,
+    u.username as username,
+    u.usercode as userCode,
+    u.grade as grade,
+    u.sex as sex,
+    u.major
+    from question q left JOIN t_user u on q.student_id = u.id and u.del_flag='0'
+    WHERE q.del_flag = '0' and q.id = #{id}
+  </select>
+
+
+  <update id="delete">
+    UPDATE question set del_flag = '1' WHERE id = #{id}
+  </update>
+
+
+  <update id="updateSuggestion" parameterType="com.ah.health.pojo.Question">
+    UPDATE question set suggestion = #{suggestion} WHERE id = #{id}
+  </update>
+
+</mapper>

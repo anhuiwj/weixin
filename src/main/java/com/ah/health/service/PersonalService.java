@@ -23,4 +23,11 @@ public interface PersonalService {
     void delete(String id);
 
     List<TUser> findUsers();
+
+
+    /**
+     * 查询角色下用户
+     * @param pager
+     */
+    void findByRole(Pager pager);
 }

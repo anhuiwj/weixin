@@ -28,4 +28,10 @@ public class CommonUtils {
 
     public static final String  nothing  = "无";//无
 
+    public static final String  ORDER_YVYUE  = "01";//已预约
+
+    public static final String  ORDER_TONGYI  = "02";//未接受
+
+    public static final String  ORDER_BUTONGYI  = "03";//接受
+
 }

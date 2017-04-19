@@ -57,6 +57,7 @@ public class PersonalController {
     @RequestMapping("/add")
     public String add(Model model,String id){
         model.addAttribute(personalService.findById(id));
+        model.addAttribute("role",UserUtils.getRole());
         return "health/user/addUser";
     }
 
@@ -90,6 +91,7 @@ public class PersonalController {
     @RequestMapping("/read")
     public String read(Model model,String id){
         model.addAttribute(personalService.findById(id));
+        model.addAttribute("role",UserUtils.getRole());
         return "health/user/userDetail";
     }
 

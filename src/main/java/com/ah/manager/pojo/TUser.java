@@ -20,16 +20,6 @@ public class TUser extends BaseEntity{
 
     private String address;
 
-    private String delFlag;
-
-    private Date createDate;
-
-    private String createBy;
-
-    private Date updateDate;
-
-    private String updateBy;
-
     private String remarks;
 
     private String school;
@@ -126,56 +116,6 @@ public class TUser extends BaseEntity{
 
     public void setFamilyName(String familyName) {
         this.familyName = familyName;
-    }
-
-    @Override
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    @Override
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
-    }
-
-    @Override
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    @Override
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    @Override
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    @Override
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    @Override
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    @Override
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    @Override
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    @Override
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
     }
 
     public String getRemarks() {

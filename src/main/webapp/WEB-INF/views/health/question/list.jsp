@@ -9,8 +9,8 @@
 <body>
 <nav class="w-breadcrumb">
     <i class="Hui-iconfont">&#xe67f;</i> 首页
-    <span class="c-gray en">&gt;</span>   个人信息管理管理
-    <span class="c-gray en">&gt;</span> 个人信息
+    <span class="c-gray en">&gt;</span>   心理健康管理
+    <span class="c-gray en">&gt;</span> 问卷列表
     <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px"
        href="javascript:location.replace(location.href);" title="刷新">
         <i class="Hui-iconfont">&#xe68f;</i>
@@ -25,11 +25,12 @@
             <p>
                 <label>用户姓名：</label>
                 <input type="text" style="width:109px;" class="input-text" id="username" name="username" >
-                <label>登录名称：</label>
+                <label>学号：</label>
                 <input type="text" style="width:109px;" class="input-text" id="userCode" name="userCode" >
+                <label>班级：</label>
+                <input type="text" style="width:109px;" class="input-text" id="grade" name="grade" >
             </p>
             <p>
-
             </p>
             <p>
                 <span>
@@ -37,18 +38,11 @@
                              style="margin-left: 30px;">查询
                      </button>
                 </span>
-                <shiro:hasAnyPermissions name="personal:add">
-                <span>
-                      <button id="add_role" class="btn btn-success radius r">
-                        新增
-                      </button>
-                 </span>
-                </shiro:hasAnyPermissions>
             </p>
         </div>
     </div>
     <div class="tbl_header mt-20">
-        <strong>用户列表</strong><p class="tbl_header_r">
+        <strong>问卷列表</strong><p class="tbl_header_r">
         <%--<input id="export" name="export" type="button" value="导出" class="btn btn-success size-S radius"></p>--%>
     </div>
     <div class="tbl_scroll">
@@ -59,25 +53,21 @@
 <script>
     $(function () {
         var whether =${fns:getDictToJSON('00002')};
-        var nation =${fns:getDictToJSON('10001')};
+        var orderStatu =${fns:getDictToJSON('10004')};
         var dtList = function () {
             var columns = [
                 {id: 'userCode', title: '学号', type: 'string', columnClass: 'text-c td'},
                 {id: 'username', title: '姓名', type: 'string', columnClass: 'text-c'},
                 {id: 'sex', title: '性别', type: 'string',codeTable:whether, columnClass: 'text-c'},
-                {id: 'familyName', title: '民族', type: 'string',codeTable:nation, columnClass: 'text-c'},
-                {id: 'school', title: '学校', type: 'string', columnClass: 'text-c'},
-                {id: 'college', title: '学院', type: 'string', columnClass: 'text-c'},
+                {id: 'grade', title: '班级', type: 'string', columnClass: 'text-c'},
+                {id: 'createDateString', title: '填写时间', type: 'string', columnClass: 'text-c'},
                 {id: 'id', title: '操作', type: 'string', columnClass: 'text-c',
                     resolution:function(value, record, column, grid, dataNo, columnNo){
                     var content = '';
-                        <shiro:hasAnyPermissions name="personal:read">
+                        <shiro:hasAnyPermissions name="question:read">
                             content += '<input onclick="read(\''+record.id+'\');" value="查看" class="btn btn-primary size-MINI radius" type="button">&nbsp;&nbsp;';
                         </shiro:hasAnyPermissions>
-                        <shiro:hasAnyPermissions name="personal:edit">
-                            content += '<input onclick="editRow(\''+record.id+'\');" value="修改" class="btn btn-primary size-MINI radius" type="button">&nbsp;&nbsp;';
-                        </shiro:hasAnyPermissions>
-                        <shiro:hasAnyPermissions name="personal:delete">
+                        <shiro:hasAnyPermissions name="question:delete">
                             content += '&nbsp<input onclick="deleteRow(\''+record.id+'\');" value="删除" class="btn btn-primary size-MINI radius" type="button">';
                         </shiro:hasAnyPermissions>
                         return content;
@@ -89,7 +79,7 @@
                 lang: 'zh-cn',
                 ajaxLoad : true,
                 tableStyle: 'font-size:14px;',
-                loadURL: "${ctx}/personal/getData",
+                loadURL: "${ctx}/question/getData",
                 check: false,
                 columns: columns,
                 gridContainer: 'table',
@@ -125,14 +115,12 @@
             var param = {};
             param.username = $('#username').val();
             param.userCode = $('#userCode').val();
+            param.grade = $('#grade').val();
             return param;
         }
         function bindEvent() {
             $('#query').on('click', function () { //查询
                 search();
-            });
-            $('#add_role').on('click', function () { //查询
-               layer_show("用户添加","${ctx}/personal/add")
             });
         }
         function pageInit() {
@@ -147,15 +135,10 @@
     });
     
     function read(id) {
-        var url = "${ctx}/personal/read?id="+id;
-        layer_show("用户查看",url)
+        var url = "${ctx}/question/read?id="+id;
+        layer_show("问卷查看",url)
     }
-    
-    function editRow(id) {
-        var url = "${ctx}/personal/add?id="+id;
-        layer_show("用户修改",url)
-    }
-    
+
     function deleteRow(id) {
         layer.confirm('确认删除吗？', {
             btn: ['确认','取消'], //按钮
@@ -163,7 +146,7 @@
             title:"提示"
         }, function(){
             $.ajax({
-                url: "${ctx}/user/delete",
+                url: "${ctx}/question/delete",
                 data:{"id":id} ,
                 success: function (data) {
                     if (data.code==200) {

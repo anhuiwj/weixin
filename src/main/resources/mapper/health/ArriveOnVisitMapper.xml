@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ah.health.mapper.ArriveOnVisitMapper" >
+  <sql id="Base_Column_List" >
+     av.id,
+     av.order_id,
+     av.ask_question,
+     av.suggestion,
+     av.del_flag
+  </sql>
+
+  <insert id="save" parameterType="com.ah.health.pojo.ArriveOnVisit" >
+    insert into arrive_on_visit (id, order_id, ask_question, 
+      suggestion)
+    values (#{id,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{askQuestion,jdbcType=VARCHAR}, 
+      #{suggestion,jdbcType=VARCHAR})
+  </insert>
+  <update id="update" parameterType="com.ah.health.pojo.ArriveOnVisit" >
+    update arrive_on_visit
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="askQuestion != null" >
+        ask_question = #{askQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion != null" >
+        suggestion = #{suggestion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="findAll" parameterType="map" resultType="com.ah.health.pojo.ArriveOnVisit">
+    select
+    <include refid="Base_Column_List" />,
+    oi.order_statu,
+    oi.guidance_id,
+    DATE_FORMAT(oi.order_time,'%m-%d-%Y') as orderTimeString,
+    u.username as username,
+    u.usercode as userCode,
+    u.grade as grade,
+    u.sex as sex
+    from arrive_on_visit av
+    INNER join  order_info oi on oi.id = av.order_id and oi.del_flag = '0'
+    INNER JOIN t_user u on oi.student_id = u.id and u.del_flag='0'
+    WHERE av.del_flag = '0'
+    <if test="username !=null and username!='' ">
+      and u.username like concat('%',#{username},'%')
+    </if>
+    <if test="userCode !=null and userCode!='' ">
+      and u.usercode like concat('%',#{userCode},'%')
+    </if>
+    <if test="grade !=null and grade!='' ">
+      and u.grade like concat('%',#{grade},'%')
+    </if>
+    <if test="userId !=null and userId!='' ">
+      and u.id = #{userId}
+    </if>
+    <if test="guidanceId !=null and guidanceId !='' ">
+      and oi.guidance_id =#{guidanceId}
+    </if>
+  </select>
+
+
+  <select id="detail"  resultType="com.ah.health.pojo.ArriveOnVisit">
+    select
+    <include refid="Base_Column_List" />,
+    oi.order_statu,
+    oi.guidance_id,
+    DATE_FORMAT(oi.order_time,'%m-%d-%Y') as orderTimeString,
+    u.username as username,
+    u.usercode as userCode,
+    u.grade as grade,
+    u.sex as sex
+    from arrive_on_visit av
+    INNER join  order_info oi on oi.id = av.order_id and oi.del_flag = '0'
+    INNER JOIN t_user u on oi.student_id = u.id and u.del_flag='0'
+    WHERE av.del_flag = '0' and av.id = #{id}
+  </select>
+  
+  <update id="delete">
+    UPDATE arrive_on_visit set del_flag = '1' WHERE id = #{id}
+  </update>
+
+
+</mapper>

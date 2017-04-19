@@ -73,7 +73,7 @@
         </javaClientGenerator>
 
         <!-- 指定数据库表 -->
-        <table tableName="t_user"></table>
+        <table tableName="question"></table>
         <!--<table tableName="t_role"></table>-->
         <!--<table tableName="doctor_history"></table>-->
         <!--<table tableName="physical_examination"></table>-->
