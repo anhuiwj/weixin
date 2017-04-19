@@ -86,12 +86,19 @@ public class OrderInfoController extends BaseController{
         return response;
     }
 
+    @RequestMapping("/refuse")
+    private String refuse(String id,Model model){
+        model.addAttribute("id",id);
+        return "health/orderInfo/refusevisit";
+    }
+
+
     @RequestMapping("/refusevisit")
     @ResponseBody
-    public JsonResponseEntity refusevisit(String id ){
+    public JsonResponseEntity refusevisit(OrderInfo orderInfo ){
         JsonResponseEntity response = new JsonResponseEntity();
         try {
-            orderInfoService.refusevisit(id);
+            orderInfoService.refusevisit(orderInfo);
             response.setMsg(CommonUtil.ADD_SUCCESS);
             response.setCode(CommonUtil.SUCCESS_CODE);
         }catch (Exception e){

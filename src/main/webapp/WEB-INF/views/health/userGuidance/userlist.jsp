@@ -146,7 +146,7 @@
     }
     
     function editRow(id) {
-        var url = "${ctx}/user/add?id="+id;
+        var url = "${ctx}/personal/add?id="+id;
         layer_show("心理辅导员信息修改",url)
     }
     

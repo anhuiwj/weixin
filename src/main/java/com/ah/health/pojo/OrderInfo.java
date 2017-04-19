@@ -33,6 +33,8 @@ public class OrderInfo {
 
     private String birthday;
 
+    private String refuseMsg;
+
     public String getId() {
         return id;
     }
@@ -151,5 +153,13 @@ public class OrderInfo {
 
     public void setCreatedateString(String createdateString) {
         this.createdateString = createdateString;
+    }
+
+    public String getRefuseMsg() {
+        return refuseMsg;
+    }
+
+    public void setRefuseMsg(String refuseMsg) {
+        this.refuseMsg = refuseMsg;
     }
 }

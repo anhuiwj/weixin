@@ -29,6 +29,8 @@ public class ArriveOnVisit {
 
     private String delFlag;
 
+    private String orderTimeString;
+
     public String getId() {
         return id;
     }
@@ -141,4 +143,11 @@ public class ArriveOnVisit {
         this.delFlag = delFlag;
     }
 
+    public String getOrderTimeString() {
+        return orderTimeString;
+    }
+
+    public void setOrderTimeString(String orderTimeString) {
+        this.orderTimeString = orderTimeString;
+    }
 }

@@ -9,8 +9,8 @@
 <body>
 <nav class="w-breadcrumb">
     <i class="Hui-iconfont">&#xe67f;</i> 首页
-    <span class="c-gray en">&gt;</span>   心理健康管理
-    <span class="c-gray en">&gt;</span> 预约信息
+    <span class="c-gray en">&gt;</span>   就诊信息管理
+    <span class="c-gray en">&gt;</span> 校医基本信息
     <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px"
        href="javascript:location.replace(location.href);" title="刷新">
         <i class="Hui-iconfont">&#xe68f;</i>
@@ -19,18 +19,14 @@
 <div class="pd-20">
     <div class="cl pd-5 bg-1 bk-gray">
         <div class="j_hform">
-            <%--<p style="padding-left:30px;">--%>
-                <%--<input id="ID" type="text" class="input-text" placeholder="企业名称" style="width:300px;"onkeyup=this.value=this.value.replace(/[$_%?*'"\s]/ig,'')>&nbsp;--%>
-            <%--</p>--%>
             <p>
                 <label>用户姓名：</label>
                 <input type="text" style="width:109px;" class="input-text" id="username" name="username" >
-                <label>学号：</label>
+                <label>登录名称：</label>
                 <input type="text" style="width:109px;" class="input-text" id="userCode" name="userCode" >
-                <label>班级：</label>
-                <input type="text" style="width:109px;" class="input-text" id="grade" name="grade" >
             </p>
             <p>
+
             </p>
             <p>
                 <span>
@@ -42,7 +38,7 @@
         </div>
     </div>
     <div class="tbl_header mt-20">
-        <strong>预约信息列表</strong><p class="tbl_header_r">
+        <strong>心理辅导员</strong><p class="tbl_header_r">
         <%--<input id="export" name="export" type="button" value="导出" class="btn btn-success size-S radius"></p>--%>
     </div>
     <div class="tbl_scroll">
@@ -53,30 +49,24 @@
 <script>
     $(function () {
         var whether =${fns:getDictToJSON('00002')};
-        var orderStatu =${fns:getDictToJSON('10004')};
+        var nation =${fns:getDictToJSON('10001')};
         var dtList = function () {
             var columns = [
-                {id: 'userCode', title: '学号', type: 'string', columnClass: 'text-c td'},
                 {id: 'username', title: '姓名', type: 'string', columnClass: 'text-c'},
                 {id: 'sex', title: '性别', type: 'string',codeTable:whether, columnClass: 'text-c'},
-                {id: 'grade', title: '班级', type: 'string', columnClass: 'text-c'},
-                {id: 'orderTimeString', title: '预约时间', type: 'string', columnClass: 'text-c'},
-                {id: 'orderStatu', title: '预约状态', type: 'string',codeTable:orderStatu, columnClass: 'text-c'},
+                {id: 'workTime', title: '工作时间', type: 'string',codeTable:nation, columnClass: 'text-c'},
+                {id: 'qqNumber', title: 'QQ号', type: 'string', columnClass: 'text-c'},
+                {id: 'email', title: '邮箱', type: 'string', columnClass: 'text-c'},
                 {id: 'id', title: '操作', type: 'string', columnClass: 'text-c',
                     resolution:function(value, record, column, grid, dataNo, columnNo){
                     var content = '';
-                        <shiro:hasAnyPermissions name="orderInfo:read">
+                        <shiro:hasAnyPermissions name="userGuidance:read">
                             content += '<input onclick="read(\''+record.id+'\');" value="查看" class="btn btn-primary size-MINI radius" type="button">&nbsp;&nbsp;';
                         </shiro:hasAnyPermissions>
-                        if(record.orderStatu == '01'){
-                            <shiro:hasAnyPermissions name="arriveOnVisit:add">
-                            content += '<input onclick="visit(\''+record.id+'\');" value="到访" class="btn btn-primary size-MINI radius" type="button">&nbsp;&nbsp;';
-                            </shiro:hasAnyPermissions>
-                            <shiro:hasAnyPermissions name="arriveOnVisit:add">
-                            content += '<input onclick="refusevisit(\''+record.id+'\');" value="拒绝预约" class="btn btn-primary size-MINI radius" type="button">&nbsp;&nbsp;';
-                            </shiro:hasAnyPermissions>
-                        }
-                        <shiro:hasAnyPermissions name="orderInfo:delete">
+                        <shiro:hasAnyPermissions name="userGuidance:edit">
+                            content += '<input onclick="editRow(\''+record.id+'\');" value="修改" class="btn btn-primary size-MINI radius" type="button">&nbsp;&nbsp;';
+                        </shiro:hasAnyPermissions>
+                        <shiro:hasAnyPermissions name="userGuidance:delete">
                             content += '&nbsp<input onclick="deleteRow(\''+record.id+'\');" value="删除" class="btn btn-primary size-MINI radius" type="button">';
                         </shiro:hasAnyPermissions>
                         return content;
@@ -88,7 +78,7 @@
                 lang: 'zh-cn',
                 ajaxLoad : true,
                 tableStyle: 'font-size:14px;',
-                loadURL: "${ctx}/orderInfo/getData",
+                loadURL: "${ctx}/schoolDoc/getData",
                 check: false,
                 columns: columns,
                 gridContainer: 'table',
@@ -124,7 +114,6 @@
             var param = {};
             param.username = $('#username').val();
             param.userCode = $('#userCode').val();
-            param.grade = $('#grade').val();
             return param;
         }
         function bindEvent() {
@@ -144,18 +133,13 @@
     });
     
     function read(id) {
-        var url = "${ctx}/orderInfo/read?id="+id;
-        layer_show("预约信息查看",url)
+        var url = "${ctx}/userGuidance/read?id="+id;
+        layer_show("心理辅导员查看",url)
     }
 
-    function visit(id) {
-        var url = "${ctx}/arriveOnVisit/add?orderId="+id;
-        layer_show("到访",url)
-    }
-
-    function refusevisit(id) {
-        var url = "${ctx}/orderInfo/refuse?id="+id;
-        layer_show("拒绝预约",url)
+    function editRow(id) {
+        var url = "${ctx}/personal/add?id="+id;
+        layer_show("心理辅导员信息修改",url)
     }
     
     function deleteRow(id) {
@@ -165,7 +149,7 @@
             title:"提示"
         }, function(){
             $.ajax({
-                url: "${ctx}/orderInfo/delete",
+                url: "${ctx}/user/delete",
                 data:{"id":id} ,
                 success: function (data) {
                     if (data.code==200) {

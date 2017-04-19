@@ -142,7 +142,7 @@
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
 						<li>
-							<a href="javascript:void(0)" onclick="iFrameJumpPage('${ctx}/personal/read?id=${fns:getUser().id}')">
+							<a href="javascript:void(0)" onclick="iFrameJumpPage('${ctx}/personal/add?id=${fns:getUser().id}')">
 								<i class="icon-user"></i>个人信息</a>
 						</li>
 						<li>

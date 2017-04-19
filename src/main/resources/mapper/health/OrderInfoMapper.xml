@@ -5,6 +5,7 @@
     oi.id,
     oi.order_time,
     oi.order_statu,
+    oi.refuse_msg,
     oi.student_id,
     oi.guidance_id,
     oi.create_date,
@@ -39,10 +40,10 @@
   </select>
 
   <insert id="save" parameterType="com.ah.health.pojo.OrderInfo" >
-    insert into order_info (id, order_time, order_statu,
+    insert into order_info (id, order_time, order_statu,refuse_msg,
     student_id, guidance_id, create_date,
     del_flag)
-    values (#{id}, #{orderTime}, #{orderStatu},
+    values (#{id}, #{orderTime}, #{orderStatu},#{refuseMsg},
     #{studentId}, #{guidanceId}, #{createDate},
     #{delFlag})
   </insert>
@@ -58,6 +59,9 @@
       </if>
       <if test="orderStatu != null" >
         order_statu = #{orderStatu},
+      </if>
+      <if test="refuseMsg != null" >
+        refuse_msg = #{refuseMsg},
       </if>
       <if test="studentId != null" >
         student_id = #{studentId},
@@ -92,6 +96,6 @@
   </update>
 
   <update id="refusevisit" parameterType="com.ah.health.pojo.OrderInfo">
-    update order_info set order_statu = #{orderStatu} where id = #{id}
+    update order_info set order_statu = #{orderStatu},refuse_msg =#{refuseMsg} where id = #{id}
   </update>
 </mapper>

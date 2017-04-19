@@ -1,7 +1,6 @@
 package com.ah.health.controller;
 
-import com.ah.health.service.OrderInfoService;
-import com.ah.health.service.PersonalService;
+import com.ah.health.service.SchoolDocService;
 import com.ah.manager.common.page.model.Pager;
 import com.ah.manager.response.JsonResponseEntity;
 import com.google.gson.Gson;
@@ -15,22 +14,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Map;
 
 /**
- * Created by wangjie on 2017/4/14.
- * 心理辅导员信息
+ * Created by wangjie on 2017/4/19.
  */
 @Controller
-@RequestMapping("/userGuidance")
-public class UserGuidanceController {
+@RequestMapping("/schoolDoc")
+public class SchoolDocController {
 
     @Autowired
-    private PersonalService personalService;
+    private SchoolDocService schoolDocService;
 
-    @Autowired
-    private OrderInfoService orderInfoService;
 
     @RequestMapping("/index")
     public String index(Model model){
-        return "health/userGuidance/userlist";
+        return "health/studentDoc/userlist";
     }
 
 
@@ -48,22 +44,9 @@ public class UserGuidanceController {
             Map<String, Object> searchParam = pager.getParameters(); //查询参数
 //            searchParam.put("user",getCurrentUser().getId());
             pager.setParameters(searchParam);
-            personalService.findByRole(pager);
+            schoolDocService.findAll(pager);
         }
         response.setData(pager);
         return response;
     }
-
-    @RequestMapping("/read")
-    public String read(String id,Model model){
-        model.addAttribute(personalService.findById(id));
-        return "health/userGuidance/userDetail";
-    }
-
-    @RequestMapping("/add")
-    public String add(String id,Model model,String guidanceId){
-        model.addAttribute("guidanceId",guidanceId);
-        return "health/orderInfo/add";
-    }
-
 }

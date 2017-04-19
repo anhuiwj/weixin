@@ -39,6 +39,10 @@
             <label class="f-l mr-30 w-200">接受预约状态</label>
             <input class="input-text" name="orderStatu" disabled="disabled" value="${fns:getDictByCode('10004',order.orderStatu).name}" style="width:300px;">
         </div>
+        <div class="f-l w-980 mb-20">
+            <label class="f-l mr-30 w-200">拒绝理由</label>
+            <textarea class="input-text" name="refuseMsg" datatype="*" style="width:300px;">${order.refuseMsg} </textarea>
+        </div>
     </form>
 </div>
 </body>

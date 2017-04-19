@@ -69,9 +69,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     }
 
     @Override
-    public void refusevisit(String id) {
-        OrderInfo orderInfo = new OrderInfo();
-        orderInfo.setId(id);
+    public void refusevisit(OrderInfo orderInfo) {
         orderInfo.setOrderStatu(CommonUtils.ORDER_TONGYI);
         orderInfoMapper.refusevisit(orderInfo);
     }

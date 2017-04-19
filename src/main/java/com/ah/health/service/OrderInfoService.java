@@ -27,5 +27,5 @@ public interface OrderInfoService {
      * 拒绝预约
      * @param id
      */
-    void refusevisit(String id);
+    void refusevisit(OrderInfo orderInfo);
 }

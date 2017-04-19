@@ -86,9 +86,8 @@ public class PersonalServiceImpl implements PersonalService {
             param.putAll(pager.getParameters());
         }
 
-        if(UserUtils.getRole() == CommonUtils.ROLE_XINLI_DOCTOR){
-            param.put("roleId","8190e019798f43e782470fd1e986b85d");
-        }
+        param.put("roleId",CommonUtils.XINLI_DOCTOR_ID);
+
         pager.setExhibitDatas(userMapper.findByRole(param));
         pager.setIsSuccess(true);           //成功
         pager.setPageCount((pager.getRecordCount() + pager.getPageSize() - 1) / pager.getPageSize());//页数
