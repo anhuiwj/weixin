@@ -24,7 +24,7 @@
         </div>
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">性别</label>
-            <select name="sex">
+            <select name="sex" disabled="disabled">
                 <option value=""></option>
                 <c:forEach var="s" items="${fns:getDictById('00002')}">
                     <option value="${s.code}" <c:if test="${TUser.sex eq s.code}">selected = "selected"</c:if>>${s.name}</option>
@@ -33,7 +33,7 @@
         </div>
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">民族</label>
-            <select name="familyName">
+            <select name="familyName" disabled="disabled">
                 <option value=""></option>
                 <c:forEach var="s" items="${fns:getDictById('10001')}">
                     <option value="${s.code}" <c:if test="${TUser.familyName eq s.code}">selected = "selected"</c:if>>${s.name}</option>
@@ -47,7 +47,7 @@
         </div>
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">学校</label>
-            <input class="input-text" name="school" value="${TUser.school}" style="width:300px;">
+            <input class="input-text" name="school" value="${TUser.school}" style="width:300px;" disabled="disabled">
         </div>
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">学院</label>

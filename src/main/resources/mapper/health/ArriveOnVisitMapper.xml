@@ -60,6 +60,7 @@
     <if test="guidanceId !=null and guidanceId !='' ">
       and oi.guidance_id =#{guidanceId}
     </if>
+    ORDER by oi.order_time
   </select>
 
 
