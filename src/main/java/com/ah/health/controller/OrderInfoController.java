@@ -107,4 +107,19 @@ public class OrderInfoController extends BaseController{
         }
         return response;
     }
+
+    @RequestMapping("/tongyi")
+    @ResponseBody
+    public JsonResponseEntity tongyi(OrderInfo orderInfo){
+        JsonResponseEntity response = new JsonResponseEntity();
+        try {
+            orderInfoService.refusevisit(orderInfo);
+            response.setMsg(CommonUtil.ADD_SUCCESS);
+            response.setCode(CommonUtil.SUCCESS_CODE);
+        }catch (Exception e){
+            e.printStackTrace();
+            response.setMsg(CommonUtil.ADD_ERROR);
+        }
+        return response;
+    }
 }

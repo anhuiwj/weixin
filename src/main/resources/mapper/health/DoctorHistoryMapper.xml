@@ -13,7 +13,7 @@
   <select id="findAll" resultType="com.ah.health.pojo.DoctorHistory" parameterType="java.util.Map" >
     select
     <include refid="Base_Column_List" />,
-    DATE_FORMAT(dh.doctor_time,'%m-%d-%Y') as doctorTimeString,
+    DATE_FORMAT(dh.doctor_time,'%Y-%m-%d %H:%i:%S') as doctorTimeString,
     u.username as username,
     u.usercode as userCode,
     u.grade as grade,

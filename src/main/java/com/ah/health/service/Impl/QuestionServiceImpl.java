@@ -47,7 +47,7 @@ public class QuestionServiceImpl implements QuestionService {
          * 如果是心理医生查看预约了自己的学生
          */
         if(UserUtils.getRole() == CommonUtils.ROLE_STUDENT){
-            param.put("id",UserUtils.getCurrentUser().getId());
+            param.put("userId",UserUtils.getCurrentUser().getId());
         }else if(UserUtils.getRole() == CommonUtils.ROLE_XINLI_DOCTOR){
         }
 

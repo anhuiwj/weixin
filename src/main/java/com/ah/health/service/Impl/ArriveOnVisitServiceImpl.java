@@ -36,7 +36,10 @@ public class ArriveOnVisitServiceImpl implements ArriveOnVisitService {
 
         if(UserUtils.getRole() == CommonUtils.ROLE_XINLI_DOCTOR){
             param.put("guidanceId",UserUtils.getCurrentUser().getId());
+        }else if(UserUtils.getRole() == CommonUtils.ROLE_STUDENT){
+            param.put("userId",UserUtils.getCurrentUser().getId());
         }
+
         pager.setExhibitDatas(arriveOnVisitMapper.findAll(param));
         pager.setIsSuccess(true);           //成功
         pager.setPageCount((pager.getRecordCount() + pager.getPageSize() - 1) / pager.getPageSize());//页数

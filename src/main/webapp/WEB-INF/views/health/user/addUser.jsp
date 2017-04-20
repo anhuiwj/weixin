@@ -40,7 +40,7 @@
                 </c:forEach>
             </select>
         </div>
-        <c:if test="${role == '1'}">
+        <c:if test="${role == '1' || type == '1'}">
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">身份证号</label>
             <input class="input-text" name="personcardNo" value="${TUser.personcardNo}" style="width:300px;">
@@ -63,7 +63,7 @@
         </div>
         </c:if>
 
-        <c:if test="${role != '1'}">
+        <c:if test="${role != '1' && type != '1'}">
             <div class="f-l w-980 mb-20">
                 <label class="f-l mr-30 w-200">工作时间</label>
                 <input class="input-text" name="workTime" value="${TUser.workTime}" style="width:300px;">
@@ -125,10 +125,17 @@
             return true;
         },
         callback: function (data) {
-            parent.layer.msg(data.msg, {icon: 1});
-            parent.exports.gridRefresh();
-            var index = parent.layer.getFrameIndex(window.name);
-            parent.layer.close(index);
+            <c:if test="${type == '1'}">
+                layer.msg(data.msg, {icon: 1});
+                location.href='${ctx}/personal/add?type=1&id=${fns:getUser().id}';
+            </c:if>
+            <c:if test="${type != '1'}">
+                parent.layer.msg(data.msg, {icon: 1});
+                parent.exports.gridRefresh();
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+            </c:if>
+
         }
     });
 </script>

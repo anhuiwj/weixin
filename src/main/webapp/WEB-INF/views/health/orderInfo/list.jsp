@@ -70,10 +70,15 @@
                         </shiro:hasAnyPermissions>
                         if(record.orderStatu == '01'){
                             <shiro:hasAnyPermissions name="arriveOnVisit:add">
-                            content += '<input onclick="visit(\''+record.id+'\');" value="到访" class="btn btn-primary size-MINI radius" type="button">&nbsp;&nbsp;';
+                            content += '<input onclick="refusevisit(\''+record.id+'\');" value="拒绝预约" class="btn btn-primary size-MINI radius" type="button">&nbsp;&nbsp;';
                             </shiro:hasAnyPermissions>
                             <shiro:hasAnyPermissions name="arriveOnVisit:add">
-                            content += '<input onclick="refusevisit(\''+record.id+'\');" value="拒绝预约" class="btn btn-primary size-MINI radius" type="button">&nbsp;&nbsp;';
+                            content += '<input onclick="tongyi(\''+record.id+'\');" value="接受预约" class="btn btn-primary size-MINI radius" type="button">&nbsp;&nbsp;';
+                            </shiro:hasAnyPermissions>
+                        }
+                        if(record.orderStatu == '03'){
+                            <shiro:hasAnyPermissions name="arriveOnVisit:add">
+                                content += '<input onclick="visit(\''+record.id+'\');" value="到访" class="btn btn-primary size-MINI radius" type="button">&nbsp;&nbsp;';
                             </shiro:hasAnyPermissions>
                         }
                         <shiro:hasAnyPermissions name="orderInfo:delete">
@@ -156,6 +161,28 @@
     function refusevisit(id) {
         var url = "${ctx}/orderInfo/refuse?id="+id;
         layer_show("拒绝预约",url)
+    }
+
+    function tongyi(id) {
+        layer.confirm('是否接受预约？', {
+            btn: ['确认','取消'], //按钮
+            icon: 1,
+            title:"提示"
+        }, function(){
+            $.ajax({
+                url: "${ctx}/orderInfo/tongyi",
+                data:{"id":id,"orderStatu":"3"} ,
+                success: function (data) {
+                    if (data.code==200) {
+                        layer.msg(data.msg, {icon: 6,end:function(){
+                            location.reload();
+                        }});
+                    } else {
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                }
+            });
+        });
     }
     
     function deleteRow(id) {

@@ -59,7 +59,7 @@
     <div style="margin-left: 78px;margin-top: 16px;">
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">就诊时间</label>
-            <input class="input-text Wdate" name="doctorTime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="${fns:formatDateTime(doctorHistory.doctorTime)}" style="width:300px;" disabled="disabled">
+            <input class="input-text Wdate" name="doctorTime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" value="${fns:formatDateTime(doctorHistory.doctorTime)}" style="width:300px;" disabled="disabled">
         </div>
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">疾病</label>

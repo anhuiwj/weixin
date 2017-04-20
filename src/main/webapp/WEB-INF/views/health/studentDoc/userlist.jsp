@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="tbl_header mt-20">
-        <strong>心理辅导员</strong><p class="tbl_header_r">
+        <strong>校医基本信息</strong><p class="tbl_header_r">
         <%--<input id="export" name="export" type="button" value="导出" class="btn btn-success size-S radius"></p>--%>
     </div>
     <div class="tbl_scroll">
@@ -134,12 +134,12 @@
     
     function read(id) {
         var url = "${ctx}/userGuidance/read?id="+id;
-        layer_show("心理辅导员查看",url)
+        layer_show("校医基本信息查看",url)
     }
 
     function editRow(id) {
         var url = "${ctx}/personal/add?id="+id;
-        layer_show("心理辅导员信息修改",url)
+        layer_show("校医基本信息信息修改",url)
     }
     
     function deleteRow(id) {

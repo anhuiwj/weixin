@@ -62,6 +62,7 @@
         },
         callback: function (data) {
            layer.msg(data.msg, {icon: 1});
+            location.href='${ctx}/personal/editPass?id=${fns:getUser().id}';
         }
     });
     

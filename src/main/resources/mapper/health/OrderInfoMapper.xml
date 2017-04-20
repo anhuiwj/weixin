@@ -15,7 +15,7 @@
   <select id="findAll" parameterType="map" resultType="com.ah.health.pojo.OrderInfo">
     select
     <include refid="Base_Column_List" />,
-    DATE_FORMAT(oi.order_time,'%m-%d-%Y') as orderTimeString,
+    DATE_FORMAT(oi.order_time,'%Y-%m-%d %H:%i:%S') as orderTimeString,
     u.username as username,
     u.usercode as userCode,
     u.grade as grade,

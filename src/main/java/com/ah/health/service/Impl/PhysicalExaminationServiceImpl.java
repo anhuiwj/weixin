@@ -45,7 +45,7 @@ public class PhysicalExaminationServiceImpl implements PhysicalExaminationServic
          */
         if(UserUtils.getRole() == CommonUtils.ROLE_STUDENT){
             param.put("roleId",UserUtils.getCurrentUser().getRole().getId());
-            param.put("id",UserUtils.getCurrentUser().getId());
+            param.put("userId",UserUtils.getCurrentUser().getId());
         }
         pager.setExhibitDatas(physicalExaminationMapper.findAll(param));
         pager.setIsSuccess(true);           //成功

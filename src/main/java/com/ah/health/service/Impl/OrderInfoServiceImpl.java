@@ -36,7 +36,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
          * 如果是心理医生查看预约了自己的学生
          */
         if(UserUtils.getRole() == CommonUtils.ROLE_STUDENT){
-            param.put("id",UserUtils.getCurrentUser().getId());
+            param.put("userId",UserUtils.getCurrentUser().getId());
         }else if(UserUtils.getRole() == CommonUtils.ROLE_XINLI_DOCTOR){
             param.put("guidanceId",UserUtils.getCurrentUser().getId());
         }
@@ -51,9 +51,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         if(StringUtils.isEmpty(orderInfo.getId())){
             orderInfo.setId(IdGen.uuid());
             orderInfo.setDelFlag("0");
-            orderInfo.setCreateDate(new Date());
             orderInfo.setStudentId(UserUtils.getCurrentUser().getId());
             orderInfo.setOrderStatu(CommonUtils.ORDER_YVYUE);
+            orderInfo.setCreateDate(new Date());
             orderInfoMapper.save(orderInfo);
         }
     }

@@ -18,7 +18,7 @@ public abstract class BaseController {
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) throws Exception {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:dd");
         CustomDateEditor dateEditor = new CustomDateEditor(df, true);
         binder.registerCustomEditor(java.util.Date.class, dateEditor);
         binder.registerCustomEditor(Date.class,new CustomSqlDateEditor());

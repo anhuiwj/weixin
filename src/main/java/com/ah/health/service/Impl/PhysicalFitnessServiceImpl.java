@@ -35,7 +35,7 @@ public class PhysicalFitnessServiceImpl implements PhysicalFitnessService {
          */
         if(UserUtils.getRole() == CommonUtils.ROLE_STUDENT){
             param.put("roleId",UserUtils.getCurrentUser().getRole().getId());
-            param.put("id",UserUtils.getCurrentUser().getId());
+            param.put("userId",UserUtils.getCurrentUser().getId());
         }
         pager.setExhibitDatas(physicalFitnessTestMapper.findAll(param));
         pager.setIsSuccess(true);           //成功

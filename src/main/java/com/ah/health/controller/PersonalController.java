@@ -54,10 +54,18 @@ public class PersonalController {
         return response;
     }
 
+    /**
+     * type 1 为个人信息修改
+     * @param model
+     * @param id
+     * @param type
+     * @return
+     */
     @RequestMapping("/add")
-    public String add(Model model,String id){
+    public String add(Model model,String id,String type){
         model.addAttribute(personalService.findById(id));
         model.addAttribute("role",UserUtils.getRole());
+        model.addAttribute("type",type);
         return "health/user/addUser";
     }
 
@@ -86,12 +94,14 @@ public class PersonalController {
      * 查看个人信息
      * @param model
      * @param id
+     * type 1 学生基本信息列表跳转
      * @return
      */
     @RequestMapping("/read")
-    public String read(Model model,String id){
+    public String read(Model model,String id,String type){
         model.addAttribute(personalService.findById(id));
         model.addAttribute("role",UserUtils.getRole());
+        model.addAttribute("type",type);
         return "health/user/userDetail";
     }
 

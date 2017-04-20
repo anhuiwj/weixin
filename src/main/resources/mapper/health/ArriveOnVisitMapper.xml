@@ -11,9 +11,9 @@
 
   <insert id="save" parameterType="com.ah.health.pojo.ArriveOnVisit" >
     insert into arrive_on_visit (id, order_id, ask_question, 
-      suggestion)
-    values (#{id,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{askQuestion,jdbcType=VARCHAR}, 
-      #{suggestion,jdbcType=VARCHAR})
+      suggestion,del_flag)
+    values (#{id}, #{orderId}, #{askQuestion},
+      #{suggestion},#{delFlag})
   </insert>
   <update id="update" parameterType="com.ah.health.pojo.ArriveOnVisit" >
     update arrive_on_visit

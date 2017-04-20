@@ -40,7 +40,7 @@
                 </c:forEach>
             </select>
         </div>
-        <c:if test="${role == '1'}">
+        <c:if test="${role == '1' || type == '1'}">
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">身份证号</label>
             <input class="input-text" name="personcardNo" disabled="disabled" value="${TUser.personcardNo}" style="width:300px;">

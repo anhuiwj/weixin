@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="tbl_header mt-20">
-        <strong>用户列表</strong><p class="tbl_header_r">
+        <strong>学生基本信息列表</strong><p class="tbl_header_r">
         <%--<input id="export" name="export" type="button" value="导出" class="btn btn-success size-S radius"></p>--%>
     </div>
     <div class="tbl_scroll">
@@ -136,7 +136,7 @@
                 search();
             });
             $('#add_role').on('click', function () { //查询
-               layer_show("用户添加","${ctx}/personal/add")
+               layer_show("学生基本信息","${ctx}/personal/add?type=1")
             });
         }
         function pageInit() {
@@ -151,13 +151,13 @@
     });
     
     function read(id) {
-        var url = "${ctx}/personal/read?id="+id;
-        layer_show("用户查看",url)
+        var url = "${ctx}/personal/read?type=1&id="+id;
+        layer_show("学生基本信息查看",url)
     }
     
     function editRow(id) {
-        var url = "${ctx}/personal/add?id="+id;
-        layer_show("用户修改",url)
+        var url = "${ctx}/personal/add?type=1&id="+id;
+        layer_show("学生基本信息修改",url)
     }
     
     function deleteRow(id) {

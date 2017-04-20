@@ -183,7 +183,7 @@
   })
 
   from =  $("#form").Validform({ //表单验证
-      tiptype: 2,
+      tiptype: 1,
       ajaxPost: true,
       datatype:{
           "english":function(gets,obj,curform,regxp){
@@ -206,6 +206,8 @@
           return true;
       },
       callback: function (data) {
+          layer.msg(data.msg, {icon: 1});
+          location.href='${ctx}/question/index';
       }
   });
 
