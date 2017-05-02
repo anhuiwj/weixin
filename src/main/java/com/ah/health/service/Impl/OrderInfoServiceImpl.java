@@ -70,7 +70,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 
     @Override
     public void refusevisit(OrderInfo orderInfo) {
-        orderInfo.setOrderStatu(CommonUtils.ORDER_TONGYI);
+       if(StringUtils.isEmpty(orderInfo.getOrderStatu())){
+           orderInfo.setOrderStatu(CommonUtils.ORDER_TONGYI);
+       }
         orderInfoMapper.refusevisit(orderInfo);
     }
 }

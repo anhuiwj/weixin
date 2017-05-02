@@ -171,7 +171,7 @@
         }, function(){
             $.ajax({
                 url: "${ctx}/orderInfo/tongyi",
-                data:{"id":id,"orderStatu":"3"} ,
+                data:{"id":id,"orderStatu":"03"} ,
                 success: function (data) {
                     if (data.code==200) {
                         layer.msg(data.msg, {icon: 6,end:function(){

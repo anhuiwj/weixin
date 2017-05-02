@@ -29,7 +29,7 @@ public class PhysicalExamination {
 
     private String theThroat;//咽喉
 
-    private Double height;//身高
+    private String height;//身高
 
     private String wright;//体重
 
@@ -173,11 +173,11 @@ public class PhysicalExamination {
         this.theThroat = theThroat == null ? null : theThroat.trim();
     }
 
-    public Double getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(Double height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 

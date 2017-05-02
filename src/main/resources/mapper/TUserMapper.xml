@@ -21,6 +21,7 @@
     u.personcard_no as personcardNo,
     u.address as address,
     u.password as password,
+    u.remarks,
     u.del_flag,
     u.create_date,
     u.create_by,

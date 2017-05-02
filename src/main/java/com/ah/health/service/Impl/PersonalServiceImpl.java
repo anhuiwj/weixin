@@ -6,6 +6,8 @@ import com.ah.manager.common.page.PageQueryMap;
 import com.ah.manager.common.page.model.Pager;
 import com.ah.manager.mapper.TUserMapper;
 import com.ah.manager.pojo.TUser;
+import com.ah.manager.pojo.TUserRole;
+import com.ah.manager.service.RoleService;
 import com.ah.manager.util.IdGen;
 import com.ah.manager.util.MD5Util;
 import com.ah.manager.util.UserUtils;
@@ -25,6 +27,9 @@ public class PersonalServiceImpl implements PersonalService {
 
     @Autowired
     private TUserMapper userMapper;
+
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public void findAll(Pager pager) {
@@ -50,6 +55,13 @@ public class PersonalServiceImpl implements PersonalService {
             user.setId(IdGen.uuid());
             user.setPassword(MD5Util.MD5(user.getPassword()));
             userMapper.save(user);
+            if(user.getRole() !=null && !StringUtils.isEmpty(user.getRole().getId())){
+                TUserRole userRole = new TUserRole();
+                userRole.setRoleId(user.getRole().getId());
+                userRole.setUserId(user.getId());
+                userRole.setId(IdGen.uuid());
+                roleService.saveUserRole(userRole);
+            }
         }else {
             user.setPassword(MD5Util.MD5(user.getPassword()));
             userMapper.updateUser(user);

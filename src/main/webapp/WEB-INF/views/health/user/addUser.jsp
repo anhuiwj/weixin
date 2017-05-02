@@ -16,7 +16,7 @@
         <input class="input-text hidden" name="id" value="${TUser.id}" style="width:300px;" display="none">
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">学号</label>
-            <input class="input-text" name="userCode"  value="${TUser.userCode}" datatype="english" style="width:300px;">
+            <input class="input-text" name="userCode"  value="${TUser.userCode}" datatype="*" style="width:300px;">
         </div>
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">姓名</label>
@@ -41,6 +41,9 @@
             </select>
         </div>
         <c:if test="${role == '1' || type == '1'}">
+            <c:if test="${empty TUser.id}">
+                <input class="input-text hidden" name="role.id" value="603bab5ba40142ebb70153bedf9da7ab" style="width:300px;" display="none">
+            </c:if>
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">身份证号</label>
             <input class="input-text" name="personcardNo" value="${TUser.personcardNo}" style="width:300px;">
@@ -125,11 +128,11 @@
             return true;
         },
         callback: function (data) {
-            <c:if test="${type == '1'}">
-                layer.msg(data.msg, {icon: 1});
-                location.href='${ctx}/personal/add?type=1&id=${fns:getUser().id}';
-            </c:if>
             <c:if test="${type != '1'}">
+                layer.msg(data.msg, {icon: 1});
+                location.href='${ctx}/personal/add?id=${fns:getUser().id}';
+            </c:if>
+            <c:if test="${type == '1'}">
                 parent.layer.msg(data.msg, {icon: 1});
                 parent.exports.gridRefresh();
                 var index = parent.layer.getFrameIndex(window.name);
