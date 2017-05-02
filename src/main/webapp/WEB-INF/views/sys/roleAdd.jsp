@@ -35,6 +35,10 @@
                     $(".ids").each(function(){
                         $(this).remove();
                     });
+
+                    $(":input[name='menus']").each(function(){
+                        $(this).remove();
+                    });
                     var nodes = zTreeObj.getCheckedNodes(true);
                     var html1 = "";
                     for(var i=0; i<nodes.length; i++) {
