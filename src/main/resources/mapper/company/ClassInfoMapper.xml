@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ah.company.mapper.ClassInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ah.company.pojo.ClassInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, class_name, del_flag, create_by, create_date
+  </sql>
+
+  <select id="findAll" parameterType="map" resultType="com.ah.company.pojo.ClassInfo">
+    SELECT 
+      <include refid="Base_Column_List"/>,
+    DATE_FORMAT(create_date,'%Y-%m-%d') as createDateString
+    from class_info
+    where del_flag = '0'
+    <if test="className !=null and className !='' ">
+      and class_name  like concat('%',#{className},'%')
+    </if>
+  </select>
+
+  <select id="findAll2" resultType="com.ah.company.pojo.ClassInfo" parameterType="map">
+    SELECT
+        u.username,u.sex,uc.id
+        FROM user_class uc INNER join t_user u on uc.user_id = u.id and u.del_flag = '0'
+        where uc.class_id = #{id}   and uc.del_flag = '0'
+  </select>
+
+  <select id="get" resultType="com.ah.company.pojo.ClassInfo">
+    select
+    <include refid="Base_Column_List" />
+    from class_info
+    where id = #{id} and del_flag = '0'
+  </select>
+
+  <insert id="saveClassUser" parameterType="com.ah.company.pojo.ClassInfo">
+    INSERT INTO user_class (id,user_id,class_id,del_flag)
+      VALUES (#{id},#{userId},#{classId},#{delFlag})
+  </insert>
+
+  <update id="deleteUser">
+    UPDATE user_class set del_flag = '1' WHERE id = #{id}
+  </update>
+
+
+  <update id="update" parameterType="com.ah.company.pojo.ClassInfo" >
+    update class_info
+    <set >
+      <if test="className != null" >
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <insert id="save" parameterType="com.ah.company.pojo.ClassInfo" >
+    insert into class_info (id, class_name, del_flag,
+    create_by, create_date)
+    values (#{id,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR},
+    #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+
+
+  <delete id="delete" parameterType="java.lang.String" >
+    UPDATE class_info SET del_flag = '1'
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.ah.company.pojo.ClassInfo" >
+    update class_info
+    set class_name = #{className,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

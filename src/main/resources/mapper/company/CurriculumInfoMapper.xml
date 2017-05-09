@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ah.company.mapper.CurriculumInfoMapper" >
+
+  <sql id="Base_Column_List" >
+    id, curriculum_name, curriculum_url, type, del_flag,file_name
+  </sql>
+
+
+  <select id="findAll" resultType="com.ah.company.pojo.CurriculumInfo" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from curriculum_info
+    where del_flag = '0'
+    <if test="curriculumName !=null and curriculumName !='' ">
+      and curriculum_name like concat('%',#{curriculumName},'%')
+    </if>
+  </select>
+
+  <select id="get" resultType="com.ah.company.pojo.CurriculumInfo">
+    select
+    <include refid="Base_Column_List" />
+    from curriculum_info
+    where del_flag = '0' and id = #{id}
+  </select>
+
+  <insert id="save" parameterType="com.ah.company.pojo.CurriculumInfo" >
+    insert into curriculum_info (id, curriculum_name, curriculum_url,
+    type, del_flag,file_name)
+    values (#{id,jdbcType=VARCHAR}, #{curriculumName,jdbcType=VARCHAR}, #{curriculumUrl,jdbcType=VARCHAR},
+    #{type,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR},#{fileName})
+  </insert>
+
+  <update id="delete" parameterType="java.lang.String" >
+    UPDATE curriculum_info set del_flag = '1'
+    where id = #{id}
+  </update>
+
+  <update id="update" parameterType="com.ah.company.pojo.CurriculumInfo" >
+    update curriculum_info
+    <set >
+      <if test="curriculumName != null" >
+        curriculum_name = #{curriculumName,jdbcType=VARCHAR},
+      </if>
+      <if test="curriculumUrl != null" >
+        curriculum_url = #{curriculumUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

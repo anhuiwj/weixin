@@ -42,18 +42,6 @@
   </function>
 
   <function>
-    <name>getRawMaterial</name>
-    <function-class>com.ah.manager.util.FnsUtils</function-class>
-    <function-signature>java.util.List getRawMaterial()</function-signature>
-  </function>
-  
-  <function>
-    <name>findFormulas</name>
-    <function-class>com.ah.manager.util.FnsUtils</function-class>
-    <function-signature>java.util.List findFormulas()</function-signature>
-  </function>
-
-  <function>
     <name>getUsers</name>
     <function-class>com.ah.manager.util.UserUtils</function-class>
     <function-signature>java.util.List getUsers()</function-signature>

@@ -3,8 +3,6 @@
  */
 package com.ah.manager.pojo;
 
-import com.ah.manager.util.UserUtils;
-
 import java.io.Serializable;
 import java.util.Date;
 

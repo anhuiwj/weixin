@@ -20,4 +20,6 @@ public interface TUserMapper {
     int delete(String id);
 
     List<TUser> findUsers();
+
+    List<TUser> findUserNotInclass();
 }
