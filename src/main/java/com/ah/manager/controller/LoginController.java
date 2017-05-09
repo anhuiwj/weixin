@@ -49,7 +49,7 @@ public class LoginController {
         if(isAjax) {
             response.setHeader("Session-Status", "timeout");
         }
-        return "login";
+        return "login2";
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
@@ -102,7 +102,7 @@ public class LoginController {
     @RequestMapping(value = "/index")
     public String index(Model model){
         model.addAttribute(sysMenuService.findUserId(UserUtils.getCurrentUser().getId()));
-        return "index";
+        return "index2";
     }
 
 }

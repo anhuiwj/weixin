@@ -1,0 +1,19 @@
+body {
+    min-width: auto;color: #000; background: #fff;
+}
+@page {
+      margin: 1cm;
+}
+img {
+   max-width: 100% !important;
+}
+ul, img {
+   page-break-inside: avoid;
+}
+.table-bordered,.table-bordered td,.table-bordered th{border-collapse:collapse;border: 1px solid #ddd;}
+.print_view{width: 100%;overflow: hidden;}
+.print_view .item span{width: 100px;}
+.Hui-aside,.dislpayArrow,.breadcrumb,.page_title,.footer{display: none;}
+.dislpayArrow, .Hui-article-box{left: 0;}
+.Hui-article{top: 0;}
+.print_report_btm{font-size: 12px;}
