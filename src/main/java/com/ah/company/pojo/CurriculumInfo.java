@@ -13,6 +13,14 @@ public class CurriculumInfo extends BaseEntity{
 
     private String fileName;
 
+    private String standardFraction;
+
+    private String curriculumId;
+
+    private String classId;
+
+    private Float learnTime;
+
     public String getId() {
         return id;
     }
@@ -51,5 +59,37 @@ public class CurriculumInfo extends BaseEntity{
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public String getStandardFraction() {
+        return standardFraction;
+    }
+
+    public void setStandardFraction(String standardFraction) {
+        this.standardFraction = standardFraction;
+    }
+
+    public String getCurriculumId() {
+        return curriculumId;
+    }
+
+    public void setCurriculumId(String curriculumId) {
+        this.curriculumId = curriculumId;
+    }
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
+
+    public Float getLearnTime() {
+        return learnTime;
+    }
+
+    public void setLearnTime(Float learnTime) {
+        this.learnTime = learnTime;
     }
 }

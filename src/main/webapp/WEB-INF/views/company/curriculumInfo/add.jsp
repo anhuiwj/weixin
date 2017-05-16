@@ -14,27 +14,29 @@
 <body>
 <div class="pd-20">
     <form action="${ctx}/curriculumInfo/save" method="post" enctype="multipart/form-data"   class="form form-horizontal va-m" id="form-role-edit">
-        <input class="input-text hidden" name="id" value="${classInfo.id}" style="width:300px;" display="none">
+        <input class="input-text hidden" name="id" value="${curriculumInfo.id}" style="width:300px;" display="none">
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">课程名称</label>
-            <input class="input-text" id="curriculumName" name="curriculumName" value="${classInfo.className}" datatype="*" style="width:300px;">
+            <input class="input-text" id="curriculumName" name="curriculumName" value="${curriculumInfo.curriculumName}" datatype="*" style="width:300px;">
         </div>
+        <c:if test="${empty curriculumInfo.id}">
         <div class="f-l w-980 mb-20">
             <label class="f-l mr-30 w-200">课程类别</label>
             <select style="width:300px;" id="type" name="type" onchange="selectType(this)">
                 <c:forEach var="SysXDict"  items="${fns:getDictById('00005')}">
-                    <option value="${SysXDict.code}" <%--<c:if test="${TRole.status eq SysXDict.code}">selected='selected'</c:if>--%>>${SysXDict.name}</option>
+                    <option value="${SysXDict.code}" <c:if test="${curriculumInfo.type eq SysXDict.code}">selected='selected'</c:if>>${SysXDict.name}</option>
                 </c:forEach>
             </select>
         </div>
         <div class="f-l w-980 mb-20" id="url" style="display: none">
-            <label class="f-l mr-30 w-200">课程地址</label>
-            <input class="input-text" id="curriculumUrl" name="curriculumUrl" value="${classInfo.className}" datatype="*"  ignore="ignore" style="width:300px;">
+            <label class="f-l mr-30 w-200">课程地址(MP4)</label>
+            <input class="input-text" id="curriculumUrl" name="curriculumUrl" value="${curriculumInfo.curriculumUrl}" datatype="*"  ignore="ignore" style="width:300px;">
         </div>
         <div class="f-l w-980 mb-20" id="uploadVideo" style="display: none">
-            <label class="f-l mr-30 w-200">课程视频</label>
-            <input class="input-text" type="file" name="file" id="file"  value="${classInfo.className}" datatype="*"  ignore="ignore" style="width:300px;">
+            <label class="f-l mr-30 w-200">课程视频(MP4)</label>
+            <input class="input-text" type="file" name="file" id="file"   datatype="*"  ignore="ignore" style="width:300px;">
         </div>
+        </c:if>
         <div class="row cl va-m clear text-c">
             <a class="btn btn-primary radius  mt-50" onclick="save()">&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;</a>
         </div>
@@ -69,7 +71,6 @@
         if(form.check()==false){
             return;
         }
-        debugger;
         var formData = new FormData();
         formData.append("curriculumName",$('#curriculumName').val());
         formData.append("type",$('#type').val());

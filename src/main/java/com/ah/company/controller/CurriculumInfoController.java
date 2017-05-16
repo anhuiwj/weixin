@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -34,6 +35,7 @@ public class CurriculumInfoController {
 
     @RequestMapping("/add")
     public String add(String id,Model model) {
+        model.addAttribute("curriculumInfo",curriculumInfoService.get(id));
         return "company/curriculumInfo/add";
     }
 
@@ -54,10 +56,10 @@ public class CurriculumInfoController {
 
     @RequestMapping("/save")
     @ResponseBody
-    public JsonResponseEntity save(CurriculumInfo curriculumInfo,@RequestParam(value = "file",required = false) MultipartFile file){
+    public JsonResponseEntity save(CurriculumInfo curriculumInfo,@RequestParam(value = "file",required = false) MultipartFile file,HttpServletRequest request){
         JsonResponseEntity response = new JsonResponseEntity();
         try {
-            curriculumInfoService.save(curriculumInfo,file);
+            curriculumInfoService.save(curriculumInfo,file,request);
             response.setCode(200);
             response.setMsg(CommonUtil.ADD_SUCCESS);
         }catch (Exception e){
@@ -83,7 +85,8 @@ public class CurriculumInfoController {
     }
 
     @RequestMapping("/read")
-    public String read(String id){
-        return "";
+    public String read(String id,Model model){
+        model.addAttribute("curriculumInfo",curriculumInfoService.get(id));
+        return "company/curriculumInfo/read";
     }
 }

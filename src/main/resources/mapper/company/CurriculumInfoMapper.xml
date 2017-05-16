@@ -16,6 +16,13 @@
       and curriculum_name like concat('%',#{curriculumName},'%')
     </if>
   </select>
+  
+  <select id="findCurriculumInfoByClass" resultType="com.ah.company.pojo.CurriculumInfo" parameterType="map">
+    SELECT
+       cn.curriculum_name,mc.standard_fraction,mc.id
+      from  must_curriculum mc INNER join curriculum_info cn on mc.curriculum_id = cn.id and cn.del_flag = '0'
+      where mc.del_flag = '0'
+  </select>
 
   <select id="get" resultType="com.ah.company.pojo.CurriculumInfo">
     select
@@ -51,4 +58,27 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="findCurriculems" parameterType="string" resultType="com.ah.company.pojo.CurriculumInfo">
+    select ci.curriculum_name,ci.id
+      from curriculum_info ci LEFT JOIN must_curriculum mc on mc.curriculum_id = ci.id and mc.del_flag = '0' and mc.class_id != #{classId}
+      where ci.del_flag = '0'
+  </select>
+
+  <insert id="saveClassCurrculum" parameterType="com.ah.company.pojo.CurriculumInfo">
+    INSERT INTO must_curriculum(id,curriculum_id,standard_fraction,del_flag,class_id) VALUES (#{id},#{curriculumId},#{standardFraction},#{delFlag},#{classId})
+  </insert>
+  
+  <update id="deleteClassCurrculum">
+    UPDATE must_curriculum set del_flag = '1' where id =#{id}
+  </update>
+  
+  <select id="findPersonalCurrculum" resultType="com.ah.company.pojo.CurriculumInfo" parameterType="map">
+   SELECT
+      mi.curriculum_name,mi.curriculum_url,mi.type,ifNULL(0,li.learn_time) AS learnTime,mi.id
+      FROM user_class u INNER join must_curriculum mc on u.class_id = mc.class_id and mc.del_flag = '0'
+      INNER join curriculum_info mi on mc.curriculum_id = mi.id and mi.del_flag = '0'
+      LEFT JOIN learn_info li on mc.curriculum_id = li.curriculum_id and u.user_id = li.user_id
+      WHERE u.user_id = #{userId}
+  </select>
 </mapper>

@@ -87,7 +87,6 @@
 			return true;
 		}
 		function ajaxValidationCallback(status, form, result, options){
-			debugger;
 			layer.close(layerLoadIndex);
 			if(status === true){
 				if (result.code == '200'){

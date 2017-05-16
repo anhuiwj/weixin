@@ -10,7 +10,7 @@
 <nav class="w-breadcrumb">
     <i class="Hui-iconfont">&#xe67f;</i> 首页
     <span class="c-gray en">&gt;</span>  课程管理
-    <span class="c-gray en">&gt;</span> 课程查询
+    <span class="c-gray en">&gt;</span> 个人课程查询
     <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px"
        href="javascript:location.replace(location.href);" title="刷新">
         <i class="Hui-iconfont">&#xe68f;</i>
@@ -31,11 +31,6 @@
                              style="margin-left: 30px;">查询
                      </button>
                 </span>
-                <span >
-                      <button id="add_role" class="btn btn-success radius r">
-                        新增
-                      </button>
-                 </span>
             </p>
         </div>
     </div>
@@ -55,12 +50,10 @@
         var dtList = function () {
             var columns = [
                 {id: 'curriculumName', title: '课程名称', type: 'string', columnClass: 'text-center' ,columnStyle: 'width:50px'},
-                {id: 'type', title: '课程类别', type: 'string',codeTable:whether, columnClass: 'text-center', columnStyle: 'width:50px'},
+                {id: 'learnTime', title: '学习时间', type: 'string',codeTable:whether, columnClass: 'text-center', columnStyle: 'width:50px'},
                 {id: 'id', title: '操作', type: 'string',columnClass: 'text-center',columnStyle: 'width:50px',
                     resolution:function(value, record, column, grid, dataNo, columnNo){
                     var content = '';
-                            content += '<input onclick="editRow(\''+record.id+'\');" value="修改" class="btn btn-primary size-MINI radius" type="button">';
-                            content += '&nbsp;<input onclick="deleteRow(\''+record.id+'\');" value="删除" class="btn btn-primary size-MINI radius" type="button">';
                             content += '&nbsp;<input onclick="read(\''+record.id+'\');" value="查看" class="btn btn-primary size-MINI radius" type="button">';
                         return content;
                     }
@@ -71,7 +64,7 @@
                 lang: 'zh-cn',
                 ajaxLoad : true,
                 tableStyle: 'font-size:14px;',
-                loadURL: "${ctx}/curriculumInfo/getData",
+                loadURL: "${ctx}/curriculumAllocation/getData3",
                 check: false,
                 columns: columns,
                 gridContainer: 'table',
@@ -117,9 +110,6 @@
             $('#query').on('click', function () { //查询
                 search();
             });
-            $('#add_role').on('click', function () { //查询
-               layer_show("新增课程","${ctx}/curriculumInfo/add")
-            });
         }
         function pageInit() {
             bindEvent();
@@ -132,34 +122,9 @@
         pageInit();
     });
     
-    function editRow(id) {
-        layer_show("课程编辑","${ctx}/curriculumInfo/add?id="+id)
-    }
 
     function read(id) {
         layer_show("课程查看","${ctx}/curriculumInfo/read?id="+id)
-    }
-
-    function deleteRow(id) {
-        layer.confirm('确认删除吗？', {
-            btn: ['确认','取消'], //按钮
-            icon: 5,
-            title:"提示"
-        }, function(){
-            $.ajax({
-                url: "${ctx}/curriculumInfo/delete",
-                data:{"id":id} ,
-                success: function (data) {
-                    if (data.code==200) {
-                        layer.msg(data.msg, {icon: 6,end:function(){
-                            location.reload();
-                        }});
-                    } else {
-                        layer.msg(data.msg, {icon: 5});
-                    }
-                }
-            });
-        });
     }
 </script>
 

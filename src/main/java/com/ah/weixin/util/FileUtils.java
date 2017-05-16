@@ -23,16 +23,14 @@ public class FileUtils {
      * 上传文件
      * @param file
      * @param attachFile
-     * @param infoVo
      */
-    public static  int uploadFile(MultipartFile file, String attachFile) {
+    public static  int uploadFile(MultipartFile file, String attachFile,String rootPath) {
         InputStream in = null;
         OutputStream out = null;
         int rtn = 0;
 
         try {
             //上传操作
-            String rootPath = ConfigUtil.getConfig("uploadFileDir");
             String directoryPath = rootPath;
 
             File serverDirectory = new File(directoryPath);
