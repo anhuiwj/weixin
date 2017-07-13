@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ah.company.mapper.TmPaperMapper" >
+  <sql id="Base_Column_List" >
+    t.p_id, t.p_name, t.p_cid, t.p_status, t.p_starttime, t.p_endtime, t.p_duration, t.p_showtime, t.p_total_score,
+    t.p_pass_score, t.p_question_order, t.p_papertype, t.p_poster, t.p_createdate, t.p_modifyor,
+    t.p_modifydate, t.p_showkey, t.p_showmode
+  </sql>
+  <select id="findAll" resultType="com.ah.company.pojo.TmPaper" parameterType="map" >
+    SELECT
+    <include refid="Base_Column_List" />,
+    DATE_FORMAT(t.p_starttime,'%Y-%m-%d %h:%i:%s') as startTime,
+    DATE_FORMAT(t.p_endtime,'%Y-%m-%d %h:%i:%s') as endTime
+    FROM
+    tm_paper t WHERE t.p_id not in (
+    SELECT tm.e_pid from tm_examdata tm INNER JOIN tm_user u ON tm.e_uid = u.u_id
+    where u.u_username =#{username}
+    )
+    AND t.p_status = '1'
+    AND t.p_starttime &lt;= #{pStarttime}
+    AND t.p_endtime &gt;= #{pStarttime}
+  </select>
+</mapper>

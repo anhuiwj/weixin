@@ -32,7 +32,14 @@
                             <ul class="sub-menu">
                                 <c:forEach items="${item.children}" var="ch">
                                     <li>
-                                        <a href="javascript:void(0)" onclick="iFrameJumpPage('${ctx}/${ch.href}')">
+                                        <c:choose>
+                                        <c:when test="${not empty ch.target}">
+                                        <a href="javascript:void(0)" onclick="openNew('${ch.href}')">
+                                            </c:when>
+                                            <c:otherwise>
+                                            <a href="javascript:void(0)" onclick="iFrameJumpPage('${ctx}/${ch.href}')">
+                                                </c:otherwise>
+                                                </c:choose>
                                             <i class="${ch.icon}"></i>
                                                 ${ch.name}
                                         </a>
@@ -102,7 +109,7 @@
                 <div id="iframe_box" class="Hui-article">
                     <div class="show_iframe" >
                         <div style="display:none" class="loading"></div>
-                        <iframe id="RightIFrame" onload="this.height=0;var fdh=(this.Document?this.Document.body.scrollHeight:this.contentDocument.body.offsetHeight);this.height=(fdh>700?fdh:700)" scrolling="yes" frameborder="0" src="" style="min-height:100%;min-width:100%;"></iframe>
+                        <iframe id="RightIFrame" onload="this.height=0;var fdh=(this.Document?this.Document.body.scrollHeight:this.contentDocument.body.offsetHeight);this.height=(fdh>700?fdh:700)" scrolling="yes" frameborder="0" src="${ctx}/welcome/index" style="min-height:100%;min-width:100%;"></iframe>
                     </div>
                 </div>
         </div>
@@ -134,6 +141,10 @@
     	});
         function iFrameJumpPage(url){
             $("#RightIFrame").attr("src",url);
+        }
+        
+        function openNew(url) {
+            window.open(url);
         }
 
     </script>

@@ -75,7 +75,7 @@
         <!-- 指定数据库表 -->
         <!--<table tableName="t_user"></table>-->
         <!--<table tableName="t_role"></table>-->
-        <table tableName="class_info" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="tm_paper" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <!--<table tableName="weixin_account"></table>-->
 
 

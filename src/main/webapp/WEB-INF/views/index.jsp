@@ -181,6 +181,14 @@
 							<ul class="sub-menu">
 							<c:forEach items="${item.children}" var="ch">
 									<li>
+										<c:choose>
+											<c:when test="${not empty ch.target}">
+												<a href="javascript:void(0)" onclick="iFrameJumpPage('${ch.href}')">
+											</c:when>
+											<c:otherwise>
+											<a href="javascript:void(0)" onclick="iFrameJumpPage('${ctx}/${ch.href}')">
+											</c:otherwise>
+										</c:choose>
 									<a href="javascript:void(0)" onclick="iFrameJumpPage('${ctx}/${ch.href}')">
 									<i class="${ch.icon}"></i>
 									${ch.name}

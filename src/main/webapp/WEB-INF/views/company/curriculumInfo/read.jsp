@@ -13,27 +13,26 @@
 </head>
 <body>
 <div class="pd-20">
-    <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" poster="http://video-js.zencoder.com/oceans-clip.png" data-setup="{}">
         <c:if test="${curriculumInfo.type == '1'}">
-            <source src="${ctx}/upload/${curriculumInfo.curriculumUrl}" type="video/mp4">
-        </c:if>
-
-        <c:if test="${curriculumInfo.type == '2'}">
+            <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" poster="http://video-js.zencoder.com/oceans-clip.png" data-setup="{}">
             <source src="${curriculumInfo.curriculumUrl}" type="video/mp4">
+                <p class="vjs-no-js">
+                    <!--To view this video please enable JavaScript, and consider upgrading to a web browser that-->
+                    <!--<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>-->
+                </p>
+            </video>
+            <script type="text/javascript">
+                var myPlayer = videojs('my-video');
+                videojs("my-video").ready(function(){
+                    var myPlayer = this;
+                    myPlayer.play();
+                });
+            </script>
         </c:if>
-    <p class="vjs-no-js">
-    <!--To view this video please enable JavaScript, and consider upgrading to a web browser that-->
-    <!--<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>-->
-    </p>
-    </video>
+    <c:if test="${curriculumInfo.type == '2'}">
+        <iframe height=498 width=510 src='${curriculumInfo.curriculumUrl}' frameborder='0' allowfullscreen="true"></iframe>
+    </c:if>
 
 </div>
-<script type="text/javascript">
-    var myPlayer = videojs('my-video');
-    videojs("my-video").ready(function(){
-        var myPlayer = this;
-        myPlayer.play();
-    });
-</script>
 </body>
 </html>
